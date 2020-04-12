@@ -5,3 +5,27 @@
 - Was ist soziale Phobie?
 - Wie kann man Patienten sozialer Phobie unterstützen?
 - Erste Mockups
+
+24.03.2020:
+- Projektziele
+- Prototypen erstellt
+- Peronas angefangen
+- Anforderungen
+
+29.03.2020:
+- Personas fertig gestellt
+- Die letzten 2 Mockups erstellt
+- Präsentation vorbereiten
+- Validierung
+
+30.03.2020:
+- Präsentation Design Thinking halten
+
+31.03.2020:
+- System architecture
+- Use Cases
+
+12.04.2020
+- 2 Use Case Form
+- Dokument verbessert: Vorwort, Einleitung etc.
+- 
