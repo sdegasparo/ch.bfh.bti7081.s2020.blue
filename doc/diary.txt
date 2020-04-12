@@ -27,5 +27,5 @@
 
 12.04.2020
 - 2 Use Case Form
-- Dokument verbessert: Vorwort, Einleitung etc.
+- Non-functional requirements
 - 
