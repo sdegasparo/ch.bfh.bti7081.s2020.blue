@@ -42,3 +42,11 @@
 
 20.04.2020
 - Überarbeitung Review für Team Green
+- Erster Entwurf Domain Model
+
+21.04.2020
+- Klassendiagramm
+- Sequenz Diagramm
+
+26.04.2020
+- Überarbeitung des Sequenz Diagramms
