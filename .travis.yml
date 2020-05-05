@@ -1,0 +1,35 @@
+language: java
+dist: trusty
+
+install: true
+os: linux
+
+if: tag is blank
+
+notifications:
+  email: false
+
+services:
+  - postgresql
+
+jobs:
+  include:
+    # OracleJDK - Java 11 (lts, main build with Sonar)
+    - env: MAIN_BUILD='true'
+      jdk: openjdk11
+    # OpenJDK - Java 13 (latest)
+    - env: MAIN_BUILD='false'
+      jdk: openjdk13
+
+before_script:
+  - psql -c "CREATE DATABASE social_anxiety_integration;" -U postgres
+  - psql -c "CREATE USER social_anxiety WITH PASSWORD 'social_anxiety_password';" -U postgres
+
+script:
+  - if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then export MAVEN_COMMAND="verify"; else export MAVEN_COMMAND="verify"; fi
+  - ./mvnw -f source/pom.xml versions:set -DnewVersion=${TRAVIS_BUILD_NUMBER}
+  - ./mvnw -f source/pom.xml ${MAVEN_COMMAND}
+
+cache:
+  directories:
+    - $HOME/.m2

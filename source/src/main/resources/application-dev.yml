@@ -1,0 +1,10 @@
+# Database configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/social_anxiety
+    driverClassName: org.postgresql.Driver
+    username: social_anxiety
+    password: social_anxiety_password
+  jpa:
+    show-sql=true
+    hibernate.ddl-auto=create-drop
