@@ -1,7 +1,7 @@
 # Database configuration
 spring:
   datasource:
-    url: jdbc:postgres:localhost:5432/social_anxiety
+    url: jdbc:postgresql://localhost:5432/social_anxiety_integration
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: postgres
+    username: social_anxiety
+    password: social_anxiety_password
