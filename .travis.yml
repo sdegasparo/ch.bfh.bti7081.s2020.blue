@@ -20,8 +20,8 @@ jobs:
 
 script:
   - if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then export MAVEN_COMMAND="verify"; else export MAVEN_COMMAND="verify"; fi
-  - source/mvn versions:set -DnewVersion=${TRAVIS_BUILD_NUMBER}
-  - source/mvn ${MAVEN_COMMAND}
+  - source/mvnw versions:set -DnewVersion=${TRAVIS_BUILD_NUMBER}
+  - source/mvnw ${MAVEN_COMMAND}
 
 cache:
   directories:
