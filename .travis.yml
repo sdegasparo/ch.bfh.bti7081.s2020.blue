@@ -1,0 +1,28 @@
+language: java
+dist: trusty
+
+install: true
+os: linux
+
+if: tag is blank
+
+notifications:
+  email: false
+
+jobs:
+  include:
+    # OracleJDK - Java 11 (lts, main build with Sonar)
+    - env: MAIN_BUILD='true'
+      jdk: openjdk13
+    # OpenJDK - Java 13 (latest)
+    - env: MAIN_BUILD='false'
+      jdk: openjdk13
+
+script:
+  - if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then export MAVEN_COMMAND="verify"; else export MAVEN_COMMAND="verify"; fi
+  - source/mvn versions:set -DnewVersion=$TRAVIS_BUILD_NUMBER
+  - source/mvn $MAVEN_COMMAND
+
+cache:
+  directories:
+    - $HOME/.m2
