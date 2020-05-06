@@ -166,6 +166,11 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-maven-plugin</artifactId>
                 <version>${vaadin.version}</version>
+
+                <configuration>
+                    <frontendDirectory>${project.basedir}/src/main/webapp</frontendDirectory>
+                </configuration>
+
                 <executions>
                     <execution>
                         <goals>
