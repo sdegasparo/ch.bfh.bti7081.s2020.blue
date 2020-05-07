@@ -18,6 +18,8 @@
         <vaadin.version>14.1.27</vaadin.version>
 
         <!-- Flyway configuration -->
+        <flyway.db.url>jdbc:postgresql://localhost:${flyway.db.port}</flyway.db.url>
+        <flyway.db.port>5432</flyway.db.port>
         <flyway.db.user>social_anxiety</flyway.db.user>
         <flyway.db.password>social_anxiety_password</flyway.db.password>
         <flyway.db.schema>social_anxiety</flyway.db.schema>
@@ -193,6 +195,7 @@
                 <configuration>
                     <user>${flyway.db.user}</user>
                     <password>${flyway.db.password}</password>
+                    <url>${flyway.db.url}</url>
                     <schemas>
                         <schema>${flyway.db.schema}</schema>
                     </schemas>
