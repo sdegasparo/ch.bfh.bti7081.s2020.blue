@@ -1,26 +1,23 @@
 package ch.bfh.bti7081.s2020.blue;
 
-import ch.bfh.bti7081.s2020.blue.model.User;
-import com.vaadin.flow.component.Tag;
+import ch.bfh.bti7081.s2020.blue.domain.RegisterDto;
+import ch.bfh.bti7081.s2020.blue.domain.RegisterService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.login.LoginForm;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.BinderValidationStatus;
 import com.vaadin.flow.data.binder.BindingValidationStatus;
-import com.vaadin.flow.data.binder.ValidationException;
-import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.data.validator.EmailValidator;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = RegisterView.ROUTE)
 @PageTitle("Register")
@@ -28,18 +25,59 @@ public class RegisterView extends FormLayout {
 
   public static final String ROUTE = "register";
 
-  public RegisterView() {
-    Binder<User> binder = new Binder<>(User.class);
-    User user = new User("", "");
-    binder.readBean(user);
-    Button save = new Button();
+  public RegisterView(@Autowired RegisterService service) {
+    var binder = new Binder<>(RegisterDto.class);
+
+    var registerDto = new RegisterDto();
+
+    var givenNameField = new TextField();
+    addFormItem(givenNameField, "Given Name");
+    binder.bind(givenNameField, RegisterDto::getGivenName, RegisterDto::setGivenName);
+
+    var surnameField = new TextField();
+    addFormItem(surnameField, "Surname");
+    binder.bind(surnameField, RegisterDto::getSurname, RegisterDto::setSurname);
+
+    var username = new TextField();
+    username.setPlaceholder("user1");
+    addFormItem(username, "Username");
+    binder.bind(username, RegisterDto::getUsername, RegisterDto::setUsername);
+
+    var passwordField = new PasswordField();
+    addFormItem(passwordField, "Password");
+    binder.bind(passwordField, RegisterDto::getPassword, RegisterDto::setPassword);
+
+    var passwordRepeatField = new PasswordField();
+    addFormItem(passwordRepeatField, "Repeat password");
+    binder
+        .bind(passwordRepeatField, RegisterDto::getRepeatPassword, RegisterDto::setRepeatPassword);
+
+    var emailField = new EmailField();
+    addFormItem(emailField, "E-Mail");
+    binder.forField(emailField).withValidator(new EmailValidator(
+        "This doesn't look like a valid email address"))
+        .bind(RegisterDto::getEmail, RegisterDto::setEmail);
+
+    var save = new Button();
     save.setText("Save");
-    Label infoLabel = new Label();
+    var infoLabel = new Label();
     save.addClickListener(event -> {
-      if (binder.writeBeanIfValid(user)) {
-        infoLabel.setText("Saved bean values: " + user.getUsername());
+      infoLabel.setText("");
+      if (binder.writeBeanIfValid(registerDto)) {
+        var errors = service.register(registerDto);
+        if (errors.isEmpty()) {
+          getUI().ifPresent(ui ->
+              ui.navigate("/"));
+        } else {
+          infoLabel.setText(
+              errors.stream()
+                  .map(e -> e.getMessage())
+                  .collect(Collectors.joining("\n "))
+          );
+        }
+
       } else {
-        BinderValidationStatus<User> validate = binder.validate();
+        BinderValidationStatus<RegisterDto> validate = binder.validate();
         String errorText = validate.getFieldValidationStatuses()
             .stream().filter(BindingValidationStatus::isError)
             .map(BindingValidationStatus::getMessage)
@@ -48,7 +86,8 @@ public class RegisterView extends FormLayout {
         infoLabel.setText("There are errors: " + errorText);
       }
     });
-    Button reset = new Button();
+
+    var reset = new Button();
     reset.setText("Reset");
     reset.addClickListener(event -> {
       // clear fields by setting null
@@ -56,16 +95,6 @@ public class RegisterView extends FormLayout {
       infoLabel.setText("");
     });
 
-
-    TextField username = new TextField();
-    username.setPlaceholder("user1");
-    addFormItem(username, "Username");
-    binder.bind(username, User::getUsername, User::setUsername);
-    addFormItem(new PasswordField(), "Password");
-    binder.bind(username, User::getUsername, User::setUsername);
-    addFormItem(new PasswordField(), "Password repeat");
-
-    addFormItem(new EmailField(), "E-Mail");
     add(infoLabel);
     add(save);
     add(reset);
