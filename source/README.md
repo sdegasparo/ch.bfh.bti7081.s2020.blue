@@ -10,6 +10,13 @@ Social Anxiety Application Source Code
 The application tries to connect on `localhost:5432` using the `social_anxiety` database.
 Grants should be given to the user `social_anxiety` identified by `social_anxiety_password`.
 
+If you're using Docker it will be a one liner:
+```bash
+docker run --name=[GIVE_IT_A_NAME] -e POSTGRES_USER=social_anxiety -e POSTGRES_PASSWORD=social_anxiety_password -p 5432:5432 postgresql
+```
+
+In case you're running it on a real database, you can use the SQL script in `src/main/resources/db/script`.
+
 # Running the Application
 There are two ways to run the application :  using `mvn spring-boot:run` or by running the `Application` class directly from your IDE.
 
