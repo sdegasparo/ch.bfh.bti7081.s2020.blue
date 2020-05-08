@@ -7,4 +7,3 @@ spring:
     password: social_anxiety_password
   jpa:
     show-sql=true
-    hibernate.ddl-auto=create-drop
