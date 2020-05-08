@@ -26,6 +26,4 @@ public class Challenge {
 
   @OneToMany(mappedBy = "challenge")
   private List<PatientHasChallenge> patients;
-
-  // private List<Reward> rewards;
 }

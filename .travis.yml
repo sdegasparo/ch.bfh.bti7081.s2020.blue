@@ -13,7 +13,6 @@ services:
   - postgresql
 
 addons:
-  chrome: stable
   postgresql: '12'
   apt:
     packages:
