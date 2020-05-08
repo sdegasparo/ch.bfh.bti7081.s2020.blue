@@ -15,9 +15,9 @@ spring:
 
 # Ensure application is run in Vaadin 14/npm mode
 vaadin:
-  compatibilityMode:  false
+  compatibilityMode: false
 
-# Loggin configuration
+# Logging configuration
 logging:
   level:
-    org.atmosphere:  warn
+    org.atmosphere: WARN
