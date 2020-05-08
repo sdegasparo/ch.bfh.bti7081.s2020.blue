@@ -87,17 +87,8 @@ public class RegisterView extends FormLayout {
       }
     });
 
-    var reset = new Button();
-    reset.setText("Reset");
-    reset.addClickListener(event -> {
-      // clear fields by setting null
-      binder.readBean(null);
-      infoLabel.setText("");
-    });
-
     add(infoLabel);
     add(save);
-    add(reset);
   }
 
 }
