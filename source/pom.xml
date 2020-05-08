@@ -170,6 +170,7 @@
 
   <build>
     <defaultGoal>spring-boot:run</defaultGoal>
+
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -191,6 +192,7 @@
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-maven-plugin</artifactId>
         <version>${vaadin.version}</version>
+
         <executions>
           <execution>
             <goals>
@@ -198,6 +200,10 @@
             </goals>
           </execution>
         </executions>
+
+        <configuration>
+          <frontendDirectory>${project.basedir}/src/main/webapp</frontendDirectory>
+        </configuration>
       </plugin>
 
       <plugin>
