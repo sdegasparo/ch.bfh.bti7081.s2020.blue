@@ -5,3 +5,8 @@ spring:
     driverClassName: org.postgresql.Driver
     username: social_anxiety
     password: social_anxiety_password
+
+# Logging configuration
+logging:
+  level:
+    root: WARN

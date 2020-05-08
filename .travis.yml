@@ -1,5 +1,5 @@
 language: java
-dist: trusty
+dist: bionic
 
 install: true
 os: linux
@@ -12,9 +12,27 @@ notifications:
 services:
   - postgresql
 
+addons:
+  postgresql: '12'
+  apt:
+    packages:
+      - postgresql-12
+      - postgresql-client-12
+
+before_install:
+  - sudo pg_dropcluster --stop 12 main
+  - sudo pg_upgradecluster 11 main
+  - sudo pg_ctlcluster 12 main restart
+  - sudo pg_dropcluster 11 main
+
+env:
+  global:
+    - PGUSER=postgres
+    - PGPORT=5432
+
 jobs:
   include:
-    # OracleJDK - Java 11 (lts, main build with Sonar)
+    # OracleJDK - Java 11 (lts, main build)
     - env: MAIN_BUILD='true'
       jdk: openjdk11
     # OpenJDK - Java 13 (latest)
