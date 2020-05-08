@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2020.blue.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -7,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
@@ -18,6 +20,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   private static final String LOGIN_URL = "/login";
   private static final String LOGOUT_SUCCESS_URL = "/login";
   private static final String LOGOUT_URL = "/logout";
+  @Autowired
+  private UserDetailsService databaseUserDetailsService;
 
   /**
    * Require login to access internal pages and configure login form.
@@ -76,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(AuthenticationManagerBuilder auth) {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    authProvider.setUserDetailsService(new DatabaseUserDetailsService());
+    authProvider.setUserDetailsService(databaseUserDetailsService);
     authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
 
     auth.authenticationProvider(authProvider);
