@@ -1,0 +1,12 @@
+# Database configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/social_anxiety_integration
+    driverClassName: org.postgresql.Driver
+    username: social_anxiety
+    password: social_anxiety_password
+
+# Logging configuration
+logging:
+  level:
+    root: WARN
