@@ -46,8 +46,8 @@ before_script:
 
 script:
   - if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then export MAVEN_COMMAND="verify"; else export MAVEN_COMMAND="verify"; fi
-  - ./mvnw -f source/pom.xml versions:set -DnewVersion=${TRAVIS_BUILD_NUMBER}
-  - ./mvnw -f source/pom.xml ${MAVEN_COMMAND}
+  - mvn -f source/pom.xml versions:set -DnewVersion=${TRAVIS_BUILD_NUMBER}
+  - mvn -f source/pom.xml ${MAVEN_COMMAND}
 
 cache:
   directories:
