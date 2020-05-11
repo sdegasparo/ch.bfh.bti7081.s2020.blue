@@ -1,18 +1,17 @@
 package ch.bfh.bti7081.s2020.blue.view.journal;
 
+import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
-import java.util.ArrayList;
-import java.util.List;
 
 @Route("journal")
-public class JournalDetailViewImpl extends VerticalLayout implements JournalDetailView, HasUrlParameter<String> {
+public class JournalDetailViewImpl extends VerticalLayout implements JournalDetailView, HasUrlParameter<Long> {
 
-  private List<JournalDetailViewListener> listeners = new ArrayList<>();
-
+  private JournalDetailViewListener listener;
   private Label display = new Label("JournalDetail works!");
 
   public JournalDetailViewImpl() {
@@ -20,12 +19,20 @@ public class JournalDetailViewImpl extends VerticalLayout implements JournalDeta
   }
 
   @Override
-  public void setParameter(BeforeEvent beforeEvent, String id) {
-    System.out.println("journalId " + id);
+  public void setParameter(BeforeEvent beforeEvent, Long id) {
+    listener.findAndDisplay(id);
+  }
+
+  @Override
+  public void display(JournalEntry journalEntry) {
+    Text title = new Text(journalEntry.getTitle());
+    Text content = new Text(journalEntry.getContent());
+    add(title);
+    add(content);
   }
 
   @Override
   public void addListener(JournalDetailViewListener listener) {
-    listeners.add(listener);
+    this.listener = listener;
   }
 }

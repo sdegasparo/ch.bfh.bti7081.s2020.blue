@@ -23,7 +23,7 @@ import com.vaadin.flow.server.PWA;
     enableInstallPrompt = false)
 public class MainView extends VerticalLayout {
 
-  public MainView() {
+  public MainView(JournalListPresenter journalListPresenter) {
     Object o = new Object();
 
     HeaderViewImpl headerView = new HeaderViewImpl();
@@ -31,7 +31,7 @@ public class MainView extends VerticalLayout {
     add(headerView);
 
     JournalListViewImpl journalListView = new JournalListViewImpl();
-    new JournalListPresenter(o, journalListView);
+    journalListPresenter.setView(journalListView);
     add(journalListView);
 
     ChallengeListViewImpl challengeListView = new ChallengeListViewImpl();

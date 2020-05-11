@@ -6,5 +6,5 @@ public interface FooterView {
 
   }
 
-  public void addListener(FooterViewListener listener);
+  void addListener(FooterViewListener listener);
 }
