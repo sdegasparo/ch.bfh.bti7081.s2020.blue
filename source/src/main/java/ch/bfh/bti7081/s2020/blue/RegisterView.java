@@ -61,18 +61,19 @@ public class RegisterView extends FormLayout {
     var save = new Button();
     save.setText("Save");
     var infoLabel = new Label();
+
     save.addClickListener(event -> {
       infoLabel.setText("");
       if (binder.writeBeanIfValid(registerDto)) {
         var errors = service.register(registerDto);
         if (errors.isEmpty()) {
           getUI().ifPresent(ui ->
-              ui.navigate("/"));
+              ui.navigate(""));
         } else {
           infoLabel.setText(
               errors.stream()
                   .map(e -> e.getMessage())
-                  .collect(Collectors.joining("\n "))
+                  .collect(Collectors.joining("<br>\n "))
           );
         }
 
