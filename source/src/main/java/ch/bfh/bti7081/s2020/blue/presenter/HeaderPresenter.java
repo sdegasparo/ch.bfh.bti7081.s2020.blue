@@ -1,11 +1,11 @@
 package ch.bfh.bti7081.s2020.blue.presenter;
 
-import ch.bfh.bti7081.s2020.blue.view.header.HeaderView;
+import ch.bfh.bti7081.s2020.blue.view.layout.header.HeaderView;
 
 public class HeaderPresenter implements HeaderView.HeaderViewListener {
 
-  private Object model;
-  private HeaderView view;
+  private final Object model;
+  private final HeaderView view;
 
   public HeaderPresenter(Object model, HeaderView view) {
     this.model = model;

@@ -9,9 +9,9 @@ import java.util.List;
 @Route("achievements")
 public class AchievementListViewImpl extends VerticalLayout implements AchievementListView {
 
-  private List<AchievementListViewListener> listeners = new ArrayList<>();
+  private final List<AchievementListViewListener> listeners = new ArrayList<>();
 
-  private Label display = new Label("Achievement works!");
+  private final Label display = new Label("Achievement works!");
 
   public AchievementListViewImpl() {
     add(display);

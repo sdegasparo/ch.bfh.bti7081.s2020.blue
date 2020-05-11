@@ -8,13 +8,14 @@ import java.util.List;
 
 public class ChallengeListViewImpl extends VerticalLayout implements ChallengeListView {
 
-  private List<ChallengeListViewListener> listeners = new ArrayList<>();
+  private final List<ChallengeListViewListener> listeners = new ArrayList<>();
 
   public ChallengeListViewImpl() {
     Label label = new Label("Challenge works!");
     add(label);
 
-    RouterLink routerLink = new RouterLink("challenge", ChallengeDetailViewImpl.class, "EnterChallengeIdHere");
+    RouterLink routerLink = new RouterLink("challenge", ChallengeDetailViewImpl.class,
+        "EnterChallengeIdHere");
     add(routerLink);
   }
 

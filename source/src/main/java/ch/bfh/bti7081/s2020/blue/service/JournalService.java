@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JournalService {
 
-  private List<JournalEntry> journalEntries = List.of(
+  private final List<JournalEntry> journalEntries = List.of(
       JournalEntry.builder()
           .id(1L)
           .title("This is a title")

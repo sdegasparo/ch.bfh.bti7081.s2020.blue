@@ -9,7 +9,7 @@ import java.util.List;
 @Route("therapists")
 public class TherapistListViewImpl extends VerticalLayout implements TherapistListView {
 
-  private List<TherapistViewListener> listeners = new ArrayList<>();
+  private final List<TherapistViewListener> listeners = new ArrayList<>();
 
   public TherapistListViewImpl() {
     Label label = new Label("Therapist works!");

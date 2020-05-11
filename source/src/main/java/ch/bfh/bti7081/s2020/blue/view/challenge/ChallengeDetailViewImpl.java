@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route("challenge")
-public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView, HasUrlParameter<String> {
+public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView,
+    HasUrlParameter<String> {
 
-  private List<ChallengeDetailViewListener> listeners = new ArrayList<>();
+  private final List<ChallengeDetailViewListener> listeners = new ArrayList<>();
 
   public ChallengeDetailViewImpl() {
     Label label = new Label("ChallengeDetail works!");
