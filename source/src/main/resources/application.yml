@@ -5,10 +5,10 @@ server:
 # Database configuration
 spring:
   datasource:
-    url: ${APPl_DATASOURCE_JDBC_URL}
+    url: jdbc:postgresql://localhost:5432/social_anxiety
     driverClassName: org.postgresql.Driver
-    username: ${APPL_DATASOURCE_USERNAME}
-    password: ${APPL_DATASOURCE_PASSWORD}
+    username: social_anxiety
+    password: social_anxiety_password
   jpa:
     hibernate:
       ddl-auto: validate

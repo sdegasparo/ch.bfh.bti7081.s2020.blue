@@ -12,7 +12,7 @@ Grants should be given to the user `social_anxiety` identified by `social_anxiet
 
 If you're using Docker it will be a one liner:
 ```bash
-docker run --name=[GIVE_IT_A_NAME] -e POSTGRES_USER=social_anxiety -e POSTGRES_PASSWORD=social_anxiety_password -p 5432:5432 postgresql
+a
 ```
 
 In case you're running it on a real database, you can use the SQL script in `src/main/resources/db/script`.
