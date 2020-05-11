@@ -5,6 +5,4 @@ public interface TherapistListView {
   interface TherapistViewListener {
 
   }
-
-  public void addListener(TherapistViewListener listener);
 }

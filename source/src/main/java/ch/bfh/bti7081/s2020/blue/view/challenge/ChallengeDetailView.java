@@ -5,6 +5,4 @@ public interface ChallengeDetailView {
   interface ChallengeDetailViewListener {
 
   }
-
-  public void addListener(ChallengeDetailViewListener listener);
 }
