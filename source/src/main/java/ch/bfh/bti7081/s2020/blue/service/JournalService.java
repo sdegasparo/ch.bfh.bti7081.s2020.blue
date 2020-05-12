@@ -33,7 +33,6 @@ public class JournalService {
     return journalEntries.stream()
         .filter(journalEntry -> journalEntry.getId().equals(id))
         .findFirst()
-        .get();
+        .orElseThrow(() -> new IllegalArgumentException("Cannot find journal entry!"));
   }
-
 }

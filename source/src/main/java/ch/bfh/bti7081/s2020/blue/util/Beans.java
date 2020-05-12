@@ -1,14 +1,26 @@
 package ch.bfh.bti7081.s2020.blue.util;
 
-import com.vaadin.flow.server.VaadinServlet;
-import java.util.Objects;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
-public class Beans {
+@Component
+public class Beans implements InitializingBean {
 
-  public static <T> T get(Class<T> serviceType) {
-    return Objects.requireNonNull(WebApplicationContextUtils
-        .getWebApplicationContext(VaadinServlet.getCurrent().getServletContext()))
-        .getBean(serviceType);
+  private static Beans instance;
+
+  private final ApplicationContext applicationContext;
+
+  public Beans(ApplicationContext applicationContext) {
+    this.applicationContext = applicationContext;
+  }
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    instance = this;
+  }
+
+  public static <T> T get(Class<T> beanType) {
+    return instance.applicationContext.getBean(beanType);
   }
 }
