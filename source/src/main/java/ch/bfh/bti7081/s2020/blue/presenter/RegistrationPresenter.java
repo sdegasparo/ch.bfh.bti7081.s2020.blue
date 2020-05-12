@@ -26,7 +26,7 @@ public class RegistrationPresenter implements RegisterViewListener {
     view.showMessage("");
     Collection<ValidationError> errors = registrationService.register(model);
     if (errors.isEmpty()) {
-      view.navigate("");
+      view.navigate("login");
     } else {
       view.showMessage(
           errors.stream()
