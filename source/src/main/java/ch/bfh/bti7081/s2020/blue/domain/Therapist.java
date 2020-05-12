@@ -18,11 +18,9 @@ import org.hibernate.annotations.Parameter;
 @AllArgsConstructor
 public class Therapist {
 
-  public static final String SEQUENCE_GENERATOR_STRATEGY = "org.hibernate.id.enhanced.SequenceStyleGenerator";
-
   @Id
   @GenericGenerator(name = "pk_sequence",
-      strategy = SEQUENCE_GENERATOR_STRATEGY,
+      strategy = PostgreSQLConstants.SEQUENCE_GENERATOR_STRATEGY,
       parameters = {@Parameter(name = "sequence_name", value = "therapist_id_seq"),
           @Parameter(name = "increment_size", value = "1")})
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
