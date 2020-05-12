@@ -1,14 +1,14 @@
 package ch.bfh.bti7081.s2020.blue.security;
 
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-
+import ch.bfh.bti7081.s2020.blue.util.SecurityUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 /**
  * HttpSessionRequestCache that avoids saving internal framework requests.
  */
-class CustomRequestCache extends HttpSessionRequestCache {
+class FrameworkIgnoringRequestCache extends HttpSessionRequestCache {
 
   /**
    * {@inheritDoc}
@@ -23,5 +23,4 @@ class CustomRequestCache extends HttpSessionRequestCache {
       super.saveRequest(request, response);
     }
   }
-
 }

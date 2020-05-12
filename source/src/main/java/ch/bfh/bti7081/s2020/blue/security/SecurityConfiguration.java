@@ -1,9 +1,9 @@
 package ch.bfh.bti7081.s2020.blue.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import ch.bfh.bti7081.s2020.blue.util.SecurityUtils;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,8 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private static final String LOGIN_PROCESSING_URL = "/login";
@@ -20,24 +20,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   private static final String LOGIN_URL = "/login";
   private static final String LOGOUT_SUCCESS_URL = "/login";
   private static final String LOGOUT_URL = "/logout";
-  @Autowired
-  private UserDetailsService databaseUserDetailsService;
+
+  private final UserDetailsService databaseUserDetailsService;
+
+  public SecurityConfiguration(UserDetailsService databaseUserDetailsService) {
+    this.databaseUserDetailsService = databaseUserDetailsService;
+  }
 
   /**
    * Require login to access internal pages and configure login form.
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.anonymous().and().authorizeRequests()
+    http.authorizeRequests()
         // TODO Add publicly accessible routes here.
-        .antMatchers("/register","/otherpublicpage","/about").permitAll();
+        .antMatchers("/register", "/otherpublicpage", "/about").permitAll();
 
     // Not using Spring CSRF here to be able to use plain HTML for the login page
     http.csrf().disable() //
 
         // Register our CustomRequestCache that saves unauthorized access attempts, so
         // the user is redirected after login.
-        .requestCache().requestCache(new CustomRequestCache()) //
+        .requestCache().requestCache(new FrameworkIgnoringRequestCache()) //
         // Restrict access to our application.
         .and().authorizeRequests()
 

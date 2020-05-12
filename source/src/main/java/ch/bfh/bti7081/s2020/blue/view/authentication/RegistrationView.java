@@ -1,8 +1,8 @@
 package ch.bfh.bti7081.s2020.blue.view.authentication;
 
-import ch.bfh.bti7081.s2020.blue.view.NavigatableView;
+public interface RegistrationView {
 
-public interface RegisterView extends NavigatableView {
+  void navigate(String route);
 
   void showMessage(String message);
 

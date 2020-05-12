@@ -7,20 +7,20 @@ import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 @Route(value = LoginViewImpl.ROUTE)
 @PageTitle("Login")
 public class LoginViewImpl extends VerticalLayout implements BeforeEnterObserver, LoginView {
 
   static final String ROUTE = "login";
-  private List<LoginViewListener> listeners = new ArrayList<>();
-  private LoginForm login = new LoginForm();
+
+  private final LoginForm login = new LoginForm();
+  private final LoginViewListener listener;
 
   public LoginViewImpl() {
-    new LoginPresenter(null, this);
+    this.listener = new LoginPresenter(login, this);
+
     login.setAction("login");
     this.add(login);
   }
@@ -33,10 +33,5 @@ public class LoginViewImpl extends VerticalLayout implements BeforeEnterObserver
         .getOrDefault("error", Collections.emptyList()).isEmpty()) {
       login.setError(true); //
     }
-  }
-
-  @Override
-  public void addListener(LoginViewListener listener) {
-    listeners.add(listener);
   }
 }

@@ -6,6 +6,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class Beans {
 
+  private Beans() {
+    // Static utility class
+  }
+
   public static <T> T get(Class<T> serviceType) {
     return Objects.requireNonNull(WebApplicationContextUtils
         .getWebApplicationContext(VaadinServlet.getCurrent().getServletContext()))

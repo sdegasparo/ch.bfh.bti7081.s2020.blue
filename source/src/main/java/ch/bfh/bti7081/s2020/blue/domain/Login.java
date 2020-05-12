@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.domain;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,24 +23,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Login implements UserDetails {
 
   @Id
-  @Getter
   private String username;
 
   private String email;
 
-  @Getter
   @Column(columnDefinition = "BPCHAR(60)")
   private String password;
 
   private Boolean isEnabled;
   private Boolean isBlocked;
 
-  @OneToOne(mappedBy = "login", cascade = CascadeType.ALL)
+  @OneToOne(mappedBy = "login", cascade = {CascadeType.DETACH, CascadeType.MERGE,
+      CascadeType.PERSIST, CascadeType.REFRESH})
   private Patient patient;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Arrays.asList(new SimpleGrantedAuthority("patient"));
+    return Collections.singletonList(new SimpleGrantedAuthority("patient"));
   }
 
   @Override
@@ -63,5 +61,4 @@ public class Login implements UserDetails {
   public boolean isEnabled() {
     return isEnabled;
   }
-
 }
