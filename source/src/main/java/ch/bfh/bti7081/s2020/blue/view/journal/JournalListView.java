@@ -5,13 +5,10 @@ import java.util.List;
 
 public interface JournalListView {
 
-  void onInit(List<JournalEntry> journalEntries);
+  void display(List<JournalEntry> journalEntries);
 
   interface JournalListViewListener {
 
     void onInit();
-
   }
-
-  void addListener(JournalListViewListener listener);
 }

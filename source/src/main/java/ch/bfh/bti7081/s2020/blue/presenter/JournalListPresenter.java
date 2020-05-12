@@ -1,34 +1,21 @@
 package ch.bfh.bti7081.s2020.blue.presenter;
 
-import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.service.JournalService;
+import ch.bfh.bti7081.s2020.blue.util.Beans;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListView;
-import com.vaadin.flow.router.Router;
-import com.vaadin.flow.server.RouteRegistry;
-import com.vaadin.flow.spring.annotation.UIScope;
-import org.springframework.stereotype.Component;
 
-@Component
-@UIScope
 public class JournalListPresenter implements JournalListView.JournalListViewListener {
 
-  private JournalListView view;
-  private JournalService journalService;
+  private final JournalListView view;
+  private final JournalService journalService;
 
-  public JournalListPresenter(JournalService journalService) {
-    this.journalService = journalService;
-  }
-
-  public void setView(JournalListView view) {
+  public JournalListPresenter(JournalListView view) {
     this.view = view;
-    this.view.addListener(this);
-    onInit();
+    this.journalService = Beans.get(JournalService.class);
   }
 
   @Override
   public void onInit() {
-    view.onInit(journalService.findAll());
+    view.display(journalService.findAll());
   }
-
-
 }

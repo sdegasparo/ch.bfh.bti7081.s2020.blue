@@ -1,16 +1,10 @@
 package ch.bfh.bti7081.s2020.blue.view;
 
-import ch.bfh.bti7081.s2020.blue.presenter.AchievementListPresenter;
-import ch.bfh.bti7081.s2020.blue.presenter.ChallengeListPresenter;
-import ch.bfh.bti7081.s2020.blue.presenter.FooterPresenter;
-import ch.bfh.bti7081.s2020.blue.presenter.HeaderPresenter;
-import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
-import ch.bfh.bti7081.s2020.blue.presenter.TherapistListPresenter;
 import ch.bfh.bti7081.s2020.blue.view.achievement.AchievementListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.challenge.ChallengeListViewImpl;
-import ch.bfh.bti7081.s2020.blue.view.footer.FooterViewImpl;
-import ch.bfh.bti7081.s2020.blue.view.header.HeaderViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListViewImpl;
+import ch.bfh.bti7081.s2020.blue.view.layout.footer.FooterViewImpl;
+import ch.bfh.bti7081.s2020.blue.view.layout.header.HeaderViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.therapist.TherapistListViewImpl;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -23,31 +17,17 @@ import com.vaadin.flow.server.PWA;
     enableInstallPrompt = false)
 public class MainView extends VerticalLayout {
 
-  public MainView(JournalListPresenter journalListPresenter) {
-    Object o = new Object();
+  public MainView() {
+    add(new HeaderViewImpl());
 
-    HeaderViewImpl headerView = new HeaderViewImpl();
-    new HeaderPresenter(o, headerView);
-    add(headerView);
+    add(new JournalListViewImpl());
 
-    JournalListViewImpl journalListView = new JournalListViewImpl();
-    journalListPresenter.setView(journalListView);
-    add(journalListView);
+    add(new ChallengeListViewImpl());
 
-    ChallengeListViewImpl challengeListView = new ChallengeListViewImpl();
-    new ChallengeListPresenter(o, challengeListView);
-    add(challengeListView);
+    add(new AchievementListViewImpl());
 
-    AchievementListViewImpl achievementListView = new AchievementListViewImpl();
-    new AchievementListPresenter(o, achievementListView);
-    add(achievementListView);
+    add(new TherapistListViewImpl());
 
-    TherapistListViewImpl therapistListView = new TherapistListViewImpl();
-    new TherapistListPresenter(o, therapistListView);
-    add(therapistListView);
-
-    FooterViewImpl footerView = new FooterViewImpl();
-    new FooterPresenter(o, footerView);
-    add(footerView);
+    add(new FooterViewImpl());
   }
 }

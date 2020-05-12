@@ -8,12 +8,6 @@ public interface JournalDetailView {
 
   interface JournalDetailViewListener {
 
-    void findAndDisplay(Long id);
-
-    void saveButtonClick();
-
-    void cancelButtonClick();
+    void onInit(Long id);
   }
-
-  void addListener(JournalDetailViewListener listener);
 }

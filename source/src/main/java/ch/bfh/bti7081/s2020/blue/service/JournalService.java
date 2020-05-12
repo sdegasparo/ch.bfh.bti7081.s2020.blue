@@ -7,21 +7,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class JournalService {
 
-  private List<JournalEntry> journalEntries = List.of(
+  private final List<JournalEntry> journalEntries = List.of(
       JournalEntry.builder()
           .id(1L)
-          .title("This is a title")
-          .content("This is content")
+          .title("Journal Day 3")
+          .content("What day is it?")
           .build(),
       JournalEntry.builder()
           .id(2L)
-          .title("This is a title")
-          .content("This is content")
+          .title("Journal Day 2")
+          .content("Oh no ..")
           .build(),
       JournalEntry.builder()
           .id(3L)
-          .title("This is a title")
-          .content("This is content")
+          .title("Journal Day 1")
+          .content("This is the beginning of ..")
           .build()
   );
 
