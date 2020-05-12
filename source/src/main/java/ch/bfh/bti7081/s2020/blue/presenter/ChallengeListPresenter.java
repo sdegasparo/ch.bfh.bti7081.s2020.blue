@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.presenter;
 
 import ch.bfh.bti7081.s2020.blue.service.ChallengeService;
-import ch.bfh.bti7081.s2020.blue.util.Beans;
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.challenge.ChallengeListView;
 
 public class ChallengeListPresenter implements ChallengeListView.ChallengeListViewListener {
@@ -9,9 +9,9 @@ public class ChallengeListPresenter implements ChallengeListView.ChallengeListVi
   private final ChallengeListView view;
   private final ChallengeService challengeService;
 
-  public ChallengeListPresenter(ChallengeListView view) {
+  public ChallengeListPresenter(ChallengeListView view, BeanInjector beanInjector) {
     this.view = view;
-    this.challengeService = Beans.get(ChallengeService.class);
+    this.challengeService = beanInjector.get(ChallengeService.class);
   }
 
   @Override

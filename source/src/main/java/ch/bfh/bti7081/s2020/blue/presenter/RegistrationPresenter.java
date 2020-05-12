@@ -3,7 +3,7 @@ package ch.bfh.bti7081.s2020.blue.presenter;
 import ch.bfh.bti7081.s2020.blue.domain.dto.RegisterDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
 import ch.bfh.bti7081.s2020.blue.service.RegistrationService;
-import ch.bfh.bti7081.s2020.blue.util.Beans;
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.authentication.RegistrationView;
 import ch.bfh.bti7081.s2020.blue.view.authentication.RegistrationView.RegisterViewListener;
 import java.util.Collection;
@@ -15,10 +15,11 @@ public class RegistrationPresenter implements RegisterViewListener {
   private final RegistrationView view;
   private final RegistrationService registrationService;
 
-  public RegistrationPresenter(RegisterDto model, RegistrationView view) {
+  public RegistrationPresenter(RegisterDto model, RegistrationView view,
+      BeanInjector beanInjector) {
     this.model = model;
     this.view = view;
-    this.registrationService = Beans.get(RegistrationService.class);
+    this.registrationService = beanInjector.get(RegistrationService.class);
   }
 
   @Override

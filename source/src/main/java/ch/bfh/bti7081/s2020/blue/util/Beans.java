@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Beans implements InitializingBean {
+public class Beans implements InitializingBean, BeanInjector {
 
   private static Beans instance;
 
@@ -20,7 +20,7 @@ public class Beans implements InitializingBean {
     instance = this;
   }
 
-  public static <T> T get(Class<T> beanType) {
+  public <T> T get(Class<T> beanType) {
     return instance.applicationContext.getBean(beanType);
   }
 }

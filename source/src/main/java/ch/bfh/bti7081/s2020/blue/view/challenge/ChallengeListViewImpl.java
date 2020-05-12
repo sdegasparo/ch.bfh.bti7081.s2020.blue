@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.view.challenge;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.ChallengeListPresenter;
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -11,8 +12,8 @@ public class ChallengeListViewImpl extends VerticalLayout implements ChallengeLi
 
   private final ChallengeListViewListener listener;
 
-  public ChallengeListViewImpl() {
-    listener = new ChallengeListPresenter(this);
+  public ChallengeListViewImpl(BeanInjector beanInjector) {
+    listener = new ChallengeListPresenter(this, beanInjector);
     listener.onInit();
   }
 
