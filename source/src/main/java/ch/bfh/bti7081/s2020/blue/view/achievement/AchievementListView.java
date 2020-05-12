@@ -5,6 +5,4 @@ public interface AchievementListView {
   interface AchievementListViewListener {
 
   }
-
-  public void addListener(AchievementListViewListener listener);
 }
