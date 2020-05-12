@@ -16,9 +16,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
 @Log4j2
+@Service
 public class RegistrationService {
+
+  private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   private final LoginCrudRepository loginCrudRepository;
   private final PatientCrudRepository patientCrudRepository;
@@ -48,7 +50,7 @@ public class RegistrationService {
     }
 
     if (validationErrors.isEmpty()) {
-      String encodedPassword = new BCryptPasswordEncoder().encode(registerDto.getPassword());
+      String encodedPassword = passwordEncoder.encode(registerDto.getPassword());
       Patient patient = Patient.builder()
           .givenName(registerDto.getGivenName())
           .surname(registerDto.getGivenName())

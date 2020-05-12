@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Data
 @Entity
@@ -22,8 +24,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Patient {
 
+  public static final String SEQUENCE_GENERATOR_STRATEGY = "org.hibernate.id.enhanced.SequenceStyleGenerator";
+
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GenericGenerator(name = "pk_sequence",
+      strategy = SEQUENCE_GENERATOR_STRATEGY,
+      parameters = {@Parameter(name = "sequence_name", value = "patient_id_seq"),
+          @Parameter(name = "increment_size", value = "1")})
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
   private Long id;
 
   private String surname;

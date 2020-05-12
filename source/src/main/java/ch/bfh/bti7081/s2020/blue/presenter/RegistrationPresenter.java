@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.blue.service.RegistrationService;
 import ch.bfh.bti7081.s2020.blue.util.Beans;
 import ch.bfh.bti7081.s2020.blue.view.authentication.RegistrationView;
 import ch.bfh.bti7081.s2020.blue.view.authentication.RegistrationView.RegisterViewListener;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class RegistrationPresenter implements RegisterViewListener {
@@ -23,7 +24,7 @@ public class RegistrationPresenter implements RegisterViewListener {
   @Override
   public void saveButtonClick() {
     view.showMessage("");
-    var errors = registrationService.register(model);
+    Collection<ValidationError> errors = registrationService.register(model);
     if (errors.isEmpty()) {
       view.navigate("");
     } else {
