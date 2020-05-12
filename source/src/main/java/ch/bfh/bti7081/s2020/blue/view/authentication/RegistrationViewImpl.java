@@ -14,8 +14,8 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = RegistrationViewImpl.ROUTE)
 @PageTitle("Register")
+@Route(value = RegistrationViewImpl.ROUTE)
 public class RegistrationViewImpl extends FormLayout implements RegistrationView {
 
   static final String ROUTE = "register";

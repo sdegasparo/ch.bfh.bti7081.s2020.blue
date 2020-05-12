@@ -9,8 +9,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import java.util.Collections;
 
-@Route(value = LoginViewImpl.ROUTE)
 @PageTitle("Login")
+@Route(value = LoginViewImpl.ROUTE)
 public class LoginViewImpl extends VerticalLayout implements BeforeEnterObserver, LoginView {
 
   static final String ROUTE = "login";
