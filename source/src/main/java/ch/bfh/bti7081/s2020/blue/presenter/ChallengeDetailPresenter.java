@@ -1,15 +1,21 @@
 package ch.bfh.bti7081.s2020.blue.presenter;
 
+import ch.bfh.bti7081.s2020.blue.service.ChallengeService;
+import ch.bfh.bti7081.s2020.blue.util.Beans;
 import ch.bfh.bti7081.s2020.blue.view.challenge.ChallengeDetailView;
 
 public class ChallengeDetailPresenter implements ChallengeDetailView.ChallengeDetailViewListener {
 
-  private Object model;
-  private ChallengeDetailView view;
+  private final ChallengeDetailView view;
+  private final ChallengeService challengeService;
 
-  public ChallengeDetailPresenter(Object model, ChallengeDetailView view) {
-    this.model = model;
+  public ChallengeDetailPresenter(ChallengeDetailView view) {
     this.view = view;
-    view.addListener(this);
+    this.challengeService = Beans.get(ChallengeService.class);
+  }
+
+  @Override
+  public void onInit(Long id) {
+    view.display(challengeService.findById(id));
   }
 }

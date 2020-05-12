@@ -1,31 +1,31 @@
 package ch.bfh.bti7081.s2020.blue.view.challenge;
 
-import com.vaadin.flow.component.html.Label;
+import ch.bfh.bti7081.s2020.blue.domain.Challenge;
+import ch.bfh.bti7081.s2020.blue.presenter.ChallengeDetailPresenter;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
-import java.util.ArrayList;
-import java.util.List;
 
 @Route("challenge")
-public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView, HasUrlParameter<String> {
+public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView, HasUrlParameter<Long> {
 
-  private List<ChallengeDetailViewListener> listeners = new ArrayList<>();
+  private final ChallengeDetailViewListener listener;
 
   public ChallengeDetailViewImpl() {
-    Label label = new Label("ChallengeDetail works!");
-    add(label);
+    listener = new ChallengeDetailPresenter(this);
   }
 
   @Override
-  public void setParameter(BeforeEvent beforeEvent, String id) {
-    Label label = new Label("parameter " + id);
-    add(label);
+  public void setParameter(BeforeEvent beforeEvent, Long id) {
+    listener.onInit(id);
   }
 
   @Override
-  public void addListener(ChallengeDetailViewListener listener) {
-    listeners.add(listener);
+  public void display(Challenge challenge) {
+    Text name = new Text(challenge.getName());
+    Text content = new Text(challenge.getContent());
+    add(name, content);
   }
 }
