@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2020.blue.view;
 
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.achievement.AchievementListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.challenge.ChallengeListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListViewImpl;
@@ -17,12 +18,12 @@ import com.vaadin.flow.server.PWA;
     enableInstallPrompt = false)
 public class MainView extends VerticalLayout {
 
-  public MainView() {
+  public MainView(BeanInjector beanInjector) {
     add(new HeaderViewImpl());
 
-    add(new JournalListViewImpl());
+    add(new JournalListViewImpl(beanInjector));
 
-    add(new ChallengeListViewImpl());
+    add(new ChallengeListViewImpl(beanInjector));
 
     add(new AchievementListViewImpl());
 

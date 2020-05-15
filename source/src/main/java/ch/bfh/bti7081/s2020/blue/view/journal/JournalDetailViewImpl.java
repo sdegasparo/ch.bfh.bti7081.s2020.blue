@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalDetailPresenter;
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
@@ -13,8 +14,8 @@ public class JournalDetailViewImpl extends VerticalLayout implements JournalDeta
 
   private final JournalDetailViewListener listener;
 
-  public JournalDetailViewImpl() {
-    listener = new JournalDetailPresenter(this);
+  public JournalDetailViewImpl(BeanInjector beanInjector) {
+    listener = new JournalDetailPresenter(this, beanInjector);
   }
 
   @Override

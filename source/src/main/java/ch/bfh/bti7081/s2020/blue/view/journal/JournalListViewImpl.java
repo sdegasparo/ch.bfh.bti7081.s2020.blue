@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -11,8 +12,8 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
 
   private JournalListViewListener listener;
 
-  public JournalListViewImpl() {
-    listener = new JournalListPresenter(this);
+  public JournalListViewImpl(BeanInjector beanInjector) {
+    listener = new JournalListPresenter(this, beanInjector);
     listener.onInit();
   }
 

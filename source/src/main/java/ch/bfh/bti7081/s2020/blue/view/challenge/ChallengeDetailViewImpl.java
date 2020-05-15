@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.view.challenge;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.ChallengeDetailPresenter;
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
@@ -13,8 +14,8 @@ public class ChallengeDetailViewImpl extends VerticalLayout implements Challenge
 
   private final ChallengeDetailViewListener listener;
 
-  public ChallengeDetailViewImpl() {
-    listener = new ChallengeDetailPresenter(this);
+  public ChallengeDetailViewImpl(BeanInjector beanInjector) {
+    listener = new ChallengeDetailPresenter(this, beanInjector);
   }
 
   @Override

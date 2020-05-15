@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.view.authentication;
 
 import ch.bfh.bti7081.s2020.blue.domain.dto.RegisterDto;
 import ch.bfh.bti7081.s2020.blue.presenter.RegistrationPresenter;
+import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Label;
@@ -23,12 +24,12 @@ public class RegistrationViewImpl extends FormLayout implements RegistrationView
 
   private final Label infoText = new Label();
 
-  public RegistrationViewImpl() {
+  public RegistrationViewImpl(BeanInjector beanInjector) {
     var binder = new Binder<>(RegisterDto.class);
     var registerDto = new RegisterDto();
     binder.setBean(registerDto);
 
-    listener = new RegistrationPresenter(registerDto, this);
+    listener = new RegistrationPresenter(registerDto, this, beanInjector);
 
     var givenNameField = new TextField();
     addFormItem(givenNameField, "Given Name");
