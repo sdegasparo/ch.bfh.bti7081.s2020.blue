@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
@@ -21,6 +22,8 @@ public class ChallengeListViewImpl extends VerticalLayout implements ChallengeLi
 
   @Override
   public void display(List<Challenge> challenges) {
+    add(new H2("Meine aktuellen Herausforderungen"));
+
     for (Challenge challenge : challenges) {
       Div div = new Div();
       div.getStyle().set("border", "1px solid black");
@@ -34,7 +37,7 @@ public class ChallengeListViewImpl extends VerticalLayout implements ChallengeLi
       div.add(new Text(challenge.getContent()));
 
       Button detailButton = new Button("Detail");
-      detailButton.addClickListener(e -> listener.listItemClick(challenge.getId()));
+      detailButton.addClickListener(event -> listener.listItemClick(challenge.getId()));
       div.add(detailButton);
 
       add(div);

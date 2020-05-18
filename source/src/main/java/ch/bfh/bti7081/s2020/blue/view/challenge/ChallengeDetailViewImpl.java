@@ -4,6 +4,8 @@ import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.ChallengeDetailPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
@@ -30,7 +32,17 @@ public class ChallengeDetailViewImpl extends VerticalLayout implements Challenge
     name.getStyle().set("margin", "0");
 
     Text content = new Text(challenge.getContent());
-    Text criteria = new Text(challenge.getCriteria());
-    add(name, content, criteria);
+
+    Checkbox criteriaCheckbox = new Checkbox(challenge.getCriteria());
+
+    Button rateButton = new Button("Bewertung abschicken");
+    rateButton.addClickListener(event -> listener.rateButtonClick(challenge.getId()));
+
+    add(name, content, criteriaCheckbox, rateButton);
+  }
+
+  @Override
+  public void afterRatingSaved() {
+    getUI().ifPresent(ui -> ui.navigate(""));
   }
 }

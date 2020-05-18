@@ -6,8 +6,12 @@ public interface ChallengeDetailView {
 
   void display(Challenge challenge);
 
+  void afterRatingSaved();
+
   interface ChallengeDetailViewListener {
 
     void onInit(Long id);
+
+    void rateButtonClick(Long id);
   }
 }
