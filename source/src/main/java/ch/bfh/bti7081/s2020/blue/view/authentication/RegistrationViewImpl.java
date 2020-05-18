@@ -76,6 +76,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
         .bind(RegisterDto::getEmail, RegisterDto::setEmail);
 
     infoText.addClassName("register-info-text");
+    infoText.getStyle().set("color", "red");
     formLayout.add(infoText);
     formLayout.setColspan(infoText, 2);
 
