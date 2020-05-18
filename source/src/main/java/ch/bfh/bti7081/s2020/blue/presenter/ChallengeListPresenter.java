@@ -16,7 +16,7 @@ public class ChallengeListPresenter implements ChallengeListView.ChallengeListVi
 
   @Override
   public void onInit() {
-    view.display(challengeService.findAll());
+    view.display(challengeService.findAllAssignedToCurrentUser());
   }
 
   @Override

@@ -14,8 +14,8 @@ public class ChallengeService {
     this.challengeCrudRepository = challengeCrudRepository;
   }
 
-  public List<Challenge> findAll() {
-    return challengeCrudRepository.findAll();
+  public List<Challenge> findAllAssignedToCurrentUser() {
+    return challengeCrudRepository.findAllAssignedToCurrentUser();
   }
 
   public Challenge findById(Long id) {
