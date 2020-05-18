@@ -1,10 +1,12 @@
-package ch.bfh.bti7081.s2020.blue.security;
+package ch.bfh.bti7081.s2020.blue.configuration;
 
 import ch.bfh.bti7081.s2020.blue.domain.Login;
+import ch.bfh.bti7081.s2020.blue.security.FrameworkIgnoringRequestCache;
 import ch.bfh.bti7081.s2020.blue.util.SecurityUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsService databaseUserDetailsService;
@@ -53,8 +56,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) {
-    web.debug(true);
-
     web.ignoring().antMatchers(
         // Vaadin Flow static resources //
         "/VAADIN/**",
