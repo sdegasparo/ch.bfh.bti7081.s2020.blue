@@ -18,4 +18,9 @@ public class ChallengeListPresenter implements ChallengeListView.ChallengeListVi
   public void onInit() {
     view.display(challengeService.findAll());
   }
+
+  @Override
+  public void listItemClick(Long id) {
+    view.navigateToDetailView(id);
+  }
 }
