@@ -4,12 +4,14 @@ import ch.bfh.bti7081.s2020.blue.view.achievement.AchievementListView;
 
 public class AchievementListPresenter implements AchievementListView.AchievementListViewListener {
 
-  private Object model;
-  private AchievementListView view;
+  private final AchievementListView view;
 
-  public AchievementListPresenter(Object model, AchievementListView view) {
-    this.model = model;
+  public AchievementListPresenter(AchievementListView view) {
     this.view = view;
-    view.addListener(this);
+  }
+
+  @Override
+  public void onInit() {
+    view.display();
   }
 }

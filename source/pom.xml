@@ -22,6 +22,8 @@
 
     <!-- Dependency management -->
     <lombok.version>1.18.12</lombok.version>
+    <jupiter.version>5.6.2</jupiter.version>
+    <mockito-core.version>3.3.3</mockito-core.version>
 
     <!-- Flyway configuration -->
     <flyway.db.url>jdbc:postgresql://localhost:${flyway.db.port}</flyway.db.url>
@@ -135,6 +137,10 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
     <dependency>
@@ -165,6 +171,16 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${jupiter.version}</version>
     </dependency>
   </dependencies>
 

@@ -4,12 +4,14 @@ import ch.bfh.bti7081.s2020.blue.view.therapist.TherapistListView;
 
 public class TherapistListPresenter implements TherapistListView.TherapistViewListener {
 
-  private Object model;
-  private TherapistListView view;
+  private final TherapistListView view;
 
-  public TherapistListPresenter(Object model, TherapistListView view) {
-    this.model = model;
+  public TherapistListPresenter(TherapistListView view) {
     this.view = view;
-    view.addListener(this);
+  }
+
+  @Override
+  public void onInit() {
+    view.display();
   }
 }
