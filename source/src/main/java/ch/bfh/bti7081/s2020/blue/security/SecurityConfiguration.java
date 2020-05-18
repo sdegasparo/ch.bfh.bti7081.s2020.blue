@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2020.blue.security;
 
+import ch.bfh.bti7081.s2020.blue.domain.Login;
 import ch.bfh.bti7081.s2020.blue.util.SecurityUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -9,17 +10,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-  private static final String LOGIN_PROCESSING_URL = "/login";
-  private static final String LOGIN_FAILURE_URL = "/login?error";
-  private static final String LOGIN_URL = "/login";
-  private static final String LOGOUT_SUCCESS_URL = "/login";
-  private static final String LOGOUT_URL = "/logout";
 
   private final UserDetailsService databaseUserDetailsService;
 
@@ -32,18 +26,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-        // TODO Add publicly accessible routes here.
-        .antMatchers("/register", "/otherpublicpage", "/about").permitAll();
-
     // Not using Spring CSRF here to be able to use plain HTML for the login page
-    http.csrf().disable() //
+    http.csrf().disable()
 
         // Register our CustomRequestCache that saves unauthorized access attempts, so
         // the user is redirected after login.
-        .requestCache().requestCache(new FrameworkIgnoringRequestCache()) //
+        .requestCache().requestCache(new FrameworkIgnoringRequestCache())
+
         // Restrict access to our application.
         .and().authorizeRequests()
+        // TODO Add publicly accessible routes here.
+        .antMatchers("/register", "/otherpublicpage", "/about").permitAll()
 
         // Allow all flow internal requests.
         .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
@@ -52,16 +45,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated() //
 
         // Configure the login page.
-        .and().formLogin().loginPage(LOGIN_URL).permitAll() //
-        .loginProcessingUrl(LOGIN_PROCESSING_URL) //
-        .failureUrl(LOGIN_FAILURE_URL)
+        .and().formLogin()
 
         // Configure logout
-        .and().logout().logoutUrl(LOGOUT_URL).logoutSuccessUrl(LOGOUT_SUCCESS_URL);
+        .and().logout();
   }
 
   @Override
   public void configure(WebSecurity web) {
+    web.debug(true);
+
     web.ignoring().antMatchers(
         // Vaadin Flow static resources //
         "/VAADIN/**",
@@ -85,7 +78,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(AuthenticationManagerBuilder auth) {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
     authProvider.setUserDetailsService(databaseUserDetailsService);
-    authProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+    authProvider.setPasswordEncoder(Login.PASSWORD_ENCODER);
 
     auth.authenticationProvider(authProvider);
   }

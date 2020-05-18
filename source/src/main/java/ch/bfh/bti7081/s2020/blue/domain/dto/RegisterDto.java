@@ -3,10 +3,12 @@ package ch.bfh.bti7081.s2020.blue.domain.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterDto {
