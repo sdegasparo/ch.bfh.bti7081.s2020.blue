@@ -11,10 +11,14 @@ public class FooterViewImpl extends HorizontalLayout implements FooterView {
   public FooterViewImpl() {
     listener = new FooterPresenter(this);
     listener.onInit();
+    setMaxWidth("800px");
   }
 
   @Override
   public void display() {
-    add(new Label("Footer works!"));
+
+    var copyrightLabel = new Label("© by team blue");
+    copyrightLabel.getStyle().set("font-weight", "bolder");
+    add(copyrightLabel);
   }
 }
