@@ -22,7 +22,9 @@ public class LoginViewImpl extends VerticalLayout implements BeforeEnterObserver
     this.listener = new LoginPresenter(login, this);
 
     login.setAction("login");
-    this.add(login);
+    add(login);
+    setSizeFull();
+    setHorizontalComponentAlignment(Alignment.CENTER, login);
   }
 
   @Override
