@@ -4,8 +4,7 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.achievement.AchievementListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.challenge.ChallengeListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListViewImpl;
-import ch.bfh.bti7081.s2020.blue.view.layout.footer.FooterViewImpl;
-import ch.bfh.bti7081.s2020.blue.view.layout.header.HeaderViewImpl;
+import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import ch.bfh.bti7081.s2020.blue.view.therapist.TherapistListViewImpl;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -16,19 +15,19 @@ import com.vaadin.flow.server.PWA;
     shortName = "Social Anxiety App",
     description = "This is an application to help people with social anxiety.",
     enableInstallPrompt = false)
-public class MainView extends VerticalLayout {
+public class MainView extends SocialAnxietyLayout {
 
   public MainView(BeanInjector beanInjector) {
-    add(new HeaderViewImpl());
+    super(beanInjector);
+  }
 
-    add(new JournalListViewImpl(beanInjector));
-
-    add(new ChallengeListViewImpl(beanInjector));
-
-    add(new AchievementListViewImpl());
-
-    add(new TherapistListViewImpl());
-
-    add(new FooterViewImpl());
+  @Override
+  protected void initializeView(BeanInjector beanInjector) {
+    VerticalLayout verticalLayout = new VerticalLayout();
+    verticalLayout.add(new JournalListViewImpl(beanInjector));
+    verticalLayout.add(new ChallengeListViewImpl(beanInjector));
+    verticalLayout.add(new AchievementListViewImpl());
+    verticalLayout.add(new TherapistListViewImpl());
+    add(verticalLayout);
   }
 }
