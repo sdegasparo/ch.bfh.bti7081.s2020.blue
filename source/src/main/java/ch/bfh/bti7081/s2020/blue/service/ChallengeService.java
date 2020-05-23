@@ -1,39 +1,26 @@
 package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
+import ch.bfh.bti7081.s2020.blue.domain.repository.ChallengeCrudRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChallengeService {
 
-  private final List<Challenge> challenges = List.of(
-      Challenge.builder()
-          .id(1L)
-          .name("Monster Slayer")
-          .content("Kill 10 monsters")
-          .build(),
-      Challenge.builder()
-          .id(2L)
-          .name("Pet Collector")
-          .content("Collect 10 pets")
-          .build(),
-      Challenge.builder()
-          .id(3L)
-          .name("Mount Collector")
-          .content("Collect 10 mounts")
-          .build()
-  );
+  private ChallengeCrudRepository challengeCrudRepository;
 
-  public List<Challenge> findAll() {
-    return challenges;
+  public ChallengeService(ChallengeCrudRepository challengeCrudRepository) {
+    this.challengeCrudRepository = challengeCrudRepository;
+  }
+
+  public List<Challenge> findAllAssignedToCurrentUser() {
+    return challengeCrudRepository.findAllAssignedToCurrentUser();
   }
 
   public Challenge findById(Long id) {
-    return challenges.stream()
-        .filter(challenge -> challenge.getId().equals(id))
-        .findFirst()
-        .get();
+    return challengeCrudRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException(String.format("Challenge with id %s not found", id)));
   }
 
 }

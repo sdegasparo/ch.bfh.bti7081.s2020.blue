@@ -23,6 +23,10 @@ There are two ways to run the application :  using `mvn spring-boot:run` or by r
 You can use any IDE of your preference,but we suggest Eclipse or Intellij IDEA.
 Below are the configuration details to start the project using a `spring-boot:run` command. Both Eclipse and Intellij IDEA are covered.
 
+## Lombok
+- What is Lombok? https://projectlombok.org/
+- Getting started: Install the Lombok plugin in your IDE
+
 ## Eclipse
 - Right click on a project folder and select `Run As` --> `Maven build..` . After that a configuration window is opened.
 - In the window set the value of the **Goals** field to 'spring-boot:run' 

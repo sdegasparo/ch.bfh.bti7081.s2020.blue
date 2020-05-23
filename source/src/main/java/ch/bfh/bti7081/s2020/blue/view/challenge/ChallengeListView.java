@@ -7,8 +7,12 @@ public interface ChallengeListView {
 
   void display(List<Challenge> challenges);
 
+  void navigateToDetailView(Long id);
+
   interface ChallengeListViewListener {
 
     void onInit();
+
+    void listItemClick(Long id);
   }
 }
