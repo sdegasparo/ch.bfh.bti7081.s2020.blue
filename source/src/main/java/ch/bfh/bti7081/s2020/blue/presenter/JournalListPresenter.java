@@ -19,27 +19,39 @@ public class JournalListPresenter implements JournalListListener {
   }
 
   @Override
-  public void onInit(Optional<Long> selectedEntry) {
-    showEntry(selectedEntry);
+  public void onInit(Long selectedEntry) {
+    showEntry(selectedEntry, null);
   }
 
   @Override
   public void journalEntrySelected(Long entryId) {
-    showEntry(Optional.ofNullable(entryId));
+    showEntry(entryId, null);
   }
 
-  private void showEntry(Optional<Long> selectedId) {
-    Collection<JournalEntry> entries = journalService.findAll();
-    Optional<JournalEntry> entry = selectedId.flatMap(id -> journalService.findById(id));
+  @Override
+  public void searchFieldChanged() {
+    showEntry(null, value);
+  }
+
+  @Override
+  public void addNewClicked() {
+    view.navigate(String.format("journal/new"));
+  }
+
+  private void showEntry(Long selectedId, String search) {
+    Collection<JournalEntry> entries = journalService.findAllForCurrentUser(search);
+
+    Optional<JournalEntry> entry = entries.stream().filter(e -> e.getId().equals(selectedId))
+        .findFirst();
     // Only show the entry if screen is big enough.
     if (entry.isPresent()) {
       if (view.getScreenSize() > 600) {
-        view.display(entries, entry);
+        view.display(entries, entry.get());
       } else {
         view.navigate(String.format("journal/%d", entry.get().getId()));
       }
     } else {
-      view.display(entries, Optional.empty());
+      view.display(entries, null);
     }
   }
 }

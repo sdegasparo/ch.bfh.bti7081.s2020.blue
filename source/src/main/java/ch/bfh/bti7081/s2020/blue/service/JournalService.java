@@ -26,11 +26,11 @@ public class JournalService {
           .build()
   );
 
-  public List<JournalEntry> findAll() {
+  public List<JournalEntry> findAllForCurrentUser(String search) {
     return journalEntries;
   }
 
-  public Optional<JournalEntry> findById(Long id) {
+  public Optional<JournalEntry> findByIdForCurrentUser(Long id) {
     return journalEntries.stream()
         .filter(journalEntry -> journalEntry.getId().equals(id))
         .findFirst();
