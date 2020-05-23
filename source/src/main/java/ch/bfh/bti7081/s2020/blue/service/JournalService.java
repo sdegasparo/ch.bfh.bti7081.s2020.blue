@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,10 +30,9 @@ public class JournalService {
     return journalEntries;
   }
 
-  public JournalEntry findById(Long id) {
+  public Optional<JournalEntry> findById(Long id) {
     return journalEntries.stream()
         .filter(journalEntry -> journalEntry.getId().equals(id))
-        .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("Cannot find journal entry!"));
+        .findFirst();
   }
 }

@@ -20,6 +20,7 @@
     <!-- Vaadin configuration -->
     <vaadin.version>14.1.27</vaadin.version>
 
+    <vaadin.component.card.version>2.0.0.beta4</vaadin.component.card.version>
     <!-- Dependency management -->
     <lombok.version>1.18.12</lombok.version>
     <jupiter.version>5.6.2</jupiter.version>
@@ -181,6 +182,16 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${jupiter.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.appreciated</groupId>
+      <artifactId>card</artifactId>
+      <version>${vaadin.component.card.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.appreciated</groupId>
+      <artifactId>master-detail-view</artifactId>
+      <version>2.0.0.beta2</version>
     </dependency>
   </dependencies>
 

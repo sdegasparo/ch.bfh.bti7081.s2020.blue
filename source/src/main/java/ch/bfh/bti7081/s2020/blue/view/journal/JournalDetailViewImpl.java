@@ -9,7 +9,6 @@ import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
-@Route("journal")
 public class JournalDetailViewImpl extends VerticalLayout implements JournalDetailView, HasUrlParameter<Long> {
 
   private final JournalDetailViewListener listener;
@@ -20,7 +19,7 @@ public class JournalDetailViewImpl extends VerticalLayout implements JournalDeta
 
   @Override
   public void setParameter(BeforeEvent beforeEvent, Long id) {
-    listener.onInit(id);
+     listener.onInit(id);
   }
 
   @Override
