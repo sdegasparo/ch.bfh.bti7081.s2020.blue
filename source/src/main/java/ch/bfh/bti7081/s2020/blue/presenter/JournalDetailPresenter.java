@@ -16,6 +16,6 @@ public class JournalDetailPresenter implements JournalDetailView.JournalDetailVi
 
   @Override
   public void onInit(Long id) {
-    view.display(journalService.findById(id));
+    view.display(journalService.findById(id).get());
   }
 }
