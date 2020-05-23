@@ -6,7 +6,6 @@ public interface LandingView {
 
   }
 
-
   void addListener(LandingPageViewListener listener);
 
 }

@@ -14,7 +14,6 @@ import com.vaadin.flow.router.Route;
 @Route("")
 public class LandingViewImpl extends VerticalLayout implements LandingPageViewListener {
 
-
   public LandingViewImpl() {
     H1 title = new H1("Willkommen zur soziale Phobie App");
 
