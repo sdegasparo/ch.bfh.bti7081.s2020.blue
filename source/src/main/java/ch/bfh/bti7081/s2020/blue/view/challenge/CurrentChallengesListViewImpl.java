@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.view.challenge;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
-import ch.bfh.bti7081.s2020.blue.presenter.ChallengeListPresenter;
+import ch.bfh.bti7081.s2020.blue.presenter.CurrentChallengesListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -11,12 +11,12 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
-public class ChallengeListViewImpl extends VerticalLayout implements ChallengeListView {
+public class CurrentChallengesListViewImpl extends VerticalLayout implements CurrentChallengesListView {
 
-  private final ChallengeListViewListener listener;
+  private final CurrentChallengesListViewListener listener;
 
-  public ChallengeListViewImpl(BeanInjector beanInjector) {
-    listener = new ChallengeListPresenter(this, beanInjector);
+  public CurrentChallengesListViewImpl(BeanInjector beanInjector) {
+    listener = new CurrentChallengesListPresenter(this, beanInjector);
     listener.onInit();
   }
 

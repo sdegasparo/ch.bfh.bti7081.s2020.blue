@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ChallengeCrudRepository extends CrudRepository<Challenge, Long> {
 
   @Override
@@ -16,6 +18,6 @@ public interface ChallengeCrudRepository extends CrudRepository<Challenge, Long>
       + " from Challenge c"
       + "         join PatientHasChallenge phc on c.id = phc.challenge.id"
       + "         join Patient p on phc.patient.id = p.id"
-      + " where p.login.username = ?#{principal.username}")
+      + " where p.login.username = :#{principal.username}")
   List<Challenge> findAllAssignedToCurrentUser();
 }

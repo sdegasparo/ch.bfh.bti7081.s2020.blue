@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.view;
 
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
-import ch.bfh.bti7081.s2020.blue.view.challenge.ChallengeListViewImpl;
+import ch.bfh.bti7081.s2020.blue.view.challenge.CurrentChallengesListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
@@ -22,7 +22,7 @@ public class MainView extends SocialAnxietyLayout {
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    SplitLayout splitLayout = new SplitLayout(new ChallengeListViewImpl(beanInjector),
+    SplitLayout splitLayout = new SplitLayout(new CurrentChallengesListViewImpl(beanInjector),
         new JournalListViewImpl(beanInjector));
     splitLayout.setOrientation(Orientation.HORIZONTAL);
     add(splitLayout);
