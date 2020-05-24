@@ -45,6 +45,7 @@ public class ChallengesViewImpl extends SocialAnxietyLayout implements Challenge
 
       if (challenge.getCompleted()) {
         div.getStyle().set("border", "1px solid green");
+        div.getStyle().set("background-color", "lightgreen");
       } else {
         div.getStyle().set("border", "1px solid black");
       }
