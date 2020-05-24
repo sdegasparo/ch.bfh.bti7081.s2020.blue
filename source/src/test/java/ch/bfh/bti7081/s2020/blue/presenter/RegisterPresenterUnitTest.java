@@ -12,9 +12,12 @@ import ch.bfh.bti7081.s2020.blue.view.authentication.RegistrationView;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RegisterPresenterUnitTest {
 
   @Mock

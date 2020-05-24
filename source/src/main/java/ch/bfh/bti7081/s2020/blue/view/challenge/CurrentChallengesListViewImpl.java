@@ -11,7 +11,8 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
-public class CurrentChallengesListViewImpl extends VerticalLayout implements CurrentChallengesListView {
+public class CurrentChallengesListViewImpl extends VerticalLayout implements
+    CurrentChallengesListView {
 
   private final CurrentChallengesListViewListener listener;
 

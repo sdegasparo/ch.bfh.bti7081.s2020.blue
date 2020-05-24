@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2020.blue.view.challenge;
 
-import ch.bfh.bti7081.s2020.blue.domain.Challenge;
+import ch.bfh.bti7081.s2020.blue.domain.dto.ChallengeDto;
 import ch.bfh.bti7081.s2020.blue.presenter.ChallengesPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
@@ -39,10 +39,16 @@ public class ChallengesViewImpl extends SocialAnxietyLayout implements Challenge
   }
 
   @Override
-  public void display(List<Challenge> challenges) {
-    for (Challenge challenge : challenges) {
+  public void display(List<ChallengeDto> challenges) {
+    for (ChallengeDto challenge : challenges) {
       Div div = new Div();
-      div.getStyle().set("border", "1px solid black");
+
+      if (challenge.getCompleted()) {
+        div.getStyle().set("border", "1px solid green");
+      } else {
+        div.getStyle().set("border", "1px solid black");
+      }
+
       div.getStyle().set("padding", "0.5em");
       div.getStyle().set("width", "100%");
 

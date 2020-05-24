@@ -17,7 +17,7 @@ public class ChallengesPresenter implements ChallengesViewListener {
 
   @Override
   public void onInit() {
-    view.display(challengeService.findAllNotCompleted());
+    view.display(challengeService.findAll());
   }
 
   @Override

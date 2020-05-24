@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
-  private JournalListViewListener listener;
+  private final JournalListViewListener listener;
 
   public JournalListViewImpl(BeanInjector beanInjector) {
     listener = new JournalListPresenter(this, beanInjector);
@@ -20,7 +20,8 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
   @Override
   public void display(List<JournalEntry> journalEntries) {
     for (JournalEntry journalEntry : journalEntries) {
-      add(new RouterLink(journalEntry.getTitle(), JournalDetailViewImpl.class, journalEntry.getId()));
+      add(new RouterLink(journalEntry.getTitle(), JournalDetailViewImpl.class,
+          journalEntry.getId()));
       add(new Text(journalEntry.getContent()));
     }
   }

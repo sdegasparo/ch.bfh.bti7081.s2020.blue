@@ -13,7 +13,8 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
 @Route("challenge")
-public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView, HasUrlParameter<Long> {
+public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView,
+    HasUrlParameter<Long> {
 
   private final ChallengeDetailViewListener listener;
 

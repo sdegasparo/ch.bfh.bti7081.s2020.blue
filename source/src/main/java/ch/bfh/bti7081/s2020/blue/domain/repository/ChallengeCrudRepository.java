@@ -10,14 +10,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChallengeCrudRepository extends CrudRepository<Challenge, Long> {
 
-  @Override
-  List<Challenge> findAll();
+  @PreAuthorize("isAuthenticated()")
+  @Query("select c"
+      + " from Challenge c"
+      + "         left join PatientHasChallenge phc on c.id = phc.challenge.id"
+      + " where phc.patient.login.username = :#{principal.username}")
+  List<Challenge> findAllInclusiveAccepted();
 
   @PreAuthorize("isAuthenticated()")
   @Query("select c"
       + " from Challenge c"
       + "         join PatientHasChallenge phc on c.id = phc.challenge.id"
-      + "         join Patient p on phc.patient.id = p.id"
-      + " where p.login.username = :#{principal.username}")
+      + " where phc.patient.login.username = :#{principal.username}")
   List<Challenge> findAllAssignedToCurrentUser();
 }
