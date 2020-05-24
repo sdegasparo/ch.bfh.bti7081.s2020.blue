@@ -21,6 +21,7 @@ public interface ChallengeCrudRepository extends CrudRepository<Challenge, Long>
   @Query("select c"
       + " from Challenge c"
       + "         join PatientHasChallenge phc on c.id = phc.challenge.id"
-      + " where phc.patient.login.username = :#{principal.username}")
-  List<Challenge> findAllAssignedToCurrentUser();
+      + " where phc.completed = false"
+      + " and phc.patient.login.username = :#{principal.username}")
+  List<Challenge> findAllAssignedToCurrentUserAndNotCompleted();
 }

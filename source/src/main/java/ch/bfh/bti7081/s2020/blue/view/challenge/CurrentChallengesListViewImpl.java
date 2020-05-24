@@ -50,5 +50,4 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements
   public void navigateToDetailView(Long id) {
     getUI().ifPresent(ui -> ui.navigate(ChallengeDetailViewImpl.class, id));
   }
-
 }

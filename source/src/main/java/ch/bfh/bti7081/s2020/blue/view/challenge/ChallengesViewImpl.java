@@ -58,10 +58,12 @@ public class ChallengesViewImpl extends SocialAnxietyLayout implements Challenge
 
       div.add(new Text(challenge.getContent()));
 
-      Button acceptChallengeButton = new Button("Akzeptieren");
-      acceptChallengeButton
-          .addClickListener(event -> listener.onChallengeAccept(challenge.getId()));
-      div.add(acceptChallengeButton);
+      if (!challenge.getCompleted()) {
+        Button acceptChallengeButton = new Button("Akzeptieren");
+        acceptChallengeButton
+            .addClickListener(event -> listener.onChallengeAccept(challenge.getId()));
+        div.add(acceptChallengeButton);
+      }
 
       challengeHolder.add(div);
     }

@@ -1,12 +1,16 @@
 package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
+import ch.bfh.bti7081.s2020.blue.domain.Login;
+import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ChallengeDto;
 import ch.bfh.bti7081.s2020.blue.domain.repository.ChallengeCrudRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.PatientHasChallengeCrudRepository;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +54,7 @@ public class ChallengeService {
   }
 
   public List<Challenge> findAllAssignedToCurrentUser() {
-    return challengeCrudRepository.findAllAssignedToCurrentUser();
+    return challengeCrudRepository.findAllAssignedToCurrentUserAndNotCompleted();
   }
 
   public Challenge findById(Long id) {
@@ -61,5 +65,15 @@ public class ChallengeService {
 
   public void assignToCurrentUser(Long challengeId) {
     patientHasChallengeCrudRepository.assignToCurrentUser(challengeId);
+  }
+
+  @Transactional
+  public void completeChallenge(Long challengeId) {
+    Long patientId = ((Login) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
+        .getPatient().getId();
+    Optional<PatientHasChallenge> patientHasChallenge = patientHasChallengeCrudRepository
+        .findByPatientIdAndChallengeId(patientId, challengeId);
+    patientHasChallenge
+        .ifPresent((patientHasChallenge1 -> patientHasChallenge1.setCompleted(Boolean.TRUE)));
   }
 }

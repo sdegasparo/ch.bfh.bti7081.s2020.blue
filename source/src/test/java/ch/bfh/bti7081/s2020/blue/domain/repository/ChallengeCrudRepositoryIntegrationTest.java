@@ -27,7 +27,7 @@ public class ChallengeCrudRepositoryIntegrationTest {
   @Sql({
       "classpath:sql/ChallengeCrudRepositoryIntegrationTest_findAllAssignedToCurrentUserReadsPrincipalFromSecurityContext.sql"})
   public void findAllAssignedToCurrentUserReadsPrincipalFromSecurityContext() {
-    List<Challenge> challenges = challengeCrudRepository.findAllAssignedToCurrentUser();
+    List<Challenge> challenges = challengeCrudRepository.findAllAssignedToCurrentUserAndNotCompleted();
 
     assertThat(challenges).hasSize(1);
     assertThat(challengeCrudRepository.findAllInclusiveAccepted()).hasSize(5);

@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.domain.repository;
 
 import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
 import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallengeId;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,6 @@ public interface PatientHasChallengeCrudRepository extends
       + "             where login_username = :#{principal.username}"
       + "), :#{#challengeId})", nativeQuery = true)
   int assignToCurrentUser(@Param("challengeId") Long challengeId);
+
+  Optional<PatientHasChallenge> findByPatientIdAndChallengeId(Long patientId, Long challengeId);
 }
