@@ -9,7 +9,7 @@ import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
-@Route
+@Route("home")
 @PWA(name = "Social Anxiety Application",
     shortName = "Social Anxiety App",
     description = "This is an application to help people with social anxiety.",
