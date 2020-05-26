@@ -4,7 +4,6 @@ import ch.bfh.bti7081.s2020.blue.domain.dto.RegisterDto;
 import ch.bfh.bti7081.s2020.blue.presenter.RegistrationPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Label;
