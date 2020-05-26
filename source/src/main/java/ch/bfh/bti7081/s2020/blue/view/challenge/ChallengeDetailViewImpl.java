@@ -37,7 +37,8 @@ public class ChallengeDetailViewImpl extends VerticalLayout implements Challenge
     Checkbox criteriaCheckbox = new Checkbox(challenge.getCriteria());
 
     Button challengeCompleteButton = new Button("Herausforderung abschliessen");
-    challengeCompleteButton.addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
+    challengeCompleteButton
+        .addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
 
     add(name, content, criteriaCheckbox, challengeCompleteButton);
   }
