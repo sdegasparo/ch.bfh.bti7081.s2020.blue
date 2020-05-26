@@ -13,6 +13,9 @@ public abstract class SocialAnxietyLayout extends VerticalLayout {
     initializeView(beanInjector);
 
     add(new FooterViewImpl());
+
+    this.getStyle().set("min-height", "100%");
+
   }
 
   protected abstract void initializeView(BeanInjector beanInjector);
