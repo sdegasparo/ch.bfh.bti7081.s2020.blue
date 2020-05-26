@@ -71,7 +71,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     formLayout.addFormItem(emailField, "E-Mail");
     binder.forField(emailField).withValidator(new EmailValidator(
         "Dies ist kein gültiges E-Mail-Format."))
-        .withValidator(listener::isEmailUnique, "Diese E-Mail-Adresse wurde bereits verwendet.")
+        .withValidator(listener::isEmailUnique, "Diese E-Mail-Adresse wird bereits verwendet.")
         .bind(RegisterDto::getEmail, RegisterDto::setEmail);
 
     infoText.addClassName("register-info-text");
