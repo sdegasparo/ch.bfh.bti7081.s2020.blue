@@ -10,7 +10,8 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
 @Route("journal")
-public class JournalDetailViewImpl extends VerticalLayout implements JournalDetailView, HasUrlParameter<Long> {
+public class JournalDetailViewImpl extends VerticalLayout implements JournalDetailView,
+    HasUrlParameter<Long> {
 
   private final JournalDetailViewListener listener;
 
