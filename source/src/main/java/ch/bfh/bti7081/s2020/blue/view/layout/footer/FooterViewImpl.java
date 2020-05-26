@@ -13,12 +13,9 @@ public class FooterViewImpl extends HorizontalLayout implements FooterView {
     listener.onInit();
     this.getStyle().set("position", "absolute");
     this.getStyle().set("bottom", "0px");
-    this.getStyle().set("left", "16px");
-    this.getStyle().set("right", "16px");
     this.getStyle().set("text-align", "center");
     this.getStyle().set("border-top", "3px solid rgb(0, 0, 0)");
-
-    this.setHeight("78px");
+    this.setHeight("75px");
     this.setWidth("calc(100% - 32px)");
   }
 

@@ -14,7 +14,7 @@ public abstract class SocialAnxietyLayout extends VerticalLayout {
 
     add(new FooterViewImpl());
 
-    this.getStyle().set("height", "calc(100% - 156px)");
+    this.getStyle().set("height", "calc(100% - 75px)");
     this.getStyle().set("overflow-y", "auto");
 
   }
