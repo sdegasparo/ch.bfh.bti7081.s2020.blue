@@ -21,7 +21,7 @@ public class ChallengesViewImpl extends SocialAnxietyLayout implements Challenge
 
   private final ChallengesViewListener listener;
 
-  Div challengeHolder;
+  private Div challengeHolder;
 
   public ChallengesViewImpl(BeanInjector beanInjector) {
     super(beanInjector);

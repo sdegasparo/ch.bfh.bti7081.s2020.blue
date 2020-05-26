@@ -12,8 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PatientHasChallengeCrudRepository extends
-    CrudRepository<PatientHasChallenge, PatientHasChallengeId> {
+public interface PatientHasChallengeCrudRepository extends CrudRepository<PatientHasChallenge, PatientHasChallengeId> {
 
   @Modifying
   @Transactional

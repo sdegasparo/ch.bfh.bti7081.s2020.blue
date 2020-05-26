@@ -13,10 +13,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ChallengeDto {
 
-  Long id;
-  String name;
-  String content;
-  String criteria;
-  Boolean accepted;
-  Boolean completed;
+  private Long id;
+  private String name;
+  private String content;
+  private String criteria;
+  private Boolean accepted;
+  private Boolean completed;
 }

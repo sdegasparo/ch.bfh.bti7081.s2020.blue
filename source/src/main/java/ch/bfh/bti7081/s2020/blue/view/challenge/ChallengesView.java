@@ -7,7 +7,6 @@ public interface ChallengesView {
 
   void display(List<ChallengeDto> challenges);
 
-
   interface ChallengesViewListener {
 
     void onInit();

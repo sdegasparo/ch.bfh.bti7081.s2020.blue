@@ -17,12 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ChallengeService {
 
-  private static final Comparator<? super ChallengeDto> CHALLENGE_INCOMPLETED_FIRST_COMPARATOR = new Comparator<ChallengeDto>() {
-    @Override
-    public int compare(ChallengeDto challengeDto1, ChallengeDto challengeDto2) {
-      return challengeDto1.getCompleted().compareTo(challengeDto2.getCompleted());
-    }
-  };
+  private static final Comparator<? super ChallengeDto> CHALLENGE_INCOMPLETED_FIRST_COMPARATOR = (Comparator<ChallengeDto>) (challengeDto1, challengeDto2) -> challengeDto1.getCompleted().compareTo(challengeDto2.getCompleted());
 
   private final ChallengeCrudRepository challengeCrudRepository;
   private final PatientHasChallengeCrudRepository patientHasChallengeCrudRepository;
@@ -44,12 +39,11 @@ public class ChallengeService {
   private ChallengeDto challengeToDto(Challenge challenge) {
     return ChallengeDto.builder()
         .id(challenge.getId())
-        .name(challenge.getName()).
-            content(challenge.getContent())
+        .name(challenge.getName())
+        .content(challenge.getContent())
         .criteria(challenge.getCriteria())
         .accepted(!challenge.getPatients().isEmpty())
-        .completed(
-            !challenge.getPatients().isEmpty() && challenge.getPatients().get(0).getCompleted())
+        .completed(!challenge.getPatients().isEmpty() && challenge.getPatients().get(0).getCompleted())
         .build();
   }
 
@@ -59,8 +53,7 @@ public class ChallengeService {
 
   public Challenge findById(Long id) {
     return challengeCrudRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException(
-            String.format("Challenge with id %s not found", id)));
+        .orElseThrow(() -> new IllegalArgumentException(String.format("Challenge with id %s not found", id)));
   }
 
   public void assignToCurrentUser(Long challengeId) {
