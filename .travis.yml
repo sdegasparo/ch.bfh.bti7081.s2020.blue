@@ -13,11 +13,17 @@ services:
   - postgresql
 
 addons:
-  postgresql: '12'
   apt:
     packages:
       - postgresql-12
       - postgresql-client-12
+  sonarcloud:
+    organization: "zeroplexer"
+    token:
+      secure: "ED8xNO5yiDiWUrRf4qd4KFOEPqbj3njGrlkXq4jfeaUVJ5eZaRYsvW1ITmV0x5Z8gnh1pRA1WlIYWGAisOIzOY/EWYB1vKIMqajyXBb3wWi7T1F3JiRwVB5h8aKAuY/mHP/H/66biJoNySC5dSMjvo4WB1w0vADC7l95f9PYPILtmnPdYFLUn7jQasFkpOPI9D8uAHC3L0K74JZ34lxBn7teyM08iflIm
+gD9F5X/eb/9cHMflBhLvLJUGHq5zR4Mx2fApITHR3nfbehYe4uesB6HKv1QHJYpjmT91IdtBHWoYR6+IqCCxHdAavRjx8cee2JnfRkvwLNqIzwLOF+isUS30X7KpHJbPjrSpix7Pucvk30gwCj9nn9f7945FxcWIVeC1eXwCP4IwOiypcUZCTqpTaiTKj2h5781rQv9fvwb1iczoHjNrse+x5vgivRHGBbaNpVGcmdRh
+BO0mEN2oWXbP5uiDmMeqEQ7Qld8LDuEO8iHf+npV7Od/YiPAezhXbVA5y1mlKhmUuglaSZKcBG8DuSM9At2b1z6Qi8KqGiutKhTJB8uVN11jnjYhmIhCBi/ybCHD9UC/ZB+cNVH/BsN2hOzXzujutJk8z0ePYLUbA31TFJwMA+Bbaud7jqGlWMkSHNTzg16dS7rnck41VW75AniOvBT16jFYYlc/wU="
+  postgresql: '12'
 
 before_install:
   - sudo pg_dropcluster --stop 12 main
@@ -46,8 +52,9 @@ before_script:
 script:
   - if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then export MAVEN_COMMAND="verify"; else export MAVEN_COMMAND="verify"; fi
   - mvn -f source/pom.xml versions:set -DnewVersion=${TRAVIS_BUILD_NUMBER}
-  - mvn -f source/pom.xml ${MAVEN_COMMAND}
+  - mvn -f source/pom.xml org.jacoco:jacoco-maven-plugin:prepare-agent ${MAVEN_COMMAND} sonar:sonar
 
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.sonar/cache
