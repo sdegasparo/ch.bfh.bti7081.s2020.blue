@@ -4,8 +4,8 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.challenge.ChallengeListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
-import com.vaadin.flow.component.splitlayout.SplitLayout;
-import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
@@ -22,10 +22,20 @@ public class MainView extends SocialAnxietyLayout {
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    SplitLayout splitLayout = new SplitLayout(new ChallengeListViewImpl(beanInjector),
-        new JournalListViewImpl(beanInjector));
-    splitLayout.setOrientation(Orientation.HORIZONTAL);
-    splitLayout.getStyle().set("flex-grow", "1");
-    add(splitLayout);
+    
+    HorizontalLayout layout = new HorizontalLayout();
+    layout.setWidth("100%");
+
+    VerticalLayout challengeLayout = new VerticalLayout();
+    challengeLayout.setWidth("50%");
+    challengeLayout.add(new ChallengeListViewImpl(beanInjector));
+
+    VerticalLayout journalLayout = new VerticalLayout();
+    journalLayout.setWidth("50%");
+    journalLayout.add(new JournalListViewImpl(beanInjector));
+
+    layout.add(challengeLayout, journalLayout);
+    layout.getStyle().set("flex-grow", "1");
+    add(layout);
   }
 }

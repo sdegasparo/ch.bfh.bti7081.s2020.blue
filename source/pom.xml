@@ -5,9 +5,42 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ch.bfh.bti7081.s2020.blue</groupId>
   <artifactId>socialanxiety</artifactId>
-  <name>socialanxiety</name>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+
+  <name>socialanxiety</name>
+  <description>A project for BTI-7081 at BFH in semester 2020/1.</description>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
+  <contributors>
+    <contributor>
+      <name>Timon Borter</name>
+      <url>https://github.com/bbortt</url>
+    </contributor>
+    <contributor>
+      <name>Sven De Gasparo</name>
+      <url>https://github.com/zeroplexer</url>
+    </contributor>
+    <contributor>
+      <name>Luca Mühlheim</name>
+      <url>https://github.com/Lucamuh</url>
+    </contributor>
+    <contributor>
+      <name>Marc Muster</name>
+      <url>https://github.com/Marcarrian</url>
+    </contributor>
+    <contributor>
+      <name>Elias Schmidhalter</name>
+      <url>https://github.com/calesanz</url>
+    </contributor>
+  </contributors>
 
   <properties>
     <!-- Maven project configuration -->
@@ -298,6 +331,11 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
