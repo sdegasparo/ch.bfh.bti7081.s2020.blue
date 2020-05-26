@@ -50,7 +50,6 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
 
     layout.add(titleLayout, navLayout, userLayout);
     layout.setWidth("100%");
-    layout.setHeight("75px");
     layout.getStyle().set("font-size", "1.5em");
     layout.getStyle().set("border-bottom", "3px solid #000000");
   }

@@ -22,6 +22,7 @@ public class MainView extends SocialAnxietyLayout {
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
+    
     HorizontalLayout layout = new HorizontalLayout();
     layout.setWidth("100%");
 
@@ -34,6 +35,7 @@ public class MainView extends SocialAnxietyLayout {
     journalLayout.add(new JournalListViewImpl(beanInjector));
 
     layout.add(challengeLayout, journalLayout);
+    layout.getStyle().set("flex-grow", "1");
     add(layout);
   }
 }
