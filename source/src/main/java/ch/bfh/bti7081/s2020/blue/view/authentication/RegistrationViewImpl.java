@@ -51,7 +51,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     formLayout.addFormItem(username, "Benutzername");
 
     binder.forField(username)
-        .withValidator(listener::isUsernameUnique, "Dieser Benutzername wurde bereits registriert.")
+        .withValidator(listener::isUsernameUnique, "Dieser Benutzername wird bereits verwendet.")
         .bind(RegisterDto::getUsername, RegisterDto::setUsername);
 
     var passwordField = new PasswordField();
@@ -70,7 +70,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     emailField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(emailField, "E-Mail");
     binder.forField(emailField).withValidator(new EmailValidator(
-        "Dies ist kein gültiges E-Mail-Format."))
+        "Dies ist keine gültige E-Mail."))
         .withValidator(listener::isEmailUnique, "Diese E-Mail-Adresse wird bereits verwendet.")
         .bind(RegisterDto::getEmail, RegisterDto::setEmail);
 
