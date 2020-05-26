@@ -35,43 +35,43 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     listener = new RegistrationPresenter(registerDto, this, beanInjector);
 
     var formLayout = new FormLayout();
-    var registerTitle = new H2("Register");
+    var registerTitle = new H2("Registrieren");
     add(registerTitle);
 
     var givenNameField = new TextField();
-    formLayout.addFormItem(givenNameField, "Given Name");
+    formLayout.addFormItem(givenNameField, "Vorname");
     binder.bind(givenNameField, RegisterDto::getGivenName, RegisterDto::setGivenName);
 
     var surnameField = new TextField();
-    formLayout.addFormItem(surnameField, "Surname");
+    formLayout.addFormItem(surnameField, "Nachname");
     binder.bind(surnameField, RegisterDto::getSurname, RegisterDto::setSurname);
 
     var username = new TextField();
     username.setValueChangeMode(ValueChangeMode.EAGER);
-    formLayout.addFormItem(username, "Username");
+    formLayout.addFormItem(username, "Benutzername");
 
     binder.forField(username)
-        .withValidator(listener::isUsernameUnique, "Username is already registered.")
+        .withValidator(listener::isUsernameUnique, "Dieser Benutzername wurde bereits registriert.")
         .bind(RegisterDto::getUsername, RegisterDto::setUsername);
 
     var passwordField = new PasswordField();
-    formLayout.addFormItem(passwordField, "Password");
+    formLayout.addFormItem(passwordField, "Passwort");
     binder.bind(passwordField, RegisterDto::getPassword, RegisterDto::setPassword);
 
     var passwordRepeatField = new PasswordField();
     passwordRepeatField.setValueChangeMode(ValueChangeMode.EAGER);
-    formLayout.addFormItem(passwordRepeatField, "Repeat password");
+    formLayout.addFormItem(passwordRepeatField, "Passwort wiederholen");
     binder
         .forField(passwordRepeatField)
-        .withValidator(repeat -> repeat.equals(passwordField.getValue()), "Passwords do not match.")
+        .withValidator(repeat -> repeat.equals(passwordField.getValue()), "Passwörter stimmen nicht überein.")
         .bind(RegisterDto::getRepeatPassword, RegisterDto::setRepeatPassword);
 
     var emailField = new EmailField();
     emailField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(emailField, "E-Mail");
     binder.forField(emailField).withValidator(new EmailValidator(
-        "This doesn't look like a valid email address"))
-        .withValidator(listener::isEmailUnique, "Email address is already registered.")
+        "Dies ist kein gültiges E-Mail-Format."))
+        .withValidator(listener::isEmailUnique, "Diese E-Mail-Adresse wurde bereits verwendet.")
         .bind(RegisterDto::getEmail, RegisterDto::setEmail);
 
     infoText.addClassName("register-info-text");
