@@ -70,7 +70,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     emailField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(emailField, "E-Mail");
     binder.forField(emailField).withValidator(new EmailValidator(
-        "Dies ist keine gültige E-Mail."))
+        "Dies ist keine gültige E-Mail-Adresse."))
         .withValidator(listener::isEmailUnique, "Diese E-Mail-Adresse wird bereits verwendet.")
         .bind(RegisterDto::getEmail, RegisterDto::setEmail);
 
