@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // Restrict access to our application.
         .and().authorizeRequests()
         // TODO Add publicly accessible routes here.
-        .antMatchers("/register", "/otherpublicpage", "/about").permitAll()
+        .antMatchers("/", "/register").permitAll()
 
         // Allow all flow internal requests.
         .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
@@ -49,6 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Configure the login page.
         .and().formLogin()
+        .defaultSuccessUrl("/home", true)
 
         // Configure logout
         .and().logout();

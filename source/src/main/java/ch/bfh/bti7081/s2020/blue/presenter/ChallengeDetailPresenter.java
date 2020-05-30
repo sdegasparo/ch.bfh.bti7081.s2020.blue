@@ -15,12 +15,14 @@ public class ChallengeDetailPresenter implements ChallengeDetailView.ChallengeDe
   }
 
   @Override
-  public void onInit(Long id) {
-    view.display(challengeService.findById(id));
+  public void onInit(Long challengeId) {
+    view.display(challengeService.findById(challengeId));
   }
 
   @Override
-  public void rateButtonClick(Long id) {
-    view.afterRatingSaved();
+  public void onChallengeComplete(Long challengeId) {
+    challengeService.completeChallenge(challengeId);
+
+    view.afterChallengeCompleted();
   }
 }

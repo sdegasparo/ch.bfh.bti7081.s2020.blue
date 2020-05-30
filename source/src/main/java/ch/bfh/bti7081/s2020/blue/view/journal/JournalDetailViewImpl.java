@@ -19,7 +19,7 @@ public class JournalDetailViewImpl extends VerticalLayout implements JournalDeta
 
   @Override
   public void setParameter(BeforeEvent beforeEvent, Long id) {
-     listener.onInit(id);
+    listener.onInit(id);
   }
 
   @Override

@@ -5,9 +5,42 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ch.bfh.bti7081.s2020.blue</groupId>
   <artifactId>socialanxiety</artifactId>
-  <name>socialanxiety</name>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+
+  <name>socialanxiety</name>
+  <description>A project for BTI-7081 at BFH in semester 2020/1.</description>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
+  <contributors>
+    <contributor>
+      <name>Timon Borter</name>
+      <url>https://github.com/bbortt</url>
+    </contributor>
+    <contributor>
+      <name>Sven De Gasparo</name>
+      <url>https://github.com/zeroplexer</url>
+    </contributor>
+    <contributor>
+      <name>Luca Mühlheim</name>
+      <url>https://github.com/Lucamuh</url>
+    </contributor>
+    <contributor>
+      <name>Marc Muster</name>
+      <url>https://github.com/Marcarrian</url>
+    </contributor>
+    <contributor>
+      <name>Elias Schmidhalter</name>
+      <url>https://github.com/calesanz</url>
+    </contributor>
+  </contributors>
 
   <properties>
     <!-- Maven project configuration -->
@@ -21,10 +54,14 @@
     <vaadin.version>14.1.27</vaadin.version>
 
     <vaadin.component.card.version>2.0.0.beta4</vaadin.component.card.version>
+    <!-- Sonarcloud configuration -->
+    <sonar.projectKey>zeroplexer_ch.bfh.bti7081.s2020.blue</sonar.projectKey>
+
     <!-- Dependency management -->
     <lombok.version>1.18.12</lombok.version>
     <jupiter.version>5.6.2</jupiter.version>
     <mockito-core.version>3.3.3</mockito-core.version>
+    <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 
     <!-- Flyway configuration -->
     <flyway.db.url>jdbc:postgresql://localhost:${flyway.db.port}</flyway.db.url>
@@ -307,6 +344,35 @@
                 <include>**/*IntegrationTest.java</include>
               </includes>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+
+          <execution>
+            <id>report</id>
+
+            <goals>
+              <goal>report</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>

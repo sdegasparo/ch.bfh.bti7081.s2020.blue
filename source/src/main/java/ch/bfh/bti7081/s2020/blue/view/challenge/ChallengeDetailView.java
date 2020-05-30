@@ -6,12 +6,12 @@ public interface ChallengeDetailView {
 
   void display(Challenge challenge);
 
-  void afterRatingSaved();
+  void afterChallengeCompleted();
 
   interface ChallengeDetailViewListener {
 
-    void onInit(Long id);
+    void onInit(Long challengeId);
 
-    void rateButtonClick(Long id);
+    void onChallengeComplete(Long challengeId);
   }
 }
