@@ -16,27 +16,8 @@ public class JournalEntryService {
     this.journalEntryCrudRepository = journalEntryCrudRepository;
   }
 
-  private final List<JournalEntry> journalEntries = List.of(
-      JournalEntry.builder()
-          .id(1L)
-          .title("Journal Day 3")
-          .content("What day is it?")
-          .build(),
-      JournalEntry.builder()
-          .id(2L)
-          .title("Journal Day 2")
-          .content("Oh no ..")
-          .build(),
-      JournalEntry.builder()
-          .id(3L)
-          .title("Journal Day 1")
-          .content("This is the beginning of ..")
-          .build()
-  );
-
-  public List<JournalEntry> findAllForCurrentUser() {
-    // TODO by user
-    return journalEntryCrudRepository.findAll();
+  public List<JournalEntry> findAllByCurrentUser() {
+    return journalEntryCrudRepository.findAllByCurrentUser();
   }
 
   public void save(JournalEntryDto journalEntryDto) {
@@ -44,7 +25,7 @@ public class JournalEntryService {
   }
 
   public void update(JournalEntryDto journalEntryDto) {
-    journalEntryCrudRepository.update(journalEntryDto.getTitle(), journalEntryDto.getContent(), new Date());
+    journalEntryCrudRepository.update(journalEntryDto.getId(), journalEntryDto.getTitle(), journalEntryDto.getContent(), new Date());
   }
 
   public JournalEntry findById(Long id) {

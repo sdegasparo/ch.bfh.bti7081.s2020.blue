@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class JournalEntryDto {
 
+  private Long id;
   private String title;
   private String content;
 }

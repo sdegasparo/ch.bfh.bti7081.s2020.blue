@@ -7,15 +7,17 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry, Long> {
 
-  @Override
-  List<JournalEntry> findAll();
+  @Transactional
+  @PreAuthorize("isAuthenticated()")
+  @Query(value = "select * from journal_entry where journal_entry.patient_id = (select id from patient where login_username = :#{principal.username})",
+      nativeQuery = true)
+  List<JournalEntry> findAllByCurrentUser();
 
   @Modifying
   @Transactional
@@ -24,7 +26,7 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
       + "         (title, content, creation_date, patient_id)"
       + "         values (:#{#title}, :#{#content}, :#{#creationDate}, (select id from patient where login_username = :#{principal.username}))",
       nativeQuery = true)
-  void create(@Param("title") String title, @Param("content") String content, @Param("creationDate") Date creationDate);
+  void create(String title, String content, Date creationDate);
 
   @Modifying
   @Transactional
@@ -32,7 +34,8 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
   @Query(value = "update journal_entry"
       + "         set title = :#{#title},"
       + "             content = :#{#content},"
-      + "             creation_date = :#{#creationDate}",
+      + "             creation_date = :#{#creationDate}"
+      + "         where journal_entry.id = :#{#id}",
       nativeQuery = true)
-  void update(String title, String content, Date creationDate);
+  void update(Long id, String title, String content, Date creationDate);
 }

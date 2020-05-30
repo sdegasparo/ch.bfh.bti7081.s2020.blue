@@ -17,7 +17,7 @@ public class JournalListPresenter implements JournalListListener {
 
   @Override
   public void onInit() {
-    view.display(journalEntryService.findAllForCurrentUser());
+    view.display(journalEntryService.findAllByCurrentUser());
   }
 
   @Override

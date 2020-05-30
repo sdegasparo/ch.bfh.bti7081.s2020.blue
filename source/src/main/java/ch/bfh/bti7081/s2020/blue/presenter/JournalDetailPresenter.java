@@ -22,6 +22,7 @@ public class JournalDetailPresenter implements JournalDetailListener {
   public void afterViewInit(Long id) {
     JournalEntry journalEntry = journalEntryService.findById(id);
     JournalEntryDto journalEntryDto = JournalEntryDto.builder()
+        .id(journalEntry.getId())
         .title(journalEntry.getTitle())
         .content(journalEntry.getContent())
         .build();
@@ -37,5 +38,4 @@ public class JournalDetailPresenter implements JournalDetailListener {
   public void setModel(JournalEntryDto journalEntryDto) {
     this.model = journalEntryDto;
   }
-
 }
