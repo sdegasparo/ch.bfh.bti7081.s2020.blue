@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2020.blue.view.journal;
 
-import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryCreateDto;
+import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryDto;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalCreatePresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
@@ -21,8 +21,8 @@ public class JournalCreateViewImpl extends SocialAnxietyLayout implements Journa
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    var binder = new Binder<>(JournalEntryCreateDto.class);
-    JournalEntryCreateDto journalEntry = new JournalEntryCreateDto();
+    var binder = new Binder<>(JournalEntryDto.class);
+    JournalEntryDto journalEntry = new JournalEntryDto();
     binder.setBean(journalEntry);
 
     listener = new JournalCreatePresenter(journalEntry, this, beanInjector);
@@ -30,16 +30,16 @@ public class JournalCreateViewImpl extends SocialAnxietyLayout implements Journa
     add(createFormLayout(binder));
   }
 
-  private FormLayout createFormLayout(Binder<JournalEntryCreateDto> binder) {
+  private FormLayout createFormLayout(Binder<JournalEntryDto> binder) {
     FormLayout formlayout = new FormLayout();
 
     TextField title = new TextField();
     formlayout.addFormItem(title, "Titel");
-    binder.bind(title, JournalEntryCreateDto::getTitle, JournalEntryCreateDto::setTitle);
+    binder.bind(title, JournalEntryDto::getTitle, JournalEntryDto::setTitle);
 
     TextField content = new TextField();
     formlayout.addFormItem(content, "Inhalt");
-    binder.bind(content, JournalEntryCreateDto::getContent, JournalEntryCreateDto::setContent);
+    binder.bind(content, JournalEntryDto::getContent, JournalEntryDto::setContent);
 
     Button createButton = new Button("Erstellen");
     createButton.getStyle().set("cursor", "pointer");

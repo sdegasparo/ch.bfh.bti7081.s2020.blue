@@ -17,14 +17,6 @@ public interface JournalListView {
 
     void onJournalEntryAddClick();
 
-    void onJournalClick(Long id);
-
-//    void onInit(Long selectedEntry);
-
-//    void journalEntrySelected(Long entryId);
-//
-//    void searchFieldChanged();
-//
-//    void addNewClicked();
+    void onJournalEntryClick(Long id);
   }
 }

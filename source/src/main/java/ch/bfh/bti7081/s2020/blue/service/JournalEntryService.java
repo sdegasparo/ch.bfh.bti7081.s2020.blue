@@ -1,20 +1,19 @@
 package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
-import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryCreateDto;
-import ch.bfh.bti7081.s2020.blue.domain.repository.JournalentryCrudRepository;
+import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryDto;
+import ch.bfh.bti7081.s2020.blue.domain.repository.JournalEntryCrudRepository;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
 public class JournalEntryService {
 
-  public JournalentryCrudRepository journalentryCrudRepository;
+  public JournalEntryCrudRepository journalEntryCrudRepository;
 
-  public JournalEntryService(JournalentryCrudRepository journalentryCrudRepository) {
-    this.journalentryCrudRepository = journalentryCrudRepository;
+  public JournalEntryService(JournalEntryCrudRepository journalEntryCrudRepository) {
+    this.journalEntryCrudRepository = journalEntryCrudRepository;
   }
 
   private final List<JournalEntry> journalEntries = List.of(
@@ -37,21 +36,19 @@ public class JournalEntryService {
 
   public List<JournalEntry> findAllForCurrentUser() {
     // TODO by user
-    return journalentryCrudRepository.findAll();
+    return journalEntryCrudRepository.findAll();
   }
 
-  public Optional<JournalEntry> findByIdForCurrentUser(Long id) {
-    return journalEntries.stream()
-        .filter(journalEntry -> journalEntry.getId().equals(id))
-        .findFirst();
+  public void save(JournalEntryDto journalEntryDto) {
+    journalEntryCrudRepository.create(journalEntryDto.getTitle(), journalEntryDto.getContent(), new Date());
   }
 
-  public void save(JournalEntryCreateDto journalEntryCreateDto) {
-    journalentryCrudRepository.save(journalEntryCreateDto.getTitle(), journalEntryCreateDto.getContent(), new Date());
+  public void update(JournalEntryDto journalEntryDto) {
+    journalEntryCrudRepository.update(journalEntryDto.getTitle(), journalEntryDto.getContent(), new Date());
   }
 
   public JournalEntry findById(Long id) {
-    return journalentryCrudRepository.findById(id)
+    return journalEntryCrudRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException(String.format("JournalEntry with id %s not found", id)));
   }
 }

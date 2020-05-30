@@ -1,11 +1,13 @@
 package ch.bfh.bti7081.s2020.blue.view.journal;
 
-import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
+import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryDto;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalDetailPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
@@ -13,28 +15,46 @@ import com.vaadin.flow.router.Route;
 @Route("journal")
 public class JournalDetailViewImpl extends SocialAnxietyLayout implements JournalDetailView, HasUrlParameter<Long> {
 
-  private final JournalDetailListener listener;
-  private Div content;
+  private JournalDetailListener listener;
 
   public JournalDetailViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
-    listener = new JournalDetailPresenter(this, beanInjector);
   }
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    content = new Div();
-    add(content);
+    listener = new JournalDetailPresenter(this, beanInjector);
+  }
+
+  @Override
+  public void afterViewInit(JournalEntryDto journalEntryDto) {
+    listener.setModel(journalEntryDto);
+    var binder = new Binder<>(JournalEntryDto.class);
+    binder.setBean(journalEntryDto);
+    add(createFormLayout(binder));
+  }
+
+  private FormLayout createFormLayout(Binder<JournalEntryDto> binder) {
+    FormLayout formlayout = new FormLayout();
+
+    TextField title = new TextField();
+    formlayout.addFormItem(title, "Titel");
+    binder.bind(title, JournalEntryDto::getTitle, JournalEntryDto::setTitle);
+
+    TextField content = new TextField();
+    formlayout.addFormItem(content, "Inhalt");
+    binder.bind(content, JournalEntryDto::getContent, JournalEntryDto::setContent);
+
+    Button updateButton = new Button("Aktualisieren");
+    updateButton.getStyle().set("cursor", "pointer");
+    updateButton.addClickListener(event -> listener.onJournalEntryUpdate());
+    formlayout.add(updateButton);
+
+    return formlayout;
   }
 
   @Override
   public void setParameter(BeforeEvent beforeEvent, Long id) {
-    listener.onInit(id);
-  }
-
-  @Override
-  public void display(JournalEntry journalEntry) {
-    content.add(new Text(journalEntry.getTitle()));
-    content.add(new Text(journalEntry.getContent()));
+    listener.afterViewInit(id);
   }
 }
