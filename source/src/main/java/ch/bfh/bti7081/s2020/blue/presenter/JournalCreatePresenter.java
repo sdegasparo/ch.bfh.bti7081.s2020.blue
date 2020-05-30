@@ -18,6 +18,7 @@ public class JournalCreatePresenter implements JournalCreateListener {
     this.journalEntryService = beanInjector.get(JournalEntryService.class);
   }
 
+  @Override
   public void onJournalEntryCreate() {
     journalEntryService.save(model);
   }
