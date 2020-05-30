@@ -14,6 +14,10 @@ addons:
     packages:
       - postgresql-12
       - postgresql-client-12
+  sonarcloud:
+    organization: "zeroplexer"
+    token:
+      secure: "uNQvxJ+5icIOybiWdcOLdy3Ysyfzfw3XADqwxV5P2p/8N86hOJFhGWpzEgW9khpBK+dKSUPmUfWX2I7gll8R4ZGX5xQ6nO0y5E784afi5u/HPGRCrYLyPBD9pANLZyRmrfhWVia8r+/pN+t0pgEi/cvAkbqBQC3SlRTpog5XGjIjVC6IoNspdewoheTSHRqYIt8kLPckc0RNspoI8IiTUGBvVw+dpg+lxTr8iwjY6P1Oj39Bi0blDlab1EMLixYxauM0u3Kv+nu/6ncEk0aDhOqLqIsb7ykre1OgTukHjgA2V6z+DoJfKaMlJIxy3C61887ywhbZiYC94EW3/4b/9rFc5Lv03G/u7nYusC01GAOOH0GaKzxBgMkGm8m/SDnRgNuex7qAQmWF77Ic6OtYV6dq03/0+Nrfi5HiYhhkIVZnszwX2xShxzG+d3pHRa4P93BeeGqXOhTrkv0wELc7+2+QokzLcbKNN5G5ZcRdYy83Ius8oN87/iAxIQj0MjJoQ4NIya3ABWRvgUGckQ50gzDMRCOl6Tf8kfT7ICEVPVTxv/r5SsRRkQ+vjIhkPDNvqMgH0k4NYxp9YvW9rE8xJxcyqp2boDUlOzEwGCsHgmRA/ESVAV/S9leaTfXrzNLd72EkKXXtGUqmztJIuXfpTz6SEioLsraf62AYDo0wN2g="
 
 jobs:
   include:
@@ -36,8 +40,9 @@ before_script:
 script:
   - if [[ "${MAIN_BUILD}" != "" && "${MAIN_BUILD}" == "true" ]]; then export MAVEN_COMMAND="verify"; else export MAVEN_COMMAND="verify"; fi
   - mvn -f source/pom.xml versions:set -DnewVersion=${TRAVIS_BUILD_NUMBER}
-  - mvn -f source/pom.xml ${MAVEN_COMMAND}
+  - mvn -f source/pom.xml ${MAVEN_COMMAND} sonar:sonar
 
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.sonar/cache
