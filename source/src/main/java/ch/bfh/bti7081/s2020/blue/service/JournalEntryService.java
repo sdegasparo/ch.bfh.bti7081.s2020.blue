@@ -1,12 +1,19 @@
 package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
+import ch.bfh.bti7081.s2020.blue.domain.repository.JournalentryCrudRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JournalService {
+public class JournalEntryService {
+
+  public JournalentryCrudRepository journalentryCrudRepository;
+
+  public JournalEntryService(JournalentryCrudRepository journalentryCrudRepository) {
+    this.journalentryCrudRepository = journalentryCrudRepository;
+  }
 
   private final List<JournalEntry> journalEntries = List.of(
       JournalEntry.builder()
@@ -26,8 +33,9 @@ public class JournalService {
           .build()
   );
 
-  public List<JournalEntry> findAllForCurrentUser(String search) {
-    return journalEntries;
+  public List<JournalEntry> findAllForCurrentUser() {
+    // TODO by user
+    return journalentryCrudRepository.findAll();
   }
 
   public Optional<JournalEntry> findByIdForCurrentUser(Long id) {

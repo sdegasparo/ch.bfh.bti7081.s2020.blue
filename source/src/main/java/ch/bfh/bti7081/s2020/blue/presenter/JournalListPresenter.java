@@ -1,57 +1,59 @@
 package ch.bfh.bti7081.s2020.blue.presenter;
 
-import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
-import ch.bfh.bti7081.s2020.blue.service.JournalService;
+import ch.bfh.bti7081.s2020.blue.service.JournalEntryService;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListView;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListView.JournalListListener;
-import java.util.Collection;
-import java.util.Optional;
 
 public class JournalListPresenter implements JournalListListener {
 
   private final JournalListView view;
-  private final JournalService journalService;
+  private final JournalEntryService journalEntryService;
 
   public JournalListPresenter(JournalListView journalView, BeanInjector beanInjector) {
     this.view = journalView;
-    this.journalService = beanInjector.get(JournalService.class);
+    this.journalEntryService = beanInjector.get(JournalEntryService.class);
   }
 
   @Override
-  public void onInit(Long selectedEntry) {
-    showEntry(selectedEntry, null);
+  public void onInit() {
+    view.display(journalEntryService.findAllForCurrentUser());
   }
 
-  @Override
-  public void journalEntrySelected(Long entryId) {
-    showEntry(entryId, null);
-  }
-
-  @Override
-  public void searchFieldChanged() {
-    showEntry(null, value);
-  }
-
-  @Override
-  public void addNewClicked() {
-    view.navigate(String.format("journal/new"));
-  }
-
-  private void showEntry(Long selectedId, String search) {
-    Collection<JournalEntry> entries = journalService.findAllForCurrentUser(search);
-
-    Optional<JournalEntry> entry = entries.stream().filter(e -> e.getId().equals(selectedId))
-        .findFirst();
-    // Only show the entry if screen is big enough.
-    if (entry.isPresent()) {
-      if (view.getScreenSize() > 600) {
-        view.display(entries, entry.get());
-      } else {
-        view.navigate(String.format("journal/%d", entry.get().getId()));
-      }
-    } else {
-      view.display(entries, null);
-    }
-  }
+//  @Override
+//  public void onInit(Long selectedEntry) {
+//    showEntry(selectedEntry, null);
+//  }
+//
+//  @Override
+//  public void journalEntrySelected(Long entryId) {
+//    showEntry(entryId, null);
+//  }
+//
+//  @Override
+//  public void searchFieldChanged() {
+//    showEntry(null, value);
+//  }
+//
+//  @Override
+//  public void addNewClicked() {
+//    view.navigate(String.format("journal/new"));
+//  }
+//
+//  private void showEntry(Long selectedId, String search) {
+//    Collection<JournalEntry> entries = journalService.findAllForCurrentUser(search);
+//
+//    Optional<JournalEntry> entry = entries.stream().filter(e -> e.getId().equals(selectedId))
+//        .findFirst();
+//    // Only show the entry if screen is big enough.
+//    if (entry.isPresent()) {
+//      if (view.getScreenSize() > 600) {
+//        view.display(entries, entry.get());
+//      } else {
+//        view.navigate(String.format("journal/%d", entry.get().getId()));
+//      }
+//    } else {
+//      view.display(entries, null);
+//    }
+//  }
 }

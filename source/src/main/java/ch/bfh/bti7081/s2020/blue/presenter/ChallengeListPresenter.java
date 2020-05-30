@@ -20,7 +20,7 @@ public class ChallengeListPresenter implements ChallengeListView.ChallengeListVi
   }
 
   @Override
-  public void listItemClick(Long id) {
+  public void onChallengeClick(Long id) {
     view.navigateToDetailView(id);
   }
 }

@@ -37,7 +37,7 @@ public class ChallengeListViewImpl extends VerticalLayout implements ChallengeLi
       div.add(new Text(challenge.getContent()));
 
       Button detailButton = new Button("Detail");
-      detailButton.addClickListener(event -> listener.listItemClick(challenge.getId()));
+      detailButton.addClickListener(event -> listener.onChallengeClick(challenge.getId()));
       div.add(detailButton);
 
       add(div);

@@ -22,8 +22,7 @@ public class MainView extends SocialAnxietyLayout {
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    SplitLayout splitLayout = new SplitLayout(new ChallengeListViewImpl(beanInjector),
-        new JournalListViewImpl(beanInjector));
+    SplitLayout splitLayout = new SplitLayout(new ChallengeListViewImpl(beanInjector), new JournalListViewImpl(beanInjector));
     splitLayout.setOrientation(Orientation.HORIZONTAL);
     add(splitLayout);
   }
