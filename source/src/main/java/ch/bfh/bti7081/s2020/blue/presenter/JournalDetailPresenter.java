@@ -17,6 +17,6 @@ public class JournalDetailPresenter implements JournalDetailListener {
 
   @Override
   public void onInit(Long id) {
-    view.display(journalEntryService.findByIdForCurrentUser(id).get());
+    view.display(journalEntryService.findById(id));
   }
 }

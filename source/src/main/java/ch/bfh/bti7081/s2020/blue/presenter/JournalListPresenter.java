@@ -25,6 +25,11 @@ public class JournalListPresenter implements JournalListListener {
     view.navigateToJournalEntryCreate();
   }
 
+  @Override
+  public void onJournalClick(Long id) {
+    view.navigateToDetailView(id);
+  }
+
 //  @Override
 //  public void onInit(Long selectedEntry) {
 //    showEntry(selectedEntry, null);

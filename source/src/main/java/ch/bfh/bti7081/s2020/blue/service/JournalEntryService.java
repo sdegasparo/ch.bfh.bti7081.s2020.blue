@@ -49,4 +49,9 @@ public class JournalEntryService {
   public void save(JournalEntryCreateDto journalEntryCreateDto) {
     journalentryCrudRepository.save(journalEntryCreateDto.getTitle(), journalEntryCreateDto.getContent(), new Date());
   }
+
+  public JournalEntry findById(Long id) {
+    return journalentryCrudRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException(String.format("JournalEntry with id %s not found", id)));
+  }
 }

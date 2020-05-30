@@ -9,11 +9,15 @@ public interface JournalListView {
 
   void navigateToJournalEntryCreate();
 
+  void navigateToDetailView(Long id);
+
   interface JournalListListener {
 
     void onInit();
 
     void onJournalEntryAddClick();
+
+    void onJournalClick(Long id);
 
 //    void onInit(Long selectedEntry);
 

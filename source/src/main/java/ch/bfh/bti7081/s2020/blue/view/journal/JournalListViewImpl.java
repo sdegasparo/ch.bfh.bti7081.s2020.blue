@@ -3,11 +3,10 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
-import com.github.appreciated.card.StatefulCard;
-import com.github.appreciated.card.StatefulCardGroup;
-import com.github.appreciated.card.label.PrimaryLabel;
-import com.github.appreciated.card.label.TitleLabel;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -24,18 +23,25 @@ public class JournalListViewImpl extends HorizontalLayout implements JournalList
 
   @Override
   public void display(List<JournalEntry> journalEntries) {
-    StatefulCardGroup<StatefulCard> cardGroup = new StatefulCardGroup<>();
     for (JournalEntry journalEntry : journalEntries) {
-      StatefulCard card = new StatefulCard(
-          new TitleLabel(journalEntry.getTitle()),
-          new PrimaryLabel(journalEntry.getContent())
-      );
-      card.setId(journalEntry.getId().toString());
-      card.setWidth("100%");
-      card.getStyle().set("margin", "1em");
-      cardGroup.add(card);
+      Div div = new Div();
+      div.getStyle().set("border", "1px solid black");
+      div.getStyle().set("padding", "0.5em");
+      div.getStyle().set("width", "100%");
+
+      H3 title = new H3(journalEntry.getTitle());
+      title.getStyle().set("margin", "0"); // TODO should be in global styles
+      div.add(title);
+
+      div.add(new Text(journalEntry.getContent()));
+
+      Button detailButton = new Button("Detail");
+      detailButton.addClickListener(event -> listener.onJournalClick(journalEntry.getId()));
+      div.add(detailButton);
+
+      add(div);
+
     }
-    add(cardGroup);
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
     newJournalEntryButton.getStyle().set("cursor", "pointer");
@@ -46,6 +52,11 @@ public class JournalListViewImpl extends HorizontalLayout implements JournalList
   @Override
   public void navigateToJournalEntryCreate() {
     getUI().ifPresent(ui -> ui.navigate(JournalCreateViewImpl.class));
+  }
+
+  @Override
+  public void navigateToDetailView(Long id) {
+    getUI().ifPresent(ui -> ui.navigate(JournalDetailViewImpl.class, id));
   }
 
 //  private Component listView(Collection<JournalEntry> entries) {

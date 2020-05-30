@@ -25,14 +25,13 @@ public class ChallengesViewImpl extends SocialAnxietyLayout implements Challenge
 
   public ChallengesViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
-
     listener = new ChallengesPresenter(this, beanInjector);
     listener.onInit();
   }
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    this.challengeHolder = new Div();
+    challengeHolder = new Div();
 
     add(new H2("Alle Herausforderungen"));
     add(challengeHolder);
