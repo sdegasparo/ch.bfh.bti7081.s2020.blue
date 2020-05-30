@@ -15,6 +15,8 @@ public class FooterViewImpl extends HorizontalLayout implements FooterView {
     getStyle().set("width", "100%");
     getStyle().set("text-align", "center");
     getStyle().set("padding-top", "1rem");
+    getStyle().set("position", "fixed");
+    getStyle().set("bottom", "0px");
   }
 
   @Override
