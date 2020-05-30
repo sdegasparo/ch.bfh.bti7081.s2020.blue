@@ -1,7 +1,9 @@
 package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
+import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryCreateDto;
 import ch.bfh.bti7081.s2020.blue.domain.repository.JournalentryCrudRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -42,5 +44,9 @@ public class JournalEntryService {
     return journalEntries.stream()
         .filter(journalEntry -> journalEntry.getId().equals(id))
         .findFirst();
+  }
+
+  public void save(JournalEntryCreateDto journalEntryCreateDto) {
+    journalentryCrudRepository.save(journalEntryCreateDto.getTitle(), journalEntryCreateDto.getContent(), new Date());
   }
 }

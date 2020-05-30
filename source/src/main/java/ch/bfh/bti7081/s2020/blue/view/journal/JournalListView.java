@@ -7,9 +7,13 @@ public interface JournalListView {
 
   void display(List<JournalEntry> journalEntries);
 
+  void navigateToJournalEntryCreate();
+
   interface JournalListListener {
 
     void onInit();
+
+    void onJournalEntryAddClick();
 
 //    void onInit(Long selectedEntry);
 

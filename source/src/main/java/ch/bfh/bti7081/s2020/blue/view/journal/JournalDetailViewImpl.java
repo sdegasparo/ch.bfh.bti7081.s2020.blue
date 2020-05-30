@@ -7,11 +7,10 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
-import com.vaadin.flow.router.Route;
 
 public class JournalDetailViewImpl extends VerticalLayout implements JournalDetailView, HasUrlParameter<Long> {
 
-  private final JournalDetailViewListener listener;
+  private final JournalDetailListener listener;
 
   public JournalDetailViewImpl(BeanInjector beanInjector) {
     listener = new JournalDetailPresenter(this, beanInjector);

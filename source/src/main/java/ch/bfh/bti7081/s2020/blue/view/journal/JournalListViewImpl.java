@@ -7,6 +7,9 @@ import com.github.appreciated.card.StatefulCard;
 import com.github.appreciated.card.StatefulCardGroup;
 import com.github.appreciated.card.label.PrimaryLabel;
 import com.github.appreciated.card.label.TitleLabel;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import java.util.List;
 
@@ -33,6 +36,16 @@ public class JournalListViewImpl extends HorizontalLayout implements JournalList
       cardGroup.add(card);
     }
     add(cardGroup);
+
+    Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
+    newJournalEntryButton.getStyle().set("cursor", "pointer");
+    newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
+    add(newJournalEntryButton);
+  }
+
+  @Override
+  public void navigateToJournalEntryCreate() {
+    getUI().ifPresent(ui -> ui.navigate(JournalCreateViewImpl.class));
   }
 
 //  private Component listView(Collection<JournalEntry> entries) {

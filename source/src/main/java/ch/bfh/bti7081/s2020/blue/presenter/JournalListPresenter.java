@@ -20,6 +20,11 @@ public class JournalListPresenter implements JournalListListener {
     view.display(journalEntryService.findAllForCurrentUser());
   }
 
+  @Override
+  public void onJournalEntryAddClick() {
+    view.navigateToJournalEntryCreate();
+  }
+
 //  @Override
 //  public void onInit(Long selectedEntry) {
 //    showEntry(selectedEntry, null);

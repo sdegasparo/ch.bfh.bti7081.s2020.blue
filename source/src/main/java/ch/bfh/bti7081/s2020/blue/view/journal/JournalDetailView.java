@@ -6,7 +6,7 @@ public interface JournalDetailView {
 
   void display(JournalEntry journalEntry);
 
-  interface JournalDetailViewListener {
+  interface JournalDetailListener {
 
     void onInit(Long id);
   }
