@@ -31,8 +31,8 @@ public class LandingViewImpl extends VerticalLayout implements LandingPageViewLi
 
     H3 introductiontitle = new H3("Was ist soziale Phobie?");
     Text introduction = new Text(
-        "Eine soziale Phobie ist eine Form der Angststörung und zeichnet sich durch eine anhaltende und unangemessen starke Angst vor sozialen Situationen aus, die weit über eine normale Schüchternheit oder Lampenfieber hinausgeht. Personen mit einer Sozialphobie befürchten, sich vor anderen zu blamieren, sich peinlich zu verhalten oder abgelehnt zu werden. Die Ursachen sind bisher nicht vollständig geklärt. Vermutlich spielen verschiedene Auslöser eine Rolle. \n"
-            + "\n"
+        "Eine soziale Phobie ist eine Form der Angststörung und zeichnet sich durch eine anhaltende und unangemessen starke Angst vor sozialen Situationen aus, die weit über eine normale Schüchternheit oder Lampenfieber hinausgeht. Personen mit einer Sozialphobie befürchten, sich vor anderen zu blamieren, sich peinlich zu verhalten oder abgelehnt zu werden. Die Ursachen sind bisher nicht vollständig geklärt. Vermutlich spielen verschiedene Auslöser eine Rolle."
+            + "\n\n"
             + "Mit unserer Applikation können Sie spielerisch, Ihrer soziale Phobie den Kampf ansagen. Versuche deine Angst zu überwinden bei den Challenges und verdiene deine Rewards.");
     H3 introductionTitle = new H3("Funktionen:");
     ListItem li1 = new ListItem("Challenges bestreiten");

@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.blue.view.challenge;
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.CurrentChallengesListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
@@ -11,8 +12,7 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
-public class CurrentChallengesListViewImpl extends VerticalLayout implements
-    CurrentChallengesListView {
+public class CurrentChallengesListViewImpl extends VerticalLayout implements CurrentChallengesListView {
 
   private final CurrentChallengesListViewListener listener;
 
@@ -36,14 +36,14 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements
       div.add(title);
 
       div.add(new Text(challenge.getContent()));
+      div.add(new Html("<br />"));
 
-      Button detailButton = new Button("Detail");
+      Button detailButton = new Button("Details");
       detailButton.addClickListener(event -> listener.listItemClick(challenge.getId()));
       div.add(detailButton);
 
       add(div);
     }
-
   }
 
   @Override
