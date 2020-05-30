@@ -1,7 +1,7 @@
 language: java
 dist: bionic
 
-install: true
+install: skip
 os: linux
 
 if: tag is blank
@@ -9,26 +9,11 @@ if: tag is blank
 notifications:
   email: false
 
-services:
-  - postgresql
-
 addons:
-  postgresql: '12'
   apt:
     packages:
       - postgresql-12
       - postgresql-client-12
-
-before_install:
-  - sudo pg_dropcluster --stop 12 main
-  - sudo pg_upgradecluster 11 main
-  - sudo pg_ctlcluster 12 main restart
-  - sudo pg_dropcluster 11 main
-
-env:
-  global:
-    - PGUSER=postgres
-    - PGPORT=5432
 
 jobs:
   include:
@@ -38,6 +23,11 @@ jobs:
     # OpenJDK - Java 13 (latest)
     - env: MAIN_BUILD='false'
       jdk: openjdk13
+
+before_install:
+  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
+  - sudo cp /etc/postgresql/{9.3,12}/main/pg_hba.conf
+  - sudo pg_ctlcluster 12 main restart
 
 before_script:
   - psql -c "CREATE DATABASE social_anxiety_integration;" -U postgres
