@@ -6,6 +6,8 @@ public interface JournalDetailView {
 
   void afterViewInit(JournalEntryDto journalEntryDto);
 
+  void routeToHomeView();
+
   interface JournalDetailListener {
 
     void afterViewInit(Long id);
@@ -13,5 +15,7 @@ public interface JournalDetailView {
     void onJournalEntryUpdate();
 
     void setModel(JournalEntryDto journalEntryDto);
+
+    void onJournalEntryDelete();
   }
 }

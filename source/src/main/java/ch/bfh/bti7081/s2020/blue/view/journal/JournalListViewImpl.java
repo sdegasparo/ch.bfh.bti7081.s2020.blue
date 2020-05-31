@@ -10,7 +10,6 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
@@ -26,15 +25,17 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
   @Override
   public void display(List<JournalEntry> journalEntries) {
     H2 title = new H2("Meine Journaleinträge");
-    title.getStyle().set("margin", "0");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
     newJournalEntryButton.getStyle().set("cursor", "pointer");
     newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
 
-    var horizontalLayout = new HorizontalLayout(title, newJournalEntryButton);
-    horizontalLayout.getStyle().set("margin", "0");
-    add(horizontalLayout);
+    add(title);
+    add(newJournalEntryButton);
+
+//    var horizontalLayout = new HorizontalLayout(title, newJournalEntryButton);
+//    horizontalLayout.getStyle().set("margin", "0");
+//    add(horizontalLayout);
 
     for (JournalEntry journalEntry : journalEntries) {
       Div div = new Div();
@@ -43,7 +44,6 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
       div.getStyle().set("width", "100%");
 
       H3 journalEntryTitle = new H3(journalEntry.getTitle());
-      journalEntryTitle.getStyle().set("margin", "0"); // TODO should be in global styles
       div.add(journalEntryTitle);
 
       div.add(new Text(journalEntry.getContent()));

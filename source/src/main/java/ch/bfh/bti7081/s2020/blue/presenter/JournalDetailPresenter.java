@@ -35,6 +35,12 @@ public class JournalDetailPresenter implements JournalDetailListener {
   }
 
   @Override
+  public void onJournalEntryDelete() {
+    journalEntryService.deleteById(model.getId());
+    view.routeToHomeView();
+  }
+
+  @Override
   public void setModel(JournalEntryDto journalEntryDto) {
     this.model = journalEntryDto;
   }

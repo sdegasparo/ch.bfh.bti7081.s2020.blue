@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.BeforeEvent;
@@ -16,6 +17,7 @@ import com.vaadin.flow.router.Route;
 public class JournalDetailViewImpl extends SocialAnxietyLayout implements JournalDetailView, HasUrlParameter<Long> {
 
   private JournalDetailListener listener;
+  private Div content;
 
   public JournalDetailViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
@@ -24,6 +26,8 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
   @Override
   protected void initializeView(BeanInjector beanInjector) {
     listener = new JournalDetailPresenter(this, beanInjector);
+    content = new Div();
+    add(content);
   }
 
   @Override
@@ -31,7 +35,12 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
     listener.setModel(journalEntryDto);
     var binder = new Binder<>(JournalEntryDto.class);
     binder.setBean(journalEntryDto);
-    add(createFormLayout(binder));
+    content.add(createFormLayout(binder));
+  }
+
+  @Override
+  public void routeToHomeView() {
+    getUI().ifPresent(ui -> ui.navigate("home"));
   }
 
   private FormLayout createFormLayout(Binder<JournalEntryDto> binder) {
@@ -44,6 +53,11 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
     TextField content = new TextField();
     formlayout.addFormItem(content, "Inhalt");
     binder.bind(content, JournalEntryDto::getContent, JournalEntryDto::setContent);
+
+    Button deleteButton = new Button("Löschen");
+    deleteButton.getStyle().set("cursor", "pointer");
+    deleteButton.addClickListener(event -> listener.onJournalEntryDelete());
+    formlayout.add(deleteButton);
 
     Button updateButton = new Button("Aktualisieren");
     updateButton.getStyle().set("cursor", "pointer");

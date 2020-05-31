@@ -23,7 +23,6 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
   @Override
   public void display(List<Challenge> challenges) {
     H2 title = new H2("Meine aktuellen Herausforderungen");
-    title.getStyle().set("margin", "0");
     add(title);
 
     for (Challenge challenge : challenges) {

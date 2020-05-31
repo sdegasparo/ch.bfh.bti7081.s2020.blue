@@ -32,4 +32,8 @@ public class JournalEntryService {
     return journalEntryCrudRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException(String.format("JournalEntry with id %s not found", id)));
   }
+
+  public void deleteById(Long id) {
+    journalEntryCrudRepository.deleteById(id);
+  }
 }
