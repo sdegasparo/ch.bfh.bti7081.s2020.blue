@@ -22,7 +22,7 @@ public class JournalListPresenter implements JournalListListener {
 
   @Override
   public void onJournalEntryAddClick() {
-    view.navigateToJournalEntryCreate();
+    view.navigateToJournalEntryCreateView();
   }
 
   @Override

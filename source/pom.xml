@@ -53,7 +53,6 @@
     <!-- Vaadin configuration -->
     <vaadin.version>14.1.27</vaadin.version>
 
-    <vaadin.component.card.version>2.0.0.beta4</vaadin.component.card.version>
     <!-- Sonarcloud configuration -->
     <sonar.projectKey>zeroplexer_ch.bfh.bti7081.s2020.blue</sonar.projectKey>
 
@@ -228,16 +227,6 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${jupiter.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.appreciated</groupId>
-      <artifactId>card</artifactId>
-      <version>${vaadin.component.card.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.appreciated</groupId>
-      <artifactId>master-detail-view</artifactId>
-      <version>2.0.0.beta2</version>
     </dependency>
   </dependencies>
 

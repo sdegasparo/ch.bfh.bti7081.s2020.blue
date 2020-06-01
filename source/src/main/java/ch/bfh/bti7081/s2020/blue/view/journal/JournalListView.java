@@ -7,7 +7,7 @@ public interface JournalListView {
 
   void display(List<JournalEntry> journalEntries);
 
-  void navigateToJournalEntryCreate();
+  void navigateToJournalEntryCreateView();
 
   void navigateToDetailView(Long id);
 

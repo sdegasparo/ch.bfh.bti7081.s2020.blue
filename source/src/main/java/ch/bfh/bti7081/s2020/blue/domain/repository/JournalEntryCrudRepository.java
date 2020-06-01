@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry, Long> {
 
-  @Transactional
   @PreAuthorize("isAuthenticated()")
   @Query(value = "select * from journal_entry where journal_entry.patient_id = (select id from patient where login_username = :#{principal.username})",
       nativeQuery = true)
@@ -28,9 +27,8 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
       nativeQuery = true)
   void create(String title, String content, Date creationDate);
 
-  @Modifying
-  @Transactional
   @PreAuthorize("isAuthenticated()")
+  @Transactional
   @Query(value = "update journal_entry"
       + "         set title = :#{#title},"
       + "             content = :#{#content},"

@@ -27,15 +27,10 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
     H2 title = new H2("Meine Journaleinträge");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
-    newJournalEntryButton.getStyle().set("cursor", "pointer");
     newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
 
     add(title);
     add(newJournalEntryButton);
-
-//    var horizontalLayout = new HorizontalLayout(title, newJournalEntryButton);
-//    horizontalLayout.getStyle().set("margin", "0");
-//    add(horizontalLayout);
 
     for (JournalEntry journalEntry : journalEntries) {
       Div div = new Div();
@@ -57,7 +52,7 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
   }
 
   @Override
-  public void navigateToJournalEntryCreate() {
+  public void navigateToJournalEntryCreateView() {
     getUI().ifPresent(ui -> ui.navigate(JournalCreateViewImpl.class));
   }
 

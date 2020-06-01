@@ -24,10 +24,8 @@ public class JournalCreateViewImpl extends SocialAnxietyLayout implements Journa
     var binder = new Binder<>(JournalEntryDto.class);
     JournalEntryDto journalEntry = new JournalEntryDto();
     binder.setBean(journalEntry);
-
-    listener = new JournalCreatePresenter(journalEntry, this, beanInjector);
-
     add(createFormLayout(binder));
+    listener = new JournalCreatePresenter(journalEntry, this, beanInjector);
   }
 
   private FormLayout createFormLayout(Binder<JournalEntryDto> binder) {
@@ -42,7 +40,6 @@ public class JournalCreateViewImpl extends SocialAnxietyLayout implements Journa
     binder.bind(content, JournalEntryDto::getContent, JournalEntryDto::setContent);
 
     Button createButton = new Button("Erstellen");
-    createButton.getStyle().set("cursor", "pointer");
     createButton.addClickListener(event -> listener.onJournalEntryCreate());
     formlayout.add(createButton);
 
