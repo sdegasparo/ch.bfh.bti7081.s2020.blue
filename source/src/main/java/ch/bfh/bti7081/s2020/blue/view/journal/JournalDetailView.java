@@ -1,13 +1,21 @@
 package ch.bfh.bti7081.s2020.blue.view.journal;
 
-import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
+import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryDto;
 
 public interface JournalDetailView {
 
-  void display(JournalEntry journalEntry);
+  void afterViewInit(JournalEntryDto journalEntryDto);
 
-  interface JournalDetailViewListener {
+  void routeToHomeView();
 
-    void onInit(Long id);
+  interface JournalDetailListener {
+
+    void afterViewInit(Long id);
+
+    void onJournalEntryUpdate();
+
+    void setModel(JournalEntryDto journalEntryDto);
+
+    void onJournalEntryDelete();
   }
 }

@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.view.challenge;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
-import ch.bfh.bti7081.s2020.blue.presenter.ChallengeListPresenter;
+import ch.bfh.bti7081.s2020.blue.presenter.CurrentChallengesListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -11,18 +11,19 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
-public class ChallengeListViewImpl extends VerticalLayout implements ChallengeListView {
+public class CurrentChallengesListViewImpl extends VerticalLayout implements CurrentChallengesListView {
 
-  private final ChallengeListViewListener listener;
+  private final CurrentChallengesListViewListener listener;
 
-  public ChallengeListViewImpl(BeanInjector beanInjector) {
-    listener = new ChallengeListPresenter(this, beanInjector);
+  public CurrentChallengesListViewImpl(BeanInjector beanInjector) {
+    listener = new CurrentChallengesListPresenter(this, beanInjector);
     listener.onInit();
   }
 
   @Override
   public void display(List<Challenge> challenges) {
-    add(new H2("Meine aktuellen Herausforderungen"));
+    H2 title = new H2("Meine aktuellen Herausforderungen");
+    add(title);
 
     for (Challenge challenge : challenges) {
       Div div = new Div();
@@ -30,14 +31,14 @@ public class ChallengeListViewImpl extends VerticalLayout implements ChallengeLi
       div.getStyle().set("padding", "0.5em");
       div.getStyle().set("width", "100%");
 
-      H3 title = new H3(challenge.getName());
-      title.getStyle().set("margin", "0"); // TODO should be in global styles
-      div.add(title);
+      H3 challengeTitle = new H3(challenge.getName());
+      challengeTitle.getStyle().set("margin", "0"); // TODO should be in global styles
+      div.add(challengeTitle);
 
       div.add(new Text(challenge.getContent()));
 
       Button detailButton = new Button("Detail");
-      detailButton.addClickListener(event -> listener.listItemClick(challenge.getId()));
+      detailButton.addClickListener(event -> listener.onChallengeClick(challenge.getId()));
       div.add(detailButton);
 
       add(div);
@@ -49,5 +50,4 @@ public class ChallengeListViewImpl extends VerticalLayout implements ChallengeLi
   public void navigateToDetailView(Long id) {
     getUI().ifPresent(ui -> ui.navigate(ChallengeDetailViewImpl.class, id));
   }
-
 }
