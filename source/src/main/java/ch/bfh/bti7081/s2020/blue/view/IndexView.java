@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.blue.view;
 import ch.bfh.bti7081.s2020.blue.view.authentication.LoginViewImpl;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
@@ -12,12 +13,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
-@Route
-@CssImport("styles.css")
+@Route("")
 @PWA(name = "Social Anxiety Application",
     shortName = "Social Anxiety App",
     description = "This is an application to help people with social anxiety.",
     enableInstallPrompt = false)
+@StyleSheet("frontend://styles/styles.css")
 public class IndexView extends VerticalLayout {
 
   public IndexView() {

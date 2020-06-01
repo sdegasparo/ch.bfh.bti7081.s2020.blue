@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 import ch.bfh.bti7081.s2020.blue.domain.dto.JournalEntryDto;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalDetailPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
+import ch.bfh.bti7081.s2020.blue.view.HomeView;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -40,7 +41,7 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
 
   @Override
   public void routeToHomeView() {
-    getUI().ifPresent(ui -> ui.navigate("home"));
+    getUI().ifPresent(ui -> ui.navigate(HomeView.class));
   }
 
   private FormLayout createFormLayout(Binder<JournalEntryDto> binder) {
