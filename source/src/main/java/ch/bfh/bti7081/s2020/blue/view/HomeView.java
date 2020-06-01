@@ -4,27 +4,20 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.challenge.CurrentChallengesListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
 
 @Route("home")
-@PWA(name = "Social Anxiety Application",
-    shortName = "Social Anxiety App",
-    description = "This is an application to help people with social anxiety.",
-    enableInstallPrompt = false)
-@CssImport("styles.css")
-public class MainView extends SocialAnxietyLayout {
+public class HomeView extends SocialAnxietyLayout {
 
-  public MainView(BeanInjector beanInjector) {
+  public HomeView(BeanInjector beanInjector) {
     super(beanInjector);
   }
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    
+
     HorizontalLayout layout = new HorizontalLayout();
     layout.setWidth("100%");
 

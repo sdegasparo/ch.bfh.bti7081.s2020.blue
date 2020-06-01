@@ -255,6 +255,10 @@
         <artifactId>vaadin-maven-plugin</artifactId>
         <version>${vaadin.version}</version>
 
+        <configuration>
+          <frontendDirectory>${project.basedir}/src/main/resources/frontend</frontendDirectory>
+        </configuration>
+
         <executions>
           <execution>
             <goals>

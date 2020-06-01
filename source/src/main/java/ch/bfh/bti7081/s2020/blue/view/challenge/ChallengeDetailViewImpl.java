@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.ChallengeDetailPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
@@ -56,7 +57,11 @@ public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements Chal
     Button challengeCompleteButton = new Button("Herausforderung abschliessen");
     challengeCompleteButton.addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
 
-    contentDiv.add(name, content, criteriaCheckbox, challengeCompleteButton);
+    contentDiv.add(name, content, newSeparator(), criteriaCheckbox, newSeparator(), challengeCompleteButton);
+  }
+
+  private Html newSeparator() {
+    return new Html("<br />");
   }
 
   @Override

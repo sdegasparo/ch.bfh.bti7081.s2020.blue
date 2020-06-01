@@ -1,8 +1,8 @@
-package ch.bfh.bti7081.s2020.blue.view.landing;
+package ch.bfh.bti7081.s2020.blue.view;
 
 import ch.bfh.bti7081.s2020.blue.view.authentication.LoginViewImpl;
-import ch.bfh.bti7081.s2020.blue.view.landing.LandingView.LandingPageViewListener;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
@@ -10,11 +10,17 @@ import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.PWA;
 
 @Route("")
-public class LandingViewImpl extends VerticalLayout implements LandingPageViewListener {
+@PWA(name = "Social Anxiety Application",
+    shortName = "Social Anxiety App",
+    description = "This is an application to help people with social anxiety.",
+    enableInstallPrompt = false)
+@StyleSheet("frontend://styles/styles.css")
+public class IndexView extends VerticalLayout {
 
-  public LandingViewImpl() {
+  public IndexView() {
     H1 title = new H1("Willkommen zur soziale Phobie App");
 
     HorizontalLayout container = new HorizontalLayout();
@@ -55,5 +61,4 @@ public class LandingViewImpl extends VerticalLayout implements LandingPageViewLi
     setSizeFull();
     add(title, container);
   }
-
 }
