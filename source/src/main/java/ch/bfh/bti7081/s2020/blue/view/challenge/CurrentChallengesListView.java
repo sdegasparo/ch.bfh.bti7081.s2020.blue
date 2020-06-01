@@ -13,6 +13,6 @@ public interface CurrentChallengesListView {
 
     void onInit();
 
-    void listItemClick(Long id);
+    void onChallengeClick(Long id);
   }
 }

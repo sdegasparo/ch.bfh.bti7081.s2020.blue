@@ -22,7 +22,6 @@ public class ChallengeDetailPresenter implements ChallengeDetailView.ChallengeDe
   @Override
   public void onChallengeComplete(Long challengeId) {
     challengeService.completeChallenge(challengeId);
-
     view.afterChallengeCompleted();
   }
 }

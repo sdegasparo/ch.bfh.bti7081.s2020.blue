@@ -21,7 +21,7 @@ public class CurrentChallengesListPresenter implements CurrentChallengesListView
   }
 
   @Override
-  public void listItemClick(Long id) {
+  public void onChallengeClick(Long id) {
     view.navigateToDetailView(id);
   }
 }

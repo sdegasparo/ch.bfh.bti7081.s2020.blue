@@ -54,8 +54,7 @@ public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements Chal
     Checkbox criteriaCheckbox = new Checkbox(challenge.getCriteria());
 
     Button challengeCompleteButton = new Button("Herausforderung abschliessen");
-    challengeCompleteButton
-        .addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
+    challengeCompleteButton.addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
 
     contentDiv.add(name, content, criteriaCheckbox, challengeCompleteButton);
   }
