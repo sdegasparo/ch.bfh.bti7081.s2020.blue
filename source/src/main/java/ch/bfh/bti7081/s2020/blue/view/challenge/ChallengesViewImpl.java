@@ -18,28 +18,25 @@ import java.util.List;
 public class ChallengesViewImpl extends SocialAnxietyLayout implements ChallengesView {
 
   static final String ROUTE = "challenges";
-
   private final ChallengesViewListener listener;
-
-  private Div challengeHolder;
+  private Div content;
 
   public ChallengesViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
-
     listener = new ChallengesPresenter(this, beanInjector);
     listener.onInit();
   }
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    this.challengeHolder = new Div();
-
-    add(new H2("Alle Herausforderungen"));
-    add(challengeHolder);
+    content = new Div();
+    add(content);
   }
 
   @Override
   public void display(List<ChallengeDto> challenges) {
+    content.add(new H2("Alle Herausforderungen"));
+
     for (ChallengeDto challenge : challenges) {
       Div div = new Div();
 
@@ -54,19 +51,17 @@ public class ChallengesViewImpl extends SocialAnxietyLayout implements Challenge
       div.getStyle().set("width", "100%");
 
       H3 title = new H3(challenge.getName());
-      title.getStyle().set("margin", "0"); // TODO should be in global styles
       div.add(title);
 
       div.add(new Text(challenge.getContent()));
 
       if (!challenge.getCompleted()) {
         Button acceptChallengeButton = new Button("Akzeptieren");
-        acceptChallengeButton
-            .addClickListener(event -> listener.onChallengeAccept(challenge.getId()));
+        acceptChallengeButton.addClickListener(event -> listener.onChallengeAccept(challenge.getId()));
         div.add(acceptChallengeButton);
       }
 
-      challengeHolder.add(div);
+      content.add(div);
     }
   }
 }

@@ -13,8 +13,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
 @Route("challenge")
-public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView,
-    HasUrlParameter<Long> {
+public class ChallengeDetailViewImpl extends VerticalLayout implements ChallengeDetailView, HasUrlParameter<Long> {
 
   private final ChallengeDetailViewListener listener;
 
@@ -37,8 +36,7 @@ public class ChallengeDetailViewImpl extends VerticalLayout implements Challenge
     Checkbox criteriaCheckbox = new Checkbox(challenge.getCriteria());
 
     Button challengeCompleteButton = new Button("Herausforderung abschliessen");
-    challengeCompleteButton
-        .addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
+    challengeCompleteButton.addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
 
     add(name, content, criteriaCheckbox, challengeCompleteButton);
   }

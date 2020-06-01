@@ -96,8 +96,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
 
   @Override
   public void navigate(String route) {
-    getUI().ifPresent(ui ->
-        ui.navigate(route));
+    getUI().ifPresent(ui -> ui.navigate(route));
   }
 
   @Override
