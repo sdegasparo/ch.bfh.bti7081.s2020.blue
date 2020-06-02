@@ -7,8 +7,16 @@ public interface JournalListView {
 
   void display(List<JournalEntry> journalEntries);
 
-  interface JournalListViewListener {
+  void navigateToJournalEntryCreateView();
+
+  void navigateToDetailView(Long id);
+
+  interface JournalListListener {
 
     void onInit();
+
+    void onJournalEntryAddClick();
+
+    void onJournalEntryClick(Long id);
   }
 }

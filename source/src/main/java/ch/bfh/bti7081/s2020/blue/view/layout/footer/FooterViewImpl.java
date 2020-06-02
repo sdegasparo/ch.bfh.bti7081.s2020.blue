@@ -11,10 +11,10 @@ public class FooterViewImpl extends HorizontalLayout implements FooterView {
   public FooterViewImpl() {
     listener = new FooterPresenter(this);
     listener.onInit();
-    this.getStyle().set("border-top", "3px solid #000000");
-    this.getStyle().set("width", "100%");
-    this.getStyle().set("text-align", "center");
-    this.getStyle().set("padding-top", "1rem");
+    getStyle().set("border-top", "3px solid #000000");
+    getStyle().set("width", "100%");
+    getStyle().set("text-align", "center");
+    getStyle().set("padding-top", "1rem");
   }
 
   @Override

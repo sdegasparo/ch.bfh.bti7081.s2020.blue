@@ -15,8 +15,7 @@ public class RegistrationPresenter implements RegisterViewListener {
   private final RegistrationView view;
   private final RegistrationService registrationService;
 
-  public RegistrationPresenter(RegisterDto model, RegistrationView view,
-      BeanInjector beanInjector) {
+  public RegistrationPresenter(RegisterDto model, RegistrationView view, BeanInjector beanInjector) {
     this.model = model;
     this.view = view;
     this.registrationService = beanInjector.get(RegistrationService.class);

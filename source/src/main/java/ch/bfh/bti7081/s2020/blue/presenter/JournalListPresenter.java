@@ -1,21 +1,32 @@
 package ch.bfh.bti7081.s2020.blue.presenter;
 
-import ch.bfh.bti7081.s2020.blue.service.JournalService;
+import ch.bfh.bti7081.s2020.blue.service.JournalEntryService;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListView;
+import ch.bfh.bti7081.s2020.blue.view.journal.JournalListView.JournalListListener;
 
-public class JournalListPresenter implements JournalListView.JournalListViewListener {
+public class JournalListPresenter implements JournalListListener {
 
   private final JournalListView view;
-  private final JournalService journalService;
+  private final JournalEntryService journalEntryService;
 
-  public JournalListPresenter(JournalListView view, BeanInjector beanInjector) {
-    this.view = view;
-    this.journalService = beanInjector.get(JournalService.class);
+  public JournalListPresenter(JournalListView journalView, BeanInjector beanInjector) {
+    this.view = journalView;
+    this.journalEntryService = beanInjector.get(JournalEntryService.class);
   }
 
   @Override
   public void onInit() {
-    view.display(journalService.findAll());
+    view.display(journalEntryService.findAllByCurrentUser());
+  }
+
+  @Override
+  public void onJournalEntryAddClick() {
+    view.navigateToJournalEntryCreateView();
+  }
+
+  @Override
+  public void onJournalEntryClick(Long id) {
+    view.navigateToDetailView(id);
   }
 }

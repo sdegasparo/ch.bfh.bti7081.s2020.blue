@@ -11,8 +11,7 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
-public class CurrentChallengesListViewImpl extends VerticalLayout implements
-    CurrentChallengesListView {
+public class CurrentChallengesListViewImpl extends VerticalLayout implements CurrentChallengesListView {
 
   private final CurrentChallengesListViewListener listener;
 
@@ -23,7 +22,8 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements
 
   @Override
   public void display(List<Challenge> challenges) {
-    add(new H2("Meine aktuellen Herausforderungen"));
+    H2 title = new H2("Meine aktuellen Herausforderungen");
+    add(title);
 
     for (Challenge challenge : challenges) {
       Div div = new Div();
@@ -31,14 +31,14 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements
       div.getStyle().set("padding", "0.5em");
       div.getStyle().set("width", "100%");
 
-      H3 title = new H3(challenge.getName());
-      title.getStyle().set("margin", "0"); // TODO should be in global styles
-      div.add(title);
+      H3 challengeTitle = new H3(challenge.getName());
+      challengeTitle.getStyle().set("margin", "0"); // TODO should be in global styles
+      div.add(challengeTitle);
 
       div.add(new Text(challenge.getContent()));
 
       Button detailButton = new Button("Detail");
-      detailButton.addClickListener(event -> listener.listItemClick(challenge.getId()));
+      detailButton.addClickListener(event -> listener.onChallengeClick(challenge.getId()));
       div.add(detailButton);
 
       add(div);

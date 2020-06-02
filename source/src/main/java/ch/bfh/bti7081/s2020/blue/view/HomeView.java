@@ -7,16 +7,11 @@ import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
 
 @Route("home")
-@PWA(name = "Social Anxiety Application",
-    shortName = "Social Anxiety App",
-    description = "This is an application to help people with social anxiety.",
-    enableInstallPrompt = false)
-public class MainView extends SocialAnxietyLayout {
+public class HomeView extends SocialAnxietyLayout {
 
-  public MainView(BeanInjector beanInjector) {
+  public HomeView(BeanInjector beanInjector) {
     super(beanInjector);
   }
 
