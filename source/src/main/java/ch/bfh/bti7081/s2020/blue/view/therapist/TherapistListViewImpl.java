@@ -8,6 +8,10 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import java.util.List;
 
@@ -34,14 +38,17 @@ public class TherapistListViewImpl extends SocialAnxietyLayout implements Therap
     content.add(new H2("Therapeuten für soziale Angststörungen"));
 
     for (Therapist therapist : therapists) {
-      Div div = new Div();
+      HorizontalLayout horizontalLayout = new HorizontalLayout();
+      VerticalLayout verticalLayout = new VerticalLayout();
+      Icon icon = new Icon(VaadinIcon.DOCTOR);
+      horizontalLayout.add(icon, verticalLayout);
       H4 name = new H4(therapist.getTitle() + " " + therapist.getSurname() + " " + therapist.getGivenName());
       Label street = new Label(therapist.getStreet());
       Label place = new Label(therapist.getPlace());
       Label information = new Label(therapist.getInformation());
-      div.add(name, street, place, information);
+      verticalLayout.add(name, street, place, information);
 
-      content.add(div);
+      content.add(horizontalLayout);
     }
   }
 }
