@@ -9,6 +9,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
@@ -25,6 +27,11 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
   public void display(List<Challenge> challenges) {
     H2 title = new H2("Meine aktuellen Herausforderungen");
     add(title);
+
+    if (challenges.isEmpty()) {
+      Button acceptChallengeButton = new Button(new Icon(VaadinIcon.PLUS));
+      acceptChallengeButton.addClickListener(event -> listener.onChallengeAcceptClick());
+    }
 
     for (Challenge challenge : challenges) {
       Div div = new Div();
@@ -45,6 +52,11 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
 
       add(div);
     }
+  }
+
+  @Override
+  public void navigateToChallenges() {
+    getUI().ifPresent(ui -> ui.navigate(ChallengesListViewImpl.class));
   }
 
   @Override

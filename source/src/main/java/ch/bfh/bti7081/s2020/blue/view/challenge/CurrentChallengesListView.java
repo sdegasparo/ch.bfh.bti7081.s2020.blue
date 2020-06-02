@@ -7,11 +7,15 @@ public interface CurrentChallengesListView {
 
   void display(List<Challenge> challenges);
 
+  void navigateToChallenges();
+
   void navigateToDetailView(Long id);
 
   interface CurrentChallengesListViewListener {
 
     void onInit();
+
+    void onChallengeAcceptClick();
 
     void onChallengeClick(Long id);
   }

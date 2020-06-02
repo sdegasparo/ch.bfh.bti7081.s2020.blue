@@ -55,10 +55,14 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
       div.add(new Text(challenge.getContent()));
       div.add(new Html("<br />"));
 
-      if (!challenge.getCompleted()) {
+      if (!challenge.getAccepted()) {
         Button acceptChallengeButton = new Button("Akzeptieren");
         acceptChallengeButton.addClickListener(event -> listener.onChallengeAccept(challenge.getId()));
         div.add(acceptChallengeButton);
+      } else if (!challenge.getCompleted()) {
+        Button challengeCompletedPlaceholderButton = new Button("Akzeptiert");
+        challengeCompletedPlaceholderButton.setEnabled(false);
+        div.add(challengeCompletedPlaceholderButton);
       } else {
         Button challengeCompletedPlaceholderButton = new Button("Abgeschlossen");
         challengeCompletedPlaceholderButton.setEnabled(false);
