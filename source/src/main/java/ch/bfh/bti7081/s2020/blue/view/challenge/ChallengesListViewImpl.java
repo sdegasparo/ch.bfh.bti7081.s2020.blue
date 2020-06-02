@@ -1,8 +1,9 @@
 package ch.bfh.bti7081.s2020.blue.view.challenge;
 
 import ch.bfh.bti7081.s2020.blue.domain.dto.ChallengeDto;
-import ch.bfh.bti7081.s2020.blue.presenter.ChallengesPresenter;
+import ch.bfh.bti7081.s2020.blue.presenter.ChallengesListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
+import ch.bfh.bti7081.s2020.blue.view.HomeView;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
@@ -27,7 +28,7 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
 
   public ChallengesListViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
-    listener = new ChallengesPresenter(this, beanInjector);
+    listener = new ChallengesListPresenter(this, beanInjector);
     listener.onInit();
   }
 
@@ -66,5 +67,10 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
 
       content.add(div);
     }
+  }
+
+  @Override
+  public void navigateToCurrentChallenges() {
+    getUI().ifPresent(ui -> ui.navigate(HomeView.class));
   }
 }

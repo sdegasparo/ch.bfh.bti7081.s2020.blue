@@ -7,6 +7,8 @@ public interface ChallengesListView {
 
   void display(List<ChallengeDto> challenges);
 
+  void navigateToCurrentChallenges();
+
   interface ChallengesListViewListener {
 
     void onInit();

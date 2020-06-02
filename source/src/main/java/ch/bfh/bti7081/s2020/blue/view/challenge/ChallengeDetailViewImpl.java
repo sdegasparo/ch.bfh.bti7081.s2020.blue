@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.blue.view.challenge;
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.ChallengeDetailPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
+import ch.bfh.bti7081.s2020.blue.view.HomeView;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
@@ -66,6 +67,6 @@ public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements Chal
 
   @Override
   public void afterChallengeCompleted() {
-    getUI().ifPresent(ui -> ui.navigate("home"));
+    getUI().ifPresent(ui -> ui.navigate(HomeView.class));
   }
 }
