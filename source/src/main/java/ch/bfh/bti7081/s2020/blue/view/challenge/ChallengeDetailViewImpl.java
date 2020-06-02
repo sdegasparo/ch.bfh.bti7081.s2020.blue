@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.blue.view.challenge;
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.ChallengeDetailPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
+import ch.bfh.bti7081.s2020.blue.view.HomeView;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
@@ -43,6 +44,6 @@ public class ChallengeDetailViewImpl extends VerticalLayout implements Challenge
 
   @Override
   public void afterChallengeCompleted() {
-    getUI().ifPresent(ui -> ui.navigate(""));
+    getUI().ifPresent(ui -> ui.navigate(HomeView.class));
   }
 }
