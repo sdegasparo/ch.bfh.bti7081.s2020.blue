@@ -42,8 +42,8 @@ public class ChallengeService {
         .name(challenge.getName())
         .content(challenge.getContent())
         .criteria(challenge.getCriteria())
-        .accepted(!challenge.getPatients().isEmpty())
-        .completed(!challenge.getPatients().isEmpty() && challenge.getPatients().get(0).getCompleted())
+        .accepted(challenge.getPatients() != null && !challenge.getPatients().isEmpty())
+        .completed(challenge.getPatients() != null && !challenge.getPatients().isEmpty() && challenge.getPatients().get(0).getCompleted())
         .build();
   }
 
