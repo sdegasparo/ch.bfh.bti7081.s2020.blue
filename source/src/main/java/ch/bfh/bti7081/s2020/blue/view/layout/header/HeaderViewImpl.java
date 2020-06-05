@@ -3,6 +3,8 @@ package ch.bfh.bti7081.s2020.blue.view.layout.header;
 import ch.bfh.bti7081.s2020.blue.presenter.HeaderPresenter;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,16 +29,22 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     title.getStyle().set("color", "black");
     titleLayout.add(title);
 
-    Anchor anchor1 = new Anchor("challenges", "Challenges");
-    Anchor anchor2 = new Anchor("journal", "Journal");
-    Anchor anchor3 = new Anchor("therapists", "Therapist");
+    Icon icon1 = new Icon(VaadinIcon.GAMEPAD);
+    Icon icon2 = new Icon(VaadinIcon.CLIPBOARD_TEXT);
+    Icon icon3 = new Icon(VaadinIcon.DOCTOR);
+    String color = "#000000";
+    String size = "2em";
+    icon1.setColor(color);
+    icon1.setSize(size);
+    icon2.setColor(color);
+    icon2.setSize(size);
+    icon3.setColor(color);
+    icon3.setSize(size);
 
-    anchor1.getStyle().set("color", "black");
-    anchor1.getStyle().set("margin", "0px");
-    anchor2.getStyle().set("color", "black");
-    anchor2.getStyle().set("margin", "0px");
-    anchor3.getStyle().set("color", "black");
-    anchor3.getStyle().set("margin", "0px");
+    Anchor anchor1 = new Anchor("challenges", icon1);
+    Anchor anchor2 = new Anchor("journal", icon2);
+    Anchor anchor3 = new Anchor("therapists", icon3);
+
     navLayout.add(anchor1, anchor2, anchor3);
     navLayout.setSpacing(true);
     navLayout.setJustifyContentMode(JustifyContentMode.AROUND);
@@ -44,13 +52,18 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     Label currentUser = new Label(
         authentication.getName());
-    userLayout.add(currentUser);
+    Icon userIcon = new Icon(VaadinIcon.USER);
+    userIcon.setColor(color);
+    userIcon.getStyle().set("width", "1em")
+        .set("height", "2em");
+    userLayout.add(userIcon, currentUser);
     userLayout.setJustifyContentMode(JustifyContentMode.END);
 
     layout.add(titleLayout, navLayout, userLayout);
     layout.setWidth("100%");
-    layout.getStyle().set("font-size", "1.5em");
-    layout.getStyle().set("border-bottom", "3px solid #000000");
+    layout.getStyle().set("font-size", "1.5em")
+        .set("border-bottom", "3px solid #000000")
+        .set("padding-bottom", "0.5em");
   }
 
   @Override
