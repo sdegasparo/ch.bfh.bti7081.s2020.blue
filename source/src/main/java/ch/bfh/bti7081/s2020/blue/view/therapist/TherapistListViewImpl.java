@@ -41,11 +41,15 @@ public class TherapistListViewImpl extends SocialAnxietyLayout implements Therap
       HorizontalLayout horizontalLayout = new HorizontalLayout();
       VerticalLayout verticalLayout = new VerticalLayout();
       Icon icon = new Icon(VaadinIcon.DOCTOR);
+      icon.setSize("10em");
+      icon.setColor("#000000");
       horizontalLayout.add(icon, verticalLayout);
+
       H4 name = new H4(therapist.getTitle() + " " + therapist.getSurname() + " " + therapist.getGivenName());
       Label street = new Label(therapist.getStreet());
       Label place = new Label(therapist.getPlace());
       Label information = new Label(therapist.getInformation());
+      verticalLayout.setSpacing(false);
       verticalLayout.add(name, street, place, information);
 
       content.add(horizontalLayout);
