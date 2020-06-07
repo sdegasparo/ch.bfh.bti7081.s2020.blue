@@ -27,8 +27,9 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
       nativeQuery = true)
   void create(String title, String content, Date creationDate);
 
-  @PreAuthorize("isAuthenticated()")
+  @Modifying
   @Transactional
+  @PreAuthorize("isAuthenticated()")
   @Query(value = "update journal_entry"
       + "         set title = :#{#title},"
       + "             content = :#{#content},"
