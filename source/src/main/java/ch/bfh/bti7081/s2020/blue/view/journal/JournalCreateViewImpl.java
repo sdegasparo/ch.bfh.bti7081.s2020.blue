@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
@@ -35,7 +36,8 @@ public class JournalCreateViewImpl extends SocialAnxietyLayout implements Journa
     formlayout.addFormItem(title, "Titel");
     binder.bind(title, JournalEntryDto::getTitle, JournalEntryDto::setTitle);
 
-    TextField content = new TextField();
+    TextArea content = new TextArea();
+    content.getStyle().set("minHeight", "150px");
     formlayout.addFormItem(content, "Inhalt");
     binder.bind(content, JournalEntryDto::getContent, JournalEntryDto::setContent);
 

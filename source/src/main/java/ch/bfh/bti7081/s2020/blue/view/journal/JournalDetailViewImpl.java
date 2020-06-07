@@ -10,6 +10,7 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.BeforeEvent;
@@ -77,7 +78,8 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
     formlayout.addFormItem(title, "Titel");
     binder.bind(title, JournalEntryDto::getTitle, JournalEntryDto::setTitle);
 
-    TextField content = new TextField();
+    TextArea content = new TextArea();
+    content.getStyle().set("minHeight", "150px");
     formlayout.addFormItem(content, "Inhalt");
     binder.bind(content, JournalEntryDto::getContent, JournalEntryDto::setContent);
 
