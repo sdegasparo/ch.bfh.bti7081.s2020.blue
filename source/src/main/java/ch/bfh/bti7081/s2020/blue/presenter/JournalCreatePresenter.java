@@ -20,6 +20,7 @@ public class JournalCreatePresenter implements JournalCreateListener {
 
   @Override
   public void onJournalEntryCreate() {
-    journalEntryService.save(model);
+    Long id = journalEntryService.save(model);
+    view.navigateToDetailView(id);
   }
 }

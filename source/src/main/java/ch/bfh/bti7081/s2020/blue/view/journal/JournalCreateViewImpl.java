@@ -45,4 +45,9 @@ public class JournalCreateViewImpl extends SocialAnxietyLayout implements Journa
 
     return formlayout;
   }
+
+  @Override
+  public void navigateToDetailView(Long journalId) {
+    getUI().ifPresent(ui -> ui.navigate(JournalDetailViewImpl.class, journalId));
+  }
 }
