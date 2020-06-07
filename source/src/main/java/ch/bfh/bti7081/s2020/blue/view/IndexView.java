@@ -35,18 +35,19 @@ public class IndexView extends VerticalLayout {
 
     container.add(leftLayout, rightLayout);
 
-    H3 introductiontitle = new H3("Was ist soziale Phobie?");
+    H3 introductionTitle = new H3("Was ist soziale Phobie?");
     Text introduction = new Text(
         "Eine soziale Phobie ist eine Form der Angststörung und zeichnet sich durch eine anhaltende und unangemessen starke Angst vor sozialen Situationen aus, die weit über eine normale Schüchternheit oder Lampenfieber hinausgeht. Personen mit einer Sozialphobie befürchten, sich vor anderen zu blamieren, sich peinlich zu verhalten oder abgelehnt zu werden. Die Ursachen sind bisher nicht vollständig geklärt. Vermutlich spielen verschiedene Auslöser eine Rolle."
-            + "\n\n"
+            + "\n"
             + "Mit unserer Applikation können Sie spielerisch, Ihrer soziale Phobie den Kampf ansagen. Versuche deine Angst zu überwinden bei den Challenges und verdiene deine Rewards.");
-    H3 introductionTitle = new H3("Funktionen:");
+
+    H3 functionalitiesTitle = new H3("Funktionen:");
     ListItem li1 = new ListItem("Challenges bestreiten");
     ListItem li2 = new ListItem("Rewards erhalten");
     ListItem li3 = new ListItem("Journaleintrag erstellen und bearbeiten");
     ListItem li4 = new ListItem("Therapisten finden");
 
-    leftLayout.add(introductiontitle, introduction, introductionTitle, li1, li2, li3, li4);
+    leftLayout.add(introductionTitle, introduction, functionalitiesTitle, li1, li2, li3, li4);
 
     HorizontalLayout signUpLayout = new HorizontalLayout();
     Text signUpText = new Text("Haben Sie noch kein Benutzerkonto?");

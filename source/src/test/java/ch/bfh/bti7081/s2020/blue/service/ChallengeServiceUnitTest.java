@@ -29,12 +29,11 @@ public class ChallengeServiceUnitTest {
 
   @Before
   public void beforeTestSetup() {
-    fixture = new ChallengeService(challengeCrudRepositoryMock,
-        patientHasChallengeCrudRepositoryMock);
+    fixture = new ChallengeService(challengeCrudRepositoryMock, patientHasChallengeCrudRepositoryMock);
   }
 
   @Test
-  public void findAllReturnsChallengeDtosSortedByIncompleteFirst() {
+  public void findAllReturnsChallengeDtosSortedByNotAcceptedFirst() {
     Challenge challenge1 = Challenge.builder()
         .patients(Collections.singletonList(PatientHasChallenge.builder()
             .completed(Boolean.TRUE)
@@ -42,9 +41,6 @@ public class ChallengeServiceUnitTest {
         .build();
 
     Challenge challenge2 = Challenge.builder()
-        .patients(Collections.singletonList(PatientHasChallenge.builder()
-            .completed(Boolean.FALSE)
-            .build()))
         .build();
 
     doReturn(List.of(challenge1, challenge2))
@@ -52,6 +48,10 @@ public class ChallengeServiceUnitTest {
         .findAllInclusiveAccepted();
 
     List<ChallengeDto> result = fixture.findAll();
+
+    assertThat(result)
+        .extracting("accepted")
+        .containsExactly(Boolean.FALSE, Boolean.TRUE);
 
     assertThat(result)
         .extracting("completed")
