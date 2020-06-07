@@ -10,6 +10,7 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
@@ -24,13 +25,16 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
 
   @Override
   public void display(List<JournalEntry> journalEntries) {
+    HorizontalLayout horizontalLayout = new HorizontalLayout();
     H2 title = new H2("Meine Journaleinträge");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
     newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
 
-    add(title);
-    add(newJournalEntryButton);
+    horizontalLayout.add(title, newJournalEntryButton);
+    horizontalLayout.getStyle().set("margin", "0");
+    horizontalLayout.setAlignItems(Alignment.BASELINE);
+    add(horizontalLayout);
 
     for (JournalEntry journalEntry : journalEntries) {
       Div div = new Div();
