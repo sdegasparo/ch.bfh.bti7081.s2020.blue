@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,7 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
   JournalEntry save(JournalEntry entry);
 
   @PreAuthorize("isAuthenticated()")
+  @Modifying
   @Transactional
   @Query(value = "update journal_entry"
       + "         set title = :#{#title},"
