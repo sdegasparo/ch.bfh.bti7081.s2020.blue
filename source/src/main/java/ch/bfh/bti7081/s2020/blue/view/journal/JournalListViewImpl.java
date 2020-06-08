@@ -3,12 +3,12 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -20,7 +20,7 @@ import java.util.List;
 @CssImport("./styles.css")
 public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
-  private final JournalListListener listener;
+  private JournalListListener listener;
 
   public JournalListViewImpl(BeanInjector beanInjector) {
     listener = new JournalListPresenter(this, beanInjector);
@@ -31,6 +31,7 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
   public void display(List<JournalEntry> journalEntries) {
     HorizontalLayout horizontalLayout = new HorizontalLayout();
     H2 title = new H2("Meine Journaleinträge");
+    title.getStyle().set("padding", "0.5em");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
     newJournalEntryButton.getStyle().set("cursor", "pointer");
@@ -45,12 +46,12 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
       Div div = new Div();
       div.getStyle().set("border", "1px solid black");
       div.getStyle().set("padding", "0.5em");
-      div.getStyle().set("width", "100%");
+      div.getStyle().set("width", "96%");
 
       H3 journalEntryTitle = new H3(journalEntry.getTitle());
       div.add(journalEntryTitle);
 
-      div.add(new Text(journalEntry.getContent()));
+      div.add(new Paragraph(journalEntry.getContent()));
 
       Button detailButton = new Button("Detail");
       detailButton.addClickListener(event -> listener.onJournalEntryClick(journalEntry.getId()));

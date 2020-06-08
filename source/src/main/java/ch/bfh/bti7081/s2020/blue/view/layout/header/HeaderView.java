@@ -4,8 +4,16 @@ public interface HeaderView {
 
   void display();
 
+  void navigateToLogout();
+
+  void navigateToUserDetails();
+
   interface HeaderViewListener {
 
     void onInit();
+
+    void onLogoutClick();
+
+    void onEditProfileClick();
   }
 }

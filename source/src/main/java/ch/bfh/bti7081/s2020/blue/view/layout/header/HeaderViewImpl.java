@@ -1,6 +1,8 @@
 package ch.bfh.bti7081.s2020.blue.view.layout.header;
 
 import ch.bfh.bti7081.s2020.blue.presenter.HeaderPresenter;
+import ch.bfh.bti7081.s2020.blue.view.authentication.UserDetailsViewImpl;
+import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
@@ -12,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
 
   private final HeaderViewListener listener;
+
   HorizontalLayout layout = new HorizontalLayout();
 
   public HeaderViewImpl() {
@@ -64,6 +67,12 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     layout.getStyle().set("font-size", "1.5em")
         .set("border-bottom", "3px solid #000000")
         .set("padding-bottom", "0.5em");
+
+    ContextMenu contextMenu = new ContextMenu();
+    contextMenu.setTarget(userLayout);
+    contextMenu.setOpenOnClick(true);
+    contextMenu.addItem("Abmelden", event -> listener.onLogoutClick());
+    contextMenu.addItem("Profil bearbeiten", event -> listener.onEditProfileClick());
   }
 
   @Override
@@ -72,5 +81,15 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     setWidth("100%");
     setMargin(false);
     setPadding(false);
+  }
+
+  @Override
+  public void navigateToLogout() {
+    getUI().ifPresent(ui -> ui.getPage().setLocation("/logout"));
+  }
+
+  @Override
+  public void navigateToUserDetails() {
+    getUI().ifPresent(ui -> ui.navigate(UserDetailsViewImpl.class));
   }
 }
