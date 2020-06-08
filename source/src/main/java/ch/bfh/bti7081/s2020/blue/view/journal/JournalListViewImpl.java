@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -34,6 +35,7 @@ public class JournalListViewImpl extends SocialAnxietyLayout implements JournalL
   public void display(List<JournalEntry> journalEntries) {
     HorizontalLayout horizontalLayout = new HorizontalLayout();
     H2 title = new H2("Meine Journaleinträge");
+    title.getStyle().set("padding", "0.5em");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
     newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
@@ -47,12 +49,12 @@ public class JournalListViewImpl extends SocialAnxietyLayout implements JournalL
       Div div = new Div();
       div.getStyle().set("border", "1px solid black");
       div.getStyle().set("padding", "0.5em");
-      div.getStyle().set("width", "100%");
+      div.getStyle().set("width", "96%");
 
       H3 journalEntryTitle = new H3(journalEntry.getTitle());
       div.add(journalEntryTitle);
 
-      div.add(new Text(journalEntry.getContent()));
+      div.add(new Paragraph(journalEntry.getContent()));
 
       Button detailButton = new Button("Detail");
       detailButton.addClickListener(event -> listener.onJournalEntryClick(journalEntry.getId()));
