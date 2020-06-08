@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ChallengeDto;
 import ch.bfh.bti7081.s2020.blue.domain.repository.ChallengeCrudRepository;
+import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.PatientHasChallengeCrudRepository;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +21,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class ChallengeServiceUnitTest {
 
   @Mock
+  CurrentLoginRepository currentLoginRepository;
+
+  @Mock
   ChallengeCrudRepository challengeCrudRepositoryMock;
 
   @Mock
@@ -29,7 +33,7 @@ public class ChallengeServiceUnitTest {
 
   @Before
   public void beforeTestSetup() {
-    fixture = new ChallengeService(challengeCrudRepositoryMock, patientHasChallengeCrudRepositoryMock);
+    fixture = new ChallengeService(currentLoginRepository, challengeCrudRepositoryMock, patientHasChallengeCrudRepositoryMock);
   }
 
   @Test
