@@ -4,9 +4,9 @@ import ch.bfh.bti7081.s2020.blue.domain.Login;
 import ch.bfh.bti7081.s2020.blue.domain.Patient;
 import ch.bfh.bti7081.s2020.blue.domain.dto.UserDetailsDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
+import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.LoginCrudRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.PatientCrudRepository;
-import ch.bfh.bti7081.s2020.blue.util.SecurityUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,11 +30,13 @@ public class UserDetailsService {
 
   private final LoginCrudRepository loginCrudRepository;
   private final PatientCrudRepository patientCrudRepository;
+  private final CurrentLoginRepository currentLoginRepository;
 
   public UserDetailsService(LoginCrudRepository loginCrudRepository,
-      PatientCrudRepository patientCrudRepository) {
+      PatientCrudRepository patientCrudRepository, CurrentLoginRepository currentLoginRepository) {
     this.loginCrudRepository = loginCrudRepository;
     this.patientCrudRepository = patientCrudRepository;
+    this.currentLoginRepository = currentLoginRepository;
   }
 
   private List<ValidationError> validateUserDetailsDto(UserDetailsDto userDetailsDto) {
@@ -101,7 +103,7 @@ public class UserDetailsService {
 
   // Only the username is taken from the Security Context. As other user details might change.
   public Optional<UserDetailsDto> getCurrentUserDetails() {
-    Optional<String> username = SecurityUtils.getCurrentLogin().map(Login::getUsername);
+    Optional<String> username = currentLoginRepository.getCurrentLogin().map(Login::getUsername);
     Optional<Login> login = username.flatMap(loginCrudRepository::findById);
     return login.map(this::mapLoginToUserDetailsDto);
   }
@@ -110,7 +112,7 @@ public class UserDetailsService {
   public Collection<ValidationError> updateCurrentUserDetails(UserDetailsDto userDetails) {
     List<ValidationError> validationErrors = new ArrayList<>();
     // Override Username with Security context to prevent modification of other users data.
-    Optional<String> username = SecurityUtils.getCurrentLogin().map(Login::getUsername);
+    Optional<String> username = currentLoginRepository.getCurrentLogin().map(Login::getUsername);
     Optional<Login> login = username.flatMap(loginCrudRepository::findById);
 
     login.ifPresent(l -> {
@@ -118,13 +120,15 @@ public class UserDetailsService {
       l.getPatient().setGivenName(userDetails.getGivenName());
       l.getPatient().setSurname(userDetails.getSurname());
 
-      if (!userDetails.getEmail().equals(l.getEmail()) && !isEmailUnique(userDetails.getEmail())) {
-        validationErrors.add(new ValidationError(E_MAIL_ADDRESS_IS_ALREADY_IN_USE));
-      } else {
-        l.setEmail(userDetails.getEmail());
+      if (userDetails.getEmail() != null && !userDetails.getEmail().isEmpty()) {
+        if (!userDetails.getEmail().equals(l.getEmail()) && !isEmailUnique(userDetails.getEmail())) {
+          validationErrors.add(new ValidationError(E_MAIL_ADDRESS_IS_ALREADY_IN_USE));
+        } else {
+          l.setEmail(userDetails.getEmail());
+        }
       }
 
-      if (userDetails.getPassword() != null) {
+      if (userDetails.getPassword() != null && !userDetails.getPassword().isEmpty()) {
         if (!userDetails.getPassword().equals(userDetails.getRepeatPassword())) {
           validationErrors.add(new ValidationError(PASSWORDS_DID_NOT_MATCH));
         } else {

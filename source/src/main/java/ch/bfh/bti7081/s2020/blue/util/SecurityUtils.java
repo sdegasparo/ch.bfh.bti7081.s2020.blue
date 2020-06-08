@@ -1,9 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.util;
 
-import ch.bfh.bti7081.s2020.blue.domain.Login;
 import com.vaadin.flow.server.ServletHelper.RequestType;
 import com.vaadin.flow.shared.ApplicationConstants;
-import java.util.Optional;
 import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -39,13 +37,6 @@ public final class SecurityUtils {
     return authentication != null
         && !(authentication instanceof AnonymousAuthenticationToken)
         && authentication.isAuthenticated();
-  }
-
-  public static Optional<Login> getCurrentLogin() {
-    return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
-        .map(Authentication::getPrincipal)
-        .map(principal -> (Login) principal);
-
   }
 
 }
