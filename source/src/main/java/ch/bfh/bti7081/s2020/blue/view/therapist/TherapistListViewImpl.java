@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2020.blue.domain.Therapist;
 import ch.bfh.bti7081.s2020.blue.presenter.TherapistListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
@@ -16,6 +17,7 @@ import com.vaadin.flow.router.Route;
 import java.util.List;
 
 @Route("therapists")
+@CssImport("./styles.css")
 public class TherapistListViewImpl extends SocialAnxietyLayout implements TherapistListView {
 
   private final TherapistViewListener listener;

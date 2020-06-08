@@ -5,6 +5,7 @@ import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
@@ -14,7 +15,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import java.util.List;
+
 @Route("journal")
+@CssImport("./styles.css")
 public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
   private final JournalListListener listener;
@@ -30,6 +33,7 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
     H2 title = new H2("Meine Journaleinträge");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
+    newJournalEntryButton.getStyle().set("cursor", "pointer");
     newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
 
     horizontalLayout.add(title, newJournalEntryButton);
@@ -50,6 +54,7 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
 
       Button detailButton = new Button("Detail");
       detailButton.addClickListener(event -> listener.onJournalEntryClick(journalEntry.getId()));
+      detailButton.getStyle().set("cursor", "pointer");
       div.add(detailButton);
 
       add(div);
