@@ -11,13 +11,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import lombok.extern.log4j.Log4j2;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Log4j2
 @Service
 public class RegistrationService {
+
+  private static final Log log = LogFactory.getLog(RegistrationService.class);
 
   private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

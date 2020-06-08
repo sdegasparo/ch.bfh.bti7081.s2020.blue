@@ -3,19 +3,35 @@ package ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge;
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.domain.Patient;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class PatientHasChallengeId implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private Patient patient;
   private Challenge challenge;
+
+  public PatientHasChallengeId() {
+  }
+
+  public PatientHasChallengeId(final Patient patient, final Challenge challenge) {
+    this.patient = patient;
+    this.challenge = challenge;
+  }
+
+  public Patient getPatient() {
+    return this.patient;
+  }
+
+  public void setPatient(final Patient patient) {
+    this.patient = patient;
+  }
+
+  public Challenge getChallenge() {
+    return this.challenge;
+  }
+
+  public void setChallenge(final Challenge challenge) {
+    this.challenge = challenge;
+  }
 }
