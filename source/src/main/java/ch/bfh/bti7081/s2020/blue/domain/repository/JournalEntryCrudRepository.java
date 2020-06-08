@@ -18,10 +18,6 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
       nativeQuery = true)
   List<JournalEntry> findAllByCurrentUser();
 
-  @PreAuthorize("isAuthenticated()")
-  JournalEntry save(JournalEntry entry);
-
-
   @Modifying
   @Transactional
   @PreAuthorize("isAuthenticated()")

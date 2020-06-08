@@ -94,7 +94,6 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
     return formlayout;
   }
 
-
   @Override
   public void setParameter(BeforeEvent beforeEvent, Long id) {
     listener.afterViewInit(id);

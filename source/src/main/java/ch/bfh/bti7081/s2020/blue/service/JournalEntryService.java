@@ -29,8 +29,7 @@ public class JournalEntryService {
         .creationDate(new Date())
         .patient(login.getPatient())
         .build();
-    entry = journalEntryCrudRepository.save(entry);
-    return entry.getId();
+    return journalEntryCrudRepository.save(entry).getId();
   }
 
   public void update(JournalEntryDto journalEntryDto) {
