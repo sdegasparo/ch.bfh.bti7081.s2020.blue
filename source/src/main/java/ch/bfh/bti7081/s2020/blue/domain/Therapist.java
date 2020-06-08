@@ -25,8 +25,7 @@ public class Therapist {
   public Therapist() {
   }
 
-  public Therapist(final Long id, final String title, final String surname, final String givenName, final String street, final String place, final String information) {
-    this.id = id;
+  public Therapist(final String title, final String surname, final String givenName, final String street, final String place, final String information) {
     this.title = title;
     this.surname = surname;
     this.givenName = givenName;
@@ -37,10 +36,6 @@ public class Therapist {
 
   public Long getId() {
     return this.id;
-  }
-
-  public void setId(final Long id) {
-    this.id = id;
   }
 
   public String getTitle() {

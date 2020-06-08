@@ -21,15 +21,15 @@ public class PatientHasChallenge {
   @ManyToOne
   @JoinColumn(name = "challenge_id")
   private Challenge challenge;
-  private Boolean completed;
+
+  private Boolean completed = Boolean.FALSE;
 
   public PatientHasChallenge() {
   }
 
-  public PatientHasChallenge(final Patient patient, final Challenge challenge, final Boolean completed) {
+  public PatientHasChallenge(final Patient patient, final Challenge challenge) {
     this.patient = patient;
     this.challenge = challenge;
-    this.completed = completed;
   }
 
   public Patient getPatient() {

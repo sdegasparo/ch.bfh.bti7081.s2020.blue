@@ -50,10 +50,6 @@ public class Patient {
     return this.id;
   }
 
-  public void setId(final Long id) {
-    this.id = id;
-  }
-
   public String getSurname() {
     return this.surname;
   }

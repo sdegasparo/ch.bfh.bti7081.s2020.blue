@@ -4,9 +4,6 @@ public class ValidationError {
 
   String message;
 
-  public ValidationError() {
-  }
-
   public ValidationError(final String message) {
     this.message = message;
   }

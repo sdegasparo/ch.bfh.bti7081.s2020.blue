@@ -39,7 +39,8 @@ public class ChallengeServiceUnitTest {
   @Test
   public void findAllReturnsChallengeDtosSortedByNotAcceptedFirst() {
     Challenge challenge1 = new Challenge();
-    PatientHasChallenge patientHasChallenge = new PatientHasChallenge(null, challenge1, Boolean.TRUE);
+    PatientHasChallenge patientHasChallenge = new PatientHasChallenge(null, challenge1);
+    patientHasChallenge.setCompleted(Boolean.TRUE);
     challenge1.setPatients(Collections.singletonList(patientHasChallenge));
 
     Challenge challenge2 = new Challenge();

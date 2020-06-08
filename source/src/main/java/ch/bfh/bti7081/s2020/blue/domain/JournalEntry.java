@@ -41,16 +41,8 @@ public class JournalEntry {
     return this.id;
   }
 
-  public void setId(final Long id) {
-    this.id = id;
-  }
-
   public Date getCreationDate() {
     return this.creationDate;
-  }
-
-  public void setCreationDate(final Date creationDate) {
-    this.creationDate = creationDate;
   }
 
   public String getTitle() {

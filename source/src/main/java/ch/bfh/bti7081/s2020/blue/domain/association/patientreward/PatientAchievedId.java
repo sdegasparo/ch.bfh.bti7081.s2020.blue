@@ -7,16 +7,9 @@ import java.io.Serializable;
 public class PatientAchievedId implements Serializable {
 
   private static final long serialVersionUID = 1L;
+
   private Patient patient;
   private Achievement achievement;
-
-  public PatientAchievedId() {
-  }
-
-  public PatientAchievedId(final Patient patient, final Achievement achievement) {
-    this.patient = patient;
-    this.achievement = achievement;
-  }
 
   public Patient getPatient() {
     return this.patient;

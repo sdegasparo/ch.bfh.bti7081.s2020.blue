@@ -11,14 +11,6 @@ public class PatientHasChallengeId implements Serializable {
   private Patient patient;
   private Challenge challenge;
 
-  public PatientHasChallengeId() {
-  }
-
-  public PatientHasChallengeId(final Patient patient, final Challenge challenge) {
-    this.patient = patient;
-    this.challenge = challenge;
-  }
-
   public Patient getPatient() {
     return this.patient;
   }

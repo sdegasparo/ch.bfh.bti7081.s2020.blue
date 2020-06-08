@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.domain;
 
 import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Challenge {
   private String criteria;
 
   @OneToMany(mappedBy = "challenge")
-  private List<PatientHasChallenge> patients;
+  private List<PatientHasChallenge> patients = new ArrayList<>();
 
   public Challenge() {
   }
@@ -36,10 +37,6 @@ public class Challenge {
 
   public Long getId() {
     return this.id;
-  }
-
-  public void setId(final Long id) {
-    this.id = id;
   }
 
   public String getName() {

@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2020.blue.domain;
 
 import ch.bfh.bti7081.s2020.blue.domain.association.patientreward.PatientAchieved;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,28 +23,21 @@ public class Achievement {
   private String description;
 
   @OneToMany(mappedBy = "achievement")
-  private List<PatientAchieved> patients;
+  private List<PatientAchieved> patients = new ArrayList<>();
 
   @OneToMany(mappedBy = "achievement")
-  private List<Reward> rewardedBy;
+  private List<Reward> rewardedBy = new ArrayList<>();
 
   public Achievement() {
   }
 
-  public Achievement(final Long id, final String name, final String description, final List<PatientAchieved> patients, final List<Reward> rewardedBy) {
-    this.id = id;
+  public Achievement(final String name, final String description) {
     this.name = name;
     this.description = description;
-    this.patients = patients;
-    this.rewardedBy = rewardedBy;
   }
 
   public Long getId() {
     return this.id;
-  }
-
-  public void setId(final Long id) {
-    this.id = id;
   }
 
   public String getName() {

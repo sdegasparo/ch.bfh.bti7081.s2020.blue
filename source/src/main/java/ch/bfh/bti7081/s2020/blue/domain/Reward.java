@@ -29,20 +29,14 @@ public class Reward {
   public Reward() {
   }
 
-  public Reward(final Long id, final String name, final String description, final Integer points, final Achievement achievement) {
-    this.id = id;
+  public Reward(final String name, final String description, final Integer points) {
     this.name = name;
     this.description = description;
     this.points = points;
-    this.achievement = achievement;
   }
 
   public Long getId() {
     return this.id;
-  }
-
-  public void setId(final Long id) {
-    this.id = id;
   }
 
   public String getName() {

@@ -9,9 +9,6 @@ public class ChallengeDto {
   private Boolean accepted;
   private Boolean completed;
 
-  public ChallengeDto() {
-  }
-
   public ChallengeDto(final Long id, final String name, final String content, final String criteria, final Boolean accepted, final Boolean completed) {
     this.id = id;
     this.name = name;
