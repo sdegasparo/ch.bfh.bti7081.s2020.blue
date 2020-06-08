@@ -78,7 +78,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     formLayout.setColspan(infoText, 2);
 
     var save = new Button();
-    save.setText("Save");
+    save.setText("Registrieren");
     save.addClickListener(event -> listener.saveButtonClick());
     save.setMaxWidth("800px");
     save.setWidthFull();

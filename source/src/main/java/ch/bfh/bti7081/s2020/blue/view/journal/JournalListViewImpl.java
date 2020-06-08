@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
+import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
@@ -11,16 +12,20 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import java.util.List;
 
 @Route("journal")
-public class JournalListViewImpl extends VerticalLayout implements JournalListView {
+public class JournalListViewImpl extends SocialAnxietyLayout implements JournalListView {
 
-  private final JournalListListener listener;
+  private JournalListListener listener;
 
   public JournalListViewImpl(BeanInjector beanInjector) {
+    super(beanInjector);
+  }
+
+  @Override
+  protected void initializeView(BeanInjector beanInjector) {
     listener = new JournalListPresenter(this, beanInjector);
     listener.onInit();
   }
