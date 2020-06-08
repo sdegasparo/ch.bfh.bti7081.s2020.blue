@@ -21,15 +21,6 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
   @Modifying
   @Transactional
   @PreAuthorize("isAuthenticated()")
-  @Query(value = "insert into journal_entry"
-      + "         (title, content, creation_date, patient_id)"
-      + "         values (:#{#title}, :#{#content}, :#{#creationDate}, (select id from patient where login_username = :#{principal.username}))",
-      nativeQuery = true)
-  void create(String title, String content, Date creationDate);
-
-  @Modifying
-  @Transactional
-  @PreAuthorize("isAuthenticated()")
   @Query(value = "update journal_entry"
       + "         set title = :#{#title},"
       + "             content = :#{#content},"
@@ -37,4 +28,5 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
       + "         where journal_entry.id = :#{#id}",
       nativeQuery = true)
   void update(Long id, String title, String content, Date creationDate);
+
 }

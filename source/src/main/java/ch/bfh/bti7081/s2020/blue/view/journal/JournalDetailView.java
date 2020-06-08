@@ -8,6 +8,10 @@ public interface JournalDetailView {
 
   void routeToHomeView();
 
+  void showDeleteConfirmationDialog();
+
+  void hideDeleteConfirmationDialog();
+
   interface JournalDetailListener {
 
     void afterViewInit(Long id);
@@ -17,5 +21,9 @@ public interface JournalDetailView {
     void setModel(JournalEntryDto journalEntryDto);
 
     void onJournalEntryDelete();
+
+    void onJournalEntryDeleteConfirm();
+
+    void onJournalEntryDeleteCancel();
   }
 }

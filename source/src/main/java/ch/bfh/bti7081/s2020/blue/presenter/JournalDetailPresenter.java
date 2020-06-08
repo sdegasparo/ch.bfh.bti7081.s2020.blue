@@ -36,8 +36,19 @@ public class JournalDetailPresenter implements JournalDetailListener {
 
   @Override
   public void onJournalEntryDelete() {
+    view.showDeleteConfirmationDialog();
+  }
+
+  @Override
+  public void onJournalEntryDeleteConfirm() {
     journalEntryService.deleteById(model.getId());
+    view.hideDeleteConfirmationDialog();
     view.routeToHomeView();
+  }
+
+  @Override
+  public void onJournalEntryDeleteCancel() {
+    view.hideDeleteConfirmationDialog();
   }
 
   @Override
