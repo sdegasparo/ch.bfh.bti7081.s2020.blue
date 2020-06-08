@@ -30,6 +30,6 @@ public class ChallengeCrudRepositoryIntegrationTest {
     List<Challenge> challenges = challengeCrudRepository.findAllAssignedToCurrentUserAndNotCompleted();
 
     assertThat(challenges).hasSize(1);
-    assertThat(challengeCrudRepository.findAllInclusiveAccepted()).hasSize(5);
+    assertThat(challengeCrudRepository.findAllInclusiveAccepted()).size().isGreaterThan(1);
   }
 }
