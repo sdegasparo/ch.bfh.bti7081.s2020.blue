@@ -21,21 +21,6 @@ public class UserDetailPresenter implements UserDetailsListener {
   }
 
   @Override
-  public void saveButtonClick() {
-    view.showMessage("");
-    Collection<ValidationError> errors = userDetailsService.updateCurrentUserDetails(view.getUserDetails());
-    view.showMessage(
-        errors.stream()
-            .map(ValidationError::getMessage)
-            .collect(Collectors.joining(" ")));
-  }
-
-  @Override
-  public boolean isEmailUnique(String email) {
-    return userDetailsService.isEmailUnique(email);
-  }
-
-  @Override
   public void onInit() {
     Optional<UserDetailsDto> dto = userDetailsService.getCurrentUserDetails();
     if (dto.isPresent()) {
@@ -43,5 +28,19 @@ public class UserDetailPresenter implements UserDetailsListener {
     } else {
       view.navigateToLogin();
     }
+  }
+
+  @Override
+  public void saveButtonClick() {
+    view.showMessage("");
+    Collection<ValidationError> errors = userDetailsService.updateCurrentUserDetails(view.getUserDetails());
+    view.showMessage(errors.stream()
+        .map(ValidationError::getMessage)
+        .collect(Collectors.joining(" ")));
+  }
+
+  @Override
+  public boolean isEmailUnique(String email) {
+    return userDetailsService.isEmailUnique(email);
   }
 }

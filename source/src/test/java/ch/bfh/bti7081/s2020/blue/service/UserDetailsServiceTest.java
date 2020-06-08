@@ -3,10 +3,9 @@ package ch.bfh.bti7081.s2020.blue.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import ch.bfh.bti7081.s2020.blue.domain.Login;
 import ch.bfh.bti7081.s2020.blue.domain.Patient;
@@ -14,29 +13,28 @@ import ch.bfh.bti7081.s2020.blue.domain.dto.UserDetailsDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
 import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.LoginCrudRepository;
-import ch.bfh.bti7081.s2020.blue.domain.repository.PatientCrudRepository;
 import java.util.Collection;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class UserDetailsServiceTest {
 
-  UserDetailsService fixture;
+  @Mock
   LoginCrudRepository loginCrudRepositoryMock;
 
   @Mock
-  PatientCrudRepository patientCrudRepository;
-
   CurrentLoginRepository currentLoginRepository;
+
+  UserDetailsService fixture;
 
   @Before
   public void beforeTestSetup() {
-
-
     Login login = new Login();
     login.setUsername("testuser1");
     login.setEmail("test@test.local");
@@ -48,14 +46,15 @@ public class UserDetailsServiceTest {
     patient.setGivenName("Bester");
     login.setPatient(patient);
 
-    currentLoginRepository = mock(CurrentLoginRepository.class);
-    loginCrudRepositoryMock = mock(LoginCrudRepository.class);
-    when(loginCrudRepositoryMock.findById("testuser1")).thenReturn(Optional.ofNullable(login));
-    when(loginCrudRepositoryMock.findByEmail("test@test.local")).thenReturn(Optional.ofNullable(login));
+    doReturn(Optional.ofNullable(login))
+        .when(loginCrudRepositoryMock)
+        .findById("testuser1");
 
-    when(currentLoginRepository.getCurrentLogin()).thenReturn(Optional.ofNullable(login));
+    doReturn(Optional.ofNullable(login))
+        .when(currentLoginRepository)
+        .getCurrentLogin();
 
-    fixture = new UserDetailsService(loginCrudRepositoryMock, patientCrudRepository, currentLoginRepository);
+    fixture = new UserDetailsService(loginCrudRepositoryMock, currentLoginRepository);
   }
 
   @Test
@@ -95,7 +94,6 @@ public class UserDetailsServiceTest {
 
     assertEquals(null, argument.getValue().getPassword());
   }
-
 
   @Test
   public void shouldCallSave() {

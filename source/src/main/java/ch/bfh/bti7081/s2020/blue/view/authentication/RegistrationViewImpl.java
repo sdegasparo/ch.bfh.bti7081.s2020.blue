@@ -31,7 +31,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     var registerDto = new UserDetailsDto();
     binder.setBean(registerDto);
 
-    listener = new RegistrationPresenter(registerDto, this, beanInjector);
+    listener = new RegistrationPresenter(this, registerDto, beanInjector);
 
     var formLayout = new FormLayout();
     var registerTitle = new H2("Registrieren");
@@ -60,8 +60,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     var passwordRepeatField = new PasswordField();
     passwordRepeatField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(passwordRepeatField, "Passwort wiederholen");
-    binder
-        .forField(passwordRepeatField)
+    binder.forField(passwordRepeatField)
         .withValidator(repeat -> repeat.equals(passwordField.getValue()), "Passwörter stimmen nicht überein.")
         .bind(UserDetailsDto::getRepeatPassword, UserDetailsDto::setRepeatPassword);
 
@@ -79,7 +78,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     formLayout.setColspan(infoText, 2);
 
     var save = new Button();
-    save.setText("Save");
+    save.setText("Registrieren");
     save.addClickListener(e -> listener.saveButtonClick());
     save.setMaxWidth("800px");
     save.setWidthFull();

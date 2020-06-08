@@ -5,6 +5,7 @@ import ch.bfh.bti7081.s2020.blue.presenter.JournalCreatePresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
@@ -12,6 +13,7 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
 
 @Route("journal/create")
+@CssImport("./styles.css")
 public class JournalCreateViewImpl extends SocialAnxietyLayout implements JournalCreateView {
 
   private JournalCreatePresenter listener;
@@ -43,6 +45,7 @@ public class JournalCreateViewImpl extends SocialAnxietyLayout implements Journa
 
     Button createButton = new Button("Erstellen");
     createButton.addClickListener(event -> listener.onJournalEntryCreate());
+    createButton.getStyle().set("cursor", "pointer");
     formlayout.add(createButton);
 
     return formlayout;

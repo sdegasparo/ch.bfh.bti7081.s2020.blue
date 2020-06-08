@@ -12,8 +12,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 
-@CssImport("./styles.css")
 @Route("")
+@CssImport("./styles.css")
 @PWA(name = "Social Anxiety Application",
     shortName = "Social Anxiety App",
     description = "This is an application to help people with social anxiety.",

@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
 
   private final HeaderViewListener listener;
-  private final HorizontalLayout userLayout;
+
   HorizontalLayout layout = new HorizontalLayout();
 
   public HeaderViewImpl() {
@@ -25,7 +25,7 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     titleLayout.setWidth("33.33%");
     HorizontalLayout navLayout = new HorizontalLayout();
     navLayout.setWidth("33.33%");
-    userLayout = new HorizontalLayout();
+    HorizontalLayout userLayout = new HorizontalLayout();
     userLayout.setWidth("33.33%");
 
     Anchor title = new Anchor("home", "Social Anxiety Application");

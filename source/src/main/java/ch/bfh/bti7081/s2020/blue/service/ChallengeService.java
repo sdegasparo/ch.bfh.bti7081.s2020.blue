@@ -2,15 +2,16 @@ package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.domain.Login;
+import ch.bfh.bti7081.s2020.blue.domain.Patient;
 import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ChallengeDto;
 import ch.bfh.bti7081.s2020.blue.domain.repository.ChallengeCrudRepository;
+import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.PatientHasChallengeCrudRepository;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +21,12 @@ public class ChallengeService {
   private static final Comparator<? super ChallengeDto> CHALLENGE_INCLOMPLETED_FIRST = Comparator.comparing(ChallengeDto::getCompleted);
   private static final Comparator<? super ChallengeDto> CHALLENGE_NOT_ACCEPTED_FIRST = Comparator.comparing(ChallengeDto::getAccepted);
 
+  private final CurrentLoginRepository currentLoginRepository;
   private final ChallengeCrudRepository challengeCrudRepository;
   private final PatientHasChallengeCrudRepository patientHasChallengeCrudRepository;
 
-  public ChallengeService(ChallengeCrudRepository challengeCrudRepository,
-      PatientHasChallengeCrudRepository patientHasChallengeCrudRepository) {
+  public ChallengeService(CurrentLoginRepository currentLoginRepository, ChallengeCrudRepository challengeCrudRepository, PatientHasChallengeCrudRepository patientHasChallengeCrudRepository) {
+    this.currentLoginRepository = currentLoginRepository;
     this.challengeCrudRepository = challengeCrudRepository;
     this.patientHasChallengeCrudRepository = patientHasChallengeCrudRepository;
   }
@@ -64,8 +66,10 @@ public class ChallengeService {
 
   @Transactional
   public void completeChallenge(Long challengeId) {
-    Long patientId = ((Login) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-        .getPatient().getId();
+    Long patientId = currentLoginRepository.getCurrentLogin()
+        .map(Login::getPatient)
+        .map(Patient::getId)
+        .orElseThrow(() -> new IllegalArgumentException("User not authenticated!"));
     Optional<PatientHasChallenge> patientHasChallenge = patientHasChallengeCrudRepository
         .findByPatientIdAndChallengeId(patientId, challengeId);
     patientHasChallenge
