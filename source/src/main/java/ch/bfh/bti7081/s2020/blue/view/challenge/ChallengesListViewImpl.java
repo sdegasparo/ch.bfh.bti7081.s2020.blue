@@ -17,19 +17,19 @@ import com.vaadin.flow.router.Route;
 import java.util.List;
 
 @PageTitle("Challenges")
-@Route(ChallengesListViewImpl.ROUTE)
 @CssImport("./styles.css")
+@Route(ChallengesListViewImpl.ROUTE)
 public class ChallengesListViewImpl extends SocialAnxietyLayout implements ChallengesListView {
 
   static final String ROUTE = "challenges";
 
   private final ChallengesListViewListener listener;
 
-  private Div challengeHolder;
   private VerticalLayout content;
 
   public ChallengesListViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
+
     listener = new ChallengesListPresenter(this, beanInjector);
     listener.onInit();
   }
@@ -38,12 +38,12 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
   protected void initializeView(BeanInjector beanInjector) {
     content = new VerticalLayout();
     content.getStyle().set("width", "100%");
+
     add(content);
   }
 
   @Override
   public void display(List<ChallengeDto> challenges) {
-
     var heading = new H2("Alle Herausforderungen");
     heading.getStyle().set("margin", "0.2em");
     content.add(heading);

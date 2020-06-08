@@ -16,7 +16,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import java.util.List;
 
-@Route("journal")
 @CssImport("./styles.css")
 public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
@@ -72,4 +71,3 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
     getUI().ifPresent(ui -> ui.navigate(JournalDetailViewImpl.class, id));
   }
 }
-
