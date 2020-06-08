@@ -2,15 +2,14 @@ package ch.bfh.bti7081.s2020.blue.service;
 
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.domain.Login;
-import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
+import ch.bfh.bti7081.s2020.blue.domain.Patient;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ChallengeDto;
 import ch.bfh.bti7081.s2020.blue.domain.repository.ChallengeCrudRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.PatientHasChallengeCrudRepository;
+import ch.bfh.bti7081.s2020.blue.util.SecurityUtils;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,8 +70,13 @@ public class ChallengeService {
 
   @Transactional
   public void completeChallenge(Long challengeId) {
-    Long patientId = ((Login) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPatient().getId();
-    Optional<PatientHasChallenge> optionalPatientHasChallenge = patientHasChallengeCrudRepository.findByPatientIdAndChallengeId(patientId, challengeId);
-    optionalPatientHasChallenge.ifPresent((patientHasChallenge -> patientHasChallenge.setCompleted(Boolean.TRUE)));
+    Long patientId = SecurityUtils.getCurrentLogin()
+        .map(Login::getPatient)
+        .map(Patient::getId)
+        .orElseThrow(() -> new IllegalArgumentException("User not authenticated!"));
+
+    patientHasChallengeCrudRepository
+        .findByPatientIdAndChallengeId(patientId, challengeId)
+        .ifPresent(patientHasChallenge -> patientHasChallenge.setCompleted(Boolean.TRUE));
   }
 }

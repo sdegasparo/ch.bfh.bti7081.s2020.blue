@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl("/home", true)
 
         // Configure logout
-        .and().logout();
+        .and().logout().logoutUrl("/logout");
   }
 
   @Override
