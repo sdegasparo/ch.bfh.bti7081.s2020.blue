@@ -2,7 +2,7 @@ package ch.bfh.bti7081.s2020.blue.view.authentication;
 
 public interface RegistrationView {
 
-  void navigate(String route);
+  void navigateToLogin();
 
   void showMessage(String message);
 

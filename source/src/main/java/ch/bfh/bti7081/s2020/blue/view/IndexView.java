@@ -6,7 +6,6 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -37,16 +36,18 @@ public class IndexView extends VerticalLayout {
     container.add(leftLayout, rightLayout);
 
     H3 introductionTitle = new H3("Was ist soziale Phobie?");
-    Label introduction = new Label(
-        "Eine soziale Phobie ist eine Form der Angststörung und zeichnet sich durch eine anhaltende und unangemessen starke Angst vor sozialen Situationen aus, die weit über eine normale Schüchternheit oder Lampenfieber hinausgeht. Personen mit einer Sozialphobie befürchten, sich vor anderen zu blamieren, sich peinlich zu verhalten oder abgelehnt zu werden. Die Ursachen sind bisher nicht vollständig geklärt. Vermutlich spielen verschiedene Auslöser eine Rolle.");
-    Label introduction2 = new Label("Mit unserer Applikation können Sie spielerisch, Ihrer soziale Phobie den Kampf ansagen. Versuche deine Angst zu überwinden bei den Challenges und verdiene deine Rewards.");
-    H3 listTitle = new H3("Funktionen:");
+    Text introduction = new Text(
+        "Eine soziale Phobie ist eine Form der Angststörung und zeichnet sich durch eine anhaltende und unangemessen starke Angst vor sozialen Situationen aus, die weit über eine normale Schüchternheit oder Lampenfieber hinausgeht. Personen mit einer Sozialphobie befürchten, sich vor anderen zu blamieren, sich peinlich zu verhalten oder abgelehnt zu werden. Die Ursachen sind bisher nicht vollständig geklärt. Vermutlich spielen verschiedene Auslöser eine Rolle."
+            + "\n"
+            + "Mit unserer Applikation können Sie spielerisch, Ihrer soziale Phobie den Kampf ansagen. Versuche deine Angst zu überwinden bei den Challenges und verdiene deine Rewards.");
+
+    H3 functionalitiesTitle = new H3("Funktionen:");
     ListItem li1 = new ListItem("Challenges bestreiten");
     ListItem li2 = new ListItem("Rewards erhalten");
     ListItem li3 = new ListItem("Journaleintrag erstellen und bearbeiten");
     ListItem li4 = new ListItem("Therapisten finden");
 
-    leftLayout.add(introductionTitle, introduction, introduction2, listTitle, li1, li2, li3, li4);
+    leftLayout.add(introductionTitle, introduction, functionalitiesTitle, li1, li2, li3, li4);
 
     HorizontalLayout signUpLayout = new HorizontalLayout();
     Text signUpText = new Text("Haben Sie noch kein Benutzerkonto?");

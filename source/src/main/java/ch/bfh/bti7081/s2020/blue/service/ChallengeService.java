@@ -17,7 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ChallengeService {
 
-  private static final Comparator<? super ChallengeDto> CHALLENGE_INCOMPLETED_FIRST_COMPARATOR = (Comparator<ChallengeDto>) (challengeDto1, challengeDto2) -> challengeDto1.getCompleted().compareTo(challengeDto2.getCompleted());
+  private static final Comparator<? super ChallengeDto> CHALLENGE_INCLOMPLETED_FIRST = Comparator.comparing(ChallengeDto::getCompleted);
+  private static final Comparator<? super ChallengeDto> CHALLENGE_NOT_ACCEPTED_FIRST = Comparator.comparing(ChallengeDto::getAccepted);
 
   private final ChallengeCrudRepository challengeCrudRepository;
   private final PatientHasChallengeCrudRepository patientHasChallengeCrudRepository;
@@ -32,7 +33,8 @@ public class ChallengeService {
   public List<ChallengeDto> findAll() {
     return challengeCrudRepository.findAllInclusiveAccepted().stream()
         .map(this::challengeToDto)
-        .sorted(CHALLENGE_INCOMPLETED_FIRST_COMPARATOR)
+        .sorted(CHALLENGE_INCLOMPLETED_FIRST)
+        .sorted(CHALLENGE_NOT_ACCEPTED_FIRST)
         .collect(Collectors.toList());
   }
 

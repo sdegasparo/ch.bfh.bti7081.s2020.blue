@@ -53,7 +53,7 @@ public class RegisterPresenterUnitTest {
     fixture.saveButtonClick();
 
     // navigate to /login has to be called.
-    verify(registrationViewMock).navigate("login");
+    verify(registrationViewMock).navigateToLogin();
   }
 
   @Test

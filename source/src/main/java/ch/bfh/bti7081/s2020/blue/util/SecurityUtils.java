@@ -9,8 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * SecurityUtils takes care of all such static operations that have to do with security and querying
- * rights from different beans of the UI.
+ * SecurityUtils takes care of all such static operations that have to do with security and querying rights from different beans of the UI.
  */
 public final class SecurityUtils {
 
@@ -19,9 +18,7 @@ public final class SecurityUtils {
   }
 
   /**
-   * Tests if the request is an internal framework request. The test consists of checking if the
-   * request parameter is present and if its value is consistent with any of the request types
-   * know.
+   * Tests if the request is an internal framework request. The test consists of checking if the request parameter is present and if its value is consistent with any of the request types know.
    *
    * @param request {@link HttpServletRequest}
    * @return true if is an internal framework request. False otherwise.
@@ -33,8 +30,7 @@ public final class SecurityUtils {
   }
 
   /**
-   * Tests if some user is authenticated. As Spring Security always will create an {@link
-   * AnonymousAuthenticationToken} we have to ignore those tokens explicitly.
+   * Tests if some user is authenticated. As Spring Security always will create an {@link AnonymousAuthenticationToken} we have to ignore those tokens explicitly.
    */
   public static boolean isAuthenticatedUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

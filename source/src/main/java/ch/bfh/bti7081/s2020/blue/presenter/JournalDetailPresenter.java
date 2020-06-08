@@ -10,8 +10,8 @@ import ch.bfh.bti7081.s2020.blue.view.journal.JournalDetailView.JournalDetailLis
 public class JournalDetailPresenter implements JournalDetailListener {
 
   private final JournalDetailView view;
-  private JournalEntryDto model;
   private final JournalEntryService journalEntryService;
+  private JournalEntryDto model;
 
   public JournalDetailPresenter(JournalDetailView view, BeanInjector beanInjector) {
     this.view = view;

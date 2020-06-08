@@ -3,11 +3,14 @@ package ch.bfh.bti7081.s2020.blue.view.challenge;
 import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.presenter.CurrentChallengesListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
@@ -25,6 +28,11 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
     H2 title = new H2("Meine aktuellen Herausforderungen");
     add(title);
 
+    if (challenges.isEmpty()) {
+      Button acceptChallengeButton = new Button(new Icon(VaadinIcon.PLUS));
+      acceptChallengeButton.addClickListener(event -> listener.onChallengeAcceptClick());
+    }
+
     for (Challenge challenge : challenges) {
       Div div = new Div();
       div.getStyle().set("border", "1px solid black");
@@ -36,14 +44,19 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
       div.add(challengeTitle);
 
       div.add(new Text(challenge.getContent()));
+      div.add(new Html("<br />"));
 
-      Button detailButton = new Button("Detail");
+      Button detailButton = new Button("Details");
       detailButton.addClickListener(event -> listener.onChallengeClick(challenge.getId()));
       div.add(detailButton);
 
       add(div);
     }
+  }
 
+  @Override
+  public void navigateToChallenges() {
+    getUI().ifPresent(ui -> ui.navigate(ChallengesListViewImpl.class));
   }
 
   @Override
