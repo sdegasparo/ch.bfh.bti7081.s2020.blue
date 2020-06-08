@@ -4,11 +4,13 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.challenge.CurrentChallengesListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.journal.JournalListViewImpl;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route("home")
+@CssImport("./styles.css")
 public class HomeView extends SocialAnxietyLayout {
 
   public HomeView(BeanInjector beanInjector) {

@@ -3,9 +3,8 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
-import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
@@ -17,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import java.util.List;
 
+@CssImport("./styles.css")
 public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
   private JournalListListener listener;
@@ -33,6 +33,7 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
     title.getStyle().set("padding", "0.5em");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
+    newJournalEntryButton.getStyle().set("cursor", "pointer");
     newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
 
     horizontalLayout.add(title, newJournalEntryButton);
@@ -53,6 +54,7 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
 
       Button detailButton = new Button("Detail");
       detailButton.addClickListener(event -> listener.onJournalEntryClick(journalEntry.getId()));
+      detailButton.getStyle().set("cursor", "pointer");
       div.add(detailButton);
 
       add(div);
@@ -69,4 +71,3 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
     getUI().ifPresent(ui -> ui.navigate(JournalDetailViewImpl.class, id));
   }
 }
-
