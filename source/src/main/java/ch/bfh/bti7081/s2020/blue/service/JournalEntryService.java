@@ -34,8 +34,7 @@ public class JournalEntryService {
 
   public void update(JournalEntryDto journalEntryDto) {
     journalEntryCrudRepository
-        .update(journalEntryDto.getId(), journalEntryDto.getTitle(), journalEntryDto.getContent(),
-            new Date());
+        .update(journalEntryDto.getId(), journalEntryDto.getTitle(), journalEntryDto.getContent(), new Date());
   }
 
   public JournalEntry findById(Long id) {
