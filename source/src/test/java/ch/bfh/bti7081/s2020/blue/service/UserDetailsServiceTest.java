@@ -35,16 +35,19 @@ public class UserDetailsServiceTest {
 
   @Before
   public void beforeTestSetup() {
-    Login login = new Login();
-    login.setUsername("testuser1");
-    login.setEmail("test@test.local");
-    login.setIsBlocked(false);
-    login.setIsEnabled(true);
-    login.setPassword(null);
-    Patient patient = new Patient();
-    patient.setSurname("Tester");
-    patient.setGivenName("Bester");
-    login.setPatient(patient);
+    Patient patient = Patient.builder()
+        .surname("Tester")
+        .givenName("Bester")
+        .build();
+
+    Login login = Login.builder()
+        .username("testuser1")
+        .email("test@test.local")
+        .isBlocked(false)
+        .isEnabled(true)
+        .password(null)
+        .patient(patient)
+        .build();
 
     doReturn(Optional.ofNullable(login))
         .when(loginCrudRepositoryMock)
