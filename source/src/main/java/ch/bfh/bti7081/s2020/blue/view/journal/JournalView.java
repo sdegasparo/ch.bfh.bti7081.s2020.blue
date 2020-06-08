@@ -5,7 +5,4 @@ import java.util.List;
 
 public interface JournalView {
 
-  interface JournalListener {
-
-  }
 }
