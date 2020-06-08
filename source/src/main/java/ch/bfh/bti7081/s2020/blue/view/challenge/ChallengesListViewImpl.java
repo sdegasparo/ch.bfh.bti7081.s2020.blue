@@ -10,7 +10,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
   private final ChallengesListViewListener listener;
 
   private Div challengeHolder;
-  private Div content;
+  private VerticalLayout content;
 
   public ChallengesListViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
@@ -34,24 +34,24 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    content = new Div();
+    content = new VerticalLayout();
+    content.getStyle().set("width", "100%");
     add(content);
   }
 
   @Override
   public void display(List<ChallengeDto> challenges) {
-    content.add(new H2("Alle Herausforderungen"));
+
+    var heading = new H2("Alle Herausforderungen");
+    heading.getStyle().set("margin", "0.2em");
+    content.add(heading);
 
     for (ChallengeDto challenge : challenges) {
       Div div = new Div();
-
       div.getStyle().set("border", "1px solid black");
       div.getStyle().set("padding", "0.5em");
-      div.getStyle().set("width", "100%");
-
-      H3 title = new H3(challenge.getName());
-      div.add(title);
-
+      div.getStyle().set("margin", "0.2em");
+      div.setWidth("94%");
       div.add(new Text(challenge.getContent()));
       div.add(new Html("<br />"));
 
@@ -69,7 +69,7 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
         div.add(challengeCompletedPlaceholderButton);
       }
 
-      content.add(div);
+      content.addAndExpand(div);
     }
   }
 
