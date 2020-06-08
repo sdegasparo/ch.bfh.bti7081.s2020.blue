@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2020.blue.domain.Challenge;
 import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ChallengeDto;
 import ch.bfh.bti7081.s2020.blue.domain.repository.ChallengeCrudRepository;
+import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.PatientHasChallengeCrudRepository;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +21,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class ChallengeServiceUnitTest {
 
   @Mock
+  CurrentLoginRepository currentLoginRepository;
+
+  @Mock
   ChallengeCrudRepository challengeCrudRepositoryMock;
 
   @Mock
@@ -29,19 +33,16 @@ public class ChallengeServiceUnitTest {
 
   @Before
   public void beforeTestSetup() {
-    fixture = new ChallengeService(challengeCrudRepositoryMock, patientHasChallengeCrudRepositoryMock);
+    fixture = new ChallengeService(currentLoginRepository, challengeCrudRepositoryMock, patientHasChallengeCrudRepositoryMock);
   }
 
   @Test
   public void findAllReturnsChallengeDtosSortedByNotAcceptedFirst() {
-    Challenge challenge1 = Challenge.builder()
-        .patients(Collections.singletonList(PatientHasChallenge.builder()
-            .completed(Boolean.TRUE)
-            .build()))
-        .build();
+    Challenge challenge1 = new Challenge();
+    PatientHasChallenge patientHasChallenge = new PatientHasChallenge(null, challenge1, Boolean.TRUE);
+    challenge1.setPatients(Collections.singletonList(patientHasChallenge));
 
-    Challenge challenge2 = Challenge.builder()
-        .build();
+    Challenge challenge2 = new Challenge();
 
     doReturn(List.of(challenge1, challenge2))
         .when(challengeCrudRepositoryMock)

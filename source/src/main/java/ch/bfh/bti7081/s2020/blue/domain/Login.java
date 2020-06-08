@@ -26,8 +26,8 @@ public class Login implements UserDetails {
   @Column(columnDefinition = "BPCHAR(60)")
   private String password;
 
-  private Boolean isEnabled;
-  private Boolean isBlocked;
+  private Boolean isEnabled = Boolean.TRUE;
+  private Boolean isBlocked = Boolean.FALSE;
 
   @OneToOne(mappedBy = "login", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   private Patient patient;
@@ -35,17 +35,10 @@ public class Login implements UserDetails {
   public Login() {
   }
 
-  public Login(final String username, final String email, final String password, final Boolean isEnabled, final Boolean isBlocked, final Patient patient) {
+  public Login(final String username, final String email, final String password) {
     this.username = username;
     this.email = email;
     this.password = password;
-    this.isEnabled = isEnabled;
-    this.isBlocked = isBlocked;
-    this.patient = patient;
-  }
-
-  public static Login.LoginBuilder builder() {
-    return new Login.LoginBuilder();
   }
 
   @Override
@@ -119,57 +112,5 @@ public class Login implements UserDetails {
 
   public void setPatient(final Patient patient) {
     this.patient = patient;
-  }
-
-  public static class LoginBuilder {
-
-    private String username;
-    private String email;
-    private String password;
-    private Boolean isEnabled;
-    private Boolean isBlocked;
-    private Patient patient;
-
-    LoginBuilder() {
-    }
-
-    public Login.LoginBuilder username(final String username) {
-      this.username = username;
-      return this;
-    }
-
-    public Login.LoginBuilder email(final String email) {
-      this.email = email;
-      return this;
-    }
-
-    public Login.LoginBuilder password(final String password) {
-      this.password = password;
-      return this;
-    }
-
-    public Login.LoginBuilder isEnabled(final Boolean isEnabled) {
-      this.isEnabled = isEnabled;
-      return this;
-    }
-
-    public Login.LoginBuilder isBlocked(final Boolean isBlocked) {
-      this.isBlocked = isBlocked;
-      return this;
-    }
-
-    public Login.LoginBuilder patient(final Patient patient) {
-      this.patient = patient;
-      return this;
-    }
-
-    public Login build() {
-      return new Login(this.username, this.email, this.password, this.isEnabled, this.isBlocked, this.patient);
-    }
-
-    @Override
-    public java.lang.String toString() {
-      return "Login.LoginBuilder(username=" + this.username + ", email=" + this.email + ", password=" + this.password + ", isEnabled=" + this.isEnabled + ", isBlocked=" + this.isBlocked + ", patient=" + this.patient + ")";
-    }
   }
 }

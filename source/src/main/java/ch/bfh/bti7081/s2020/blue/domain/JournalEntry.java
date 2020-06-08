@@ -31,16 +31,10 @@ public class JournalEntry {
   public JournalEntry() {
   }
 
-  public JournalEntry(final Long id, final Date creationDate, final String title, final String content, final Patient patient) {
-    this.id = id;
-    this.creationDate = creationDate;
+  public JournalEntry(final String title, final String content, final Patient patient) {
     this.title = title;
     this.content = content;
     this.patient = patient;
-  }
-
-  public static JournalEntry.JournalEntryBuilder builder() {
-    return new JournalEntry.JournalEntryBuilder();
   }
 
   public Long getId() {
@@ -81,51 +75,5 @@ public class JournalEntry {
 
   public void setPatient(final Patient patient) {
     this.patient = patient;
-  }
-
-  public static class JournalEntryBuilder {
-
-    private Long id;
-    private Date creationDate;
-    private String title;
-    private String content;
-    private Patient patient;
-
-    JournalEntryBuilder() {
-    }
-
-    public JournalEntry.JournalEntryBuilder id(final Long id) {
-      this.id = id;
-      return this;
-    }
-
-    public JournalEntry.JournalEntryBuilder creationDate(final Date creationDate) {
-      this.creationDate = creationDate;
-      return this;
-    }
-
-    public JournalEntry.JournalEntryBuilder title(final String title) {
-      this.title = title;
-      return this;
-    }
-
-    public JournalEntry.JournalEntryBuilder content(final String content) {
-      this.content = content;
-      return this;
-    }
-
-    public JournalEntry.JournalEntryBuilder patient(final Patient patient) {
-      this.patient = patient;
-      return this;
-    }
-
-    public JournalEntry build() {
-      return new JournalEntry(this.id, this.creationDate, this.title, this.content, this.patient);
-    }
-
-    @Override
-    public java.lang.String toString() {
-      return "JournalEntry.JournalEntryBuilder(id=" + this.id + ", creationDate=" + this.creationDate + ", title=" + this.title + ", content=" + this.content + ", patient=" + this.patient + ")";
-    }
   }
 }

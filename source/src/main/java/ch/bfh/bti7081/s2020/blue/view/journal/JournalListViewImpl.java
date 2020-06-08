@@ -3,29 +3,24 @@ package ch.bfh.bti7081.s2020.blue.view.journal;
 import ch.bfh.bti7081.s2020.blue.domain.JournalEntry;
 import ch.bfh.bti7081.s2020.blue.presenter.JournalListPresenter;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
-import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
-@Route("journal")
-public class JournalListViewImpl extends SocialAnxietyLayout implements JournalListView {
+@CssImport("./styles.css")
+public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
-  private JournalListListener listener;
+  private final JournalListListener listener;
 
   public JournalListViewImpl(BeanInjector beanInjector) {
-    super(beanInjector);
-  }
-
-  @Override
-  protected void initializeView(BeanInjector beanInjector) {
     listener = new JournalListPresenter(this, beanInjector);
     listener.onInit();
   }
@@ -34,8 +29,10 @@ public class JournalListViewImpl extends SocialAnxietyLayout implements JournalL
   public void display(List<JournalEntry> journalEntries) {
     HorizontalLayout horizontalLayout = new HorizontalLayout();
     H2 title = new H2("Meine Journaleinträge");
+    title.getStyle().set("padding", "0.5em");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
+    newJournalEntryButton.getStyle().set("cursor", "pointer");
     newJournalEntryButton.addClickListener(event -> listener.onJournalEntryAddClick());
 
     horizontalLayout.add(title, newJournalEntryButton);
@@ -45,17 +42,18 @@ public class JournalListViewImpl extends SocialAnxietyLayout implements JournalL
 
     for (JournalEntry journalEntry : journalEntries) {
       Div div = new Div();
-      div.getStyle().set("border", "1px solid black");
-      div.getStyle().set("padding", "0.5em");
-      div.getStyle().set("width", "100%");
+      div.getStyle().set("border", "1px solid black")
+          .set("padding", "0.5em")
+          .set("width", "96%");
 
       H3 journalEntryTitle = new H3(journalEntry.getTitle());
       div.add(journalEntryTitle);
 
-      div.add(new Text(journalEntry.getContent()));
+      div.add(new Paragraph(journalEntry.getContent()));
 
       Button detailButton = new Button("Detail");
       detailButton.addClickListener(event -> listener.onJournalEntryClick(journalEntry.getId()));
+      detailButton.getStyle().set("cursor", "pointer");
       div.add(detailButton);
 
       add(div);
@@ -72,4 +70,3 @@ public class JournalListViewImpl extends SocialAnxietyLayout implements JournalL
     getUI().ifPresent(ui -> ui.navigate(JournalDetailViewImpl.class, journalId));
   }
 }
-

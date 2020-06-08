@@ -37,9 +37,7 @@ public class DatabaseUserDetailsServiceUnitTest {
   public void loadUserByUsernameReturnsUserDetails() {
     final String username = "username";
 
-    Login login = Login.builder()
-        .username(username)
-        .build();
+    Login login = new Login(username, null, null);
 
     doReturn(Optional.of(login))
         .when(loginCrudRepositoryMock)

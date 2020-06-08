@@ -4,9 +4,6 @@ import com.vaadin.flow.server.ServletHelper.RequestType;
 import com.vaadin.flow.shared.ApplicationConstants;
 import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * SecurityUtils takes care of all such static operations that have to do with security and querying rights from different beans of the UI.
@@ -27,15 +24,5 @@ public final class SecurityUtils {
     final String parameterValue = request.getParameter(ApplicationConstants.REQUEST_TYPE_PARAMETER);
     return parameterValue != null
         && Stream.of(RequestType.values()).anyMatch(requestType -> requestType.getIdentifier().equals(parameterValue));
-  }
-
-  /**
-   * Tests if some user is authenticated. As Spring Security always will create an {@link AnonymousAuthenticationToken} we have to ignore those tokens explicitly.
-   */
-  public static boolean isAuthenticatedUser() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    return authentication != null
-        && !(authentication instanceof AnonymousAuthenticationToken)
-        && authentication.isAuthenticated();
   }
 }

@@ -1,5 +1,8 @@
 package ch.bfh.bti7081.s2020.blue.view.layout.header;
 
+import ch.bfh.bti7081.s2020.blue.presenter.HeaderPresenter;
+import ch.bfh.bti7081.s2020.blue.view.authentication.UserDetailsViewImpl;
+import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
@@ -10,7 +13,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
 
+  private final HeaderViewListener listener;
+  private final HorizontalLayout layout;
+
   public HeaderViewImpl() {
+    listener = new HeaderPresenter(this);
+    listener.onInit();
+
     HorizontalLayout titleLayout = new HorizontalLayout();
     titleLayout.setWidth("33.33%");
     HorizontalLayout navLayout = new HorizontalLayout();
@@ -52,7 +61,7 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     userLayout.add(userIcon, currentUser);
     userLayout.setJustifyContentMode(JustifyContentMode.END);
 
-    HorizontalLayout layout = new HorizontalLayout();
+    layout = new HorizontalLayout();
     layout.add(titleLayout, navLayout, userLayout);
     layout.setWidth("100%");
     layout.getStyle()
@@ -60,9 +69,28 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
         .set("border-bottom", "3px solid #000000")
         .set("padding-bottom", "0.5em");
 
+    ContextMenu contextMenu = new ContextMenu();
+    contextMenu.setTarget(userLayout);
+    contextMenu.setOpenOnClick(true);
+    contextMenu.addItem("Abmelden", event -> listener.onLogoutClick());
+    contextMenu.addItem("Profil bearbeiten", event -> listener.onEditProfileClick());
+  }
+
+  @Override
+  public void display() {
     add(layout);
     setWidth("100%");
     setMargin(false);
     setPadding(false);
+  }
+
+  @Override
+  public void navigateToLogout() {
+    getUI().ifPresent(ui -> ui.getPage().setLocation("/logout"));
+  }
+
+  @Override
+  public void navigateToUserDetails() {
+    getUI().ifPresent(ui -> ui.navigate(UserDetailsViewImpl.class));
   }
 }

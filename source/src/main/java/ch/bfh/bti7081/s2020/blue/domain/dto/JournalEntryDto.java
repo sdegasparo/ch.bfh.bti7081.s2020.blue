@@ -15,10 +15,6 @@ public class JournalEntryDto {
     this.content = content;
   }
 
-  public static JournalEntryDto.JournalEntryDtoBuilder builder() {
-    return new JournalEntryDto.JournalEntryDtoBuilder();
-  }
-
   public Long getId() {
     return this.id;
   }
@@ -41,39 +37,5 @@ public class JournalEntryDto {
 
   public void setContent(final String content) {
     this.content = content;
-  }
-
-  public static class JournalEntryDtoBuilder {
-
-    private Long id;
-    private String title;
-    private String content;
-
-    JournalEntryDtoBuilder() {
-    }
-
-    public JournalEntryDto.JournalEntryDtoBuilder id(final Long id) {
-      this.id = id;
-      return this;
-    }
-
-    public JournalEntryDto.JournalEntryDtoBuilder title(final String title) {
-      this.title = title;
-      return this;
-    }
-
-    public JournalEntryDto.JournalEntryDtoBuilder content(final String content) {
-      this.content = content;
-      return this;
-    }
-
-    public JournalEntryDto build() {
-      return new JournalEntryDto(this.id, this.title, this.content);
-    }
-
-    @Override
-    public java.lang.String toString() {
-      return "JournalEntryDto.JournalEntryDtoBuilder(id=" + this.id + ", title=" + this.title + ", content=" + this.content + ")";
-    }
   }
 }

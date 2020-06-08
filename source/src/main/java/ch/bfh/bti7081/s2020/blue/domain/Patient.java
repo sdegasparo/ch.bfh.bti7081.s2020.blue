@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2020.blue.domain;
 
 import ch.bfh.bti7081.s2020.blue.domain.association.patientchallenge.PatientHasChallenge;
 import ch.bfh.bti7081.s2020.blue.domain.association.patientreward.PatientAchieved;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,29 +29,21 @@ public class Patient {
   private Login login;
 
   @OneToMany(mappedBy = "patient")
-  private List<PatientHasChallenge> challenges;
+  private List<PatientHasChallenge> challenges = new ArrayList<>();
 
   @OneToMany(mappedBy = "patient")
-  private List<PatientAchieved> achievements;
+  private List<PatientAchieved> achievements = new ArrayList<>();
 
   @OneToMany(mappedBy = "patient")
-  private List<JournalEntry> journalEntries;
+  private List<JournalEntry> journalEntries = new ArrayList<>();
 
   public Patient() {
   }
 
-  public Patient(final Long id, final String surname, final String givenName, final Login login, final List<PatientHasChallenge> challenges, final List<PatientAchieved> achievements, final List<JournalEntry> journalEntries) {
-    this.id = id;
+  public Patient(final String surname, final String givenName, final Login login) {
     this.surname = surname;
     this.givenName = givenName;
     this.login = login;
-    this.challenges = challenges;
-    this.achievements = achievements;
-    this.journalEntries = journalEntries;
-  }
-
-  public static Patient.PatientBuilder builder() {
-    return new Patient.PatientBuilder();
   }
 
   public Long getId() {
@@ -107,63 +100,5 @@ public class Patient {
 
   public void setJournalEntries(final List<JournalEntry> journalEntries) {
     this.journalEntries = journalEntries;
-  }
-
-  public static class PatientBuilder {
-
-    private Long id;
-    private String surname;
-    private String givenName;
-    private Login login;
-    private List<PatientHasChallenge> challenges;
-    private List<PatientAchieved> achievements;
-    private List<JournalEntry> journalEntries;
-
-    PatientBuilder() {
-    }
-
-    public Patient.PatientBuilder id(final Long id) {
-      this.id = id;
-      return this;
-    }
-
-    public Patient.PatientBuilder surname(final String surname) {
-      this.surname = surname;
-      return this;
-    }
-
-    public Patient.PatientBuilder givenName(final String givenName) {
-      this.givenName = givenName;
-      return this;
-    }
-
-    public Patient.PatientBuilder login(final Login login) {
-      this.login = login;
-      return this;
-    }
-
-    public Patient.PatientBuilder challenges(final List<PatientHasChallenge> challenges) {
-      this.challenges = challenges;
-      return this;
-    }
-
-    public Patient.PatientBuilder achievements(final List<PatientAchieved> achievements) {
-      this.achievements = achievements;
-      return this;
-    }
-
-    public Patient.PatientBuilder journalEntries(final List<JournalEntry> journalEntries) {
-      this.journalEntries = journalEntries;
-      return this;
-    }
-
-    public Patient build() {
-      return new Patient(this.id, this.surname, this.givenName, this.login, this.challenges, this.achievements, this.journalEntries);
-    }
-
-    @Override
-    public java.lang.String toString() {
-      return "Patient.PatientBuilder(id=" + this.id + ", surname=" + this.surname + ", givenName=" + this.givenName + ", login=" + this.login + ", challenges=" + this.challenges + ", achievements=" + this.achievements + ", journalEntries=" + this.journalEntries + ")";
-    }
   }
 }

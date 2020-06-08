@@ -3,7 +3,7 @@ package ch.bfh.bti7081.s2020.blue.domain.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
-public class RegisterDto {
+public class UserDetailsDto {
 
   @Size(min = 4, max = 128)
   private String username;
@@ -22,12 +22,13 @@ public class RegisterDto {
 
   @Size(min = 2, max = 128)
   private String givenName;
+
   private String message;
 
-  public RegisterDto() {
+  public UserDetailsDto() {
   }
 
-  public RegisterDto(final String username, final String password, final String repeatPassword, final String email, final String surname, final String givenName, final String message) {
+  public UserDetailsDto(final String username, final String password, final String repeatPassword, final String email, final String surname, final String givenName, final String message) {
     this.username = username;
     this.password = password;
     this.repeatPassword = repeatPassword;
