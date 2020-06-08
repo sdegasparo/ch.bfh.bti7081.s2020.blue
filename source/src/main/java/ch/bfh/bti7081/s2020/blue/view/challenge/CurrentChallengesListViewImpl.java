@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
@@ -14,6 +15,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.List;
 
+@CssImport("./styles.css")
 public class CurrentChallengesListViewImpl extends VerticalLayout implements CurrentChallengesListView {
 
   private final CurrentChallengesListViewListener listener;
@@ -47,6 +49,7 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
       div.add(new Html("<br />"));
 
       Button detailButton = new Button("Details");
+      detailButton.getStyle().set("cursor", "pointer");
       detailButton.addClickListener(event -> listener.onChallengeClick(challenge.getId()));
       div.add(detailButton);
 

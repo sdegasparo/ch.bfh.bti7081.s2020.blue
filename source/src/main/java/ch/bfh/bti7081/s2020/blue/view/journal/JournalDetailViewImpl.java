@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.HomeView;
 import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
@@ -18,8 +19,8 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
 @Route("journal")
-public class JournalDetailViewImpl extends SocialAnxietyLayout implements JournalDetailView,
-    HasUrlParameter<Long> {
+@CssImport("./styles.css")
+public class JournalDetailViewImpl extends SocialAnxietyLayout implements JournalDetailView, HasUrlParameter<Long> {
 
   private JournalDetailListener listener;
   private Div content;
@@ -57,7 +58,9 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
     messageLabel.setText("Löschen?");
 
     Button confirmButton = new Button("Bestätigen", event -> listener.onJournalEntryDeleteConfirm());
+    confirmButton.getStyle().set("cursor", "pointer");
     Button cancelButton = new Button("Abbrechen", event -> listener.onJournalEntryDeleteCancel());
+    cancelButton.getStyle().set("cursor", "pointer");
 
     deleteConfirmationDialog.add(messageLabel, confirmButton, cancelButton);
     deleteConfirmationDialog.open();

@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2020.blue.view.layout.SocialAnxietyLayout;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -16,6 +17,7 @@ import com.vaadin.flow.router.Route;
 import java.util.List;
 
 @PageTitle("Challenges")
+@CssImport("./styles.css")
 @Route(ChallengesListViewImpl.ROUTE)
 public class ChallengesListViewImpl extends SocialAnxietyLayout implements ChallengesListView {
 
@@ -57,14 +59,17 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
 
       if (!challenge.getAccepted()) {
         Button acceptChallengeButton = new Button("Akzeptieren");
+        acceptChallengeButton.getStyle().set("cursor", "pointer");
         acceptChallengeButton.addClickListener(event -> listener.onChallengeAccept(challenge.getId()));
         div.add(acceptChallengeButton);
       } else if (!challenge.getCompleted()) {
         Button challengeCompletedPlaceholderButton = new Button("Akzeptiert");
+        challengeCompletedPlaceholderButton.getStyle().set("cursor", "pointer");
         challengeCompletedPlaceholderButton.setEnabled(false);
         div.add(challengeCompletedPlaceholderButton);
       } else {
         Button challengeCompletedPlaceholderButton = new Button("Abgeschlossen");
+        challengeCompletedPlaceholderButton.getStyle().set("cursor", "pointer");
         challengeCompletedPlaceholderButton.setEnabled(false);
         div.add(challengeCompletedPlaceholderButton);
       }

@@ -9,6 +9,7 @@ import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Label;
@@ -17,6 +18,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
 @Route("challenge")
+@CssImport("./styles.css")
 public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements ChallengeDetailView, HasUrlParameter<Long> {
 
   private final ChallengeDetailViewListener listener;
@@ -55,6 +57,7 @@ public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements Chal
     Checkbox criteriaCheckbox = new Checkbox(challenge.getCriteria());
 
     Button challengeCompleteButton = new Button("Herausforderung abschliessen");
+    challengeCompleteButton.getStyle().set("cursor", "pointer");
     challengeCompleteButton.addClickListener(event -> listener.onChallengeComplete(challenge.getId()));
 
     contentDiv.add(name, content, newSeparator(), criteriaCheckbox, newSeparator(), challengeCompleteButton);
