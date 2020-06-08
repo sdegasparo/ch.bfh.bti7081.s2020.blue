@@ -4,8 +4,8 @@ import ch.bfh.bti7081.s2020.blue.domain.Login;
 import ch.bfh.bti7081.s2020.blue.domain.Patient;
 import ch.bfh.bti7081.s2020.blue.domain.dto.UserDetailsDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
+import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.LoginCrudRepository;
-import ch.bfh.bti7081.s2020.blue.util.SecurityUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,13 +14,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
-import lombok.extern.log4j.Log4j2;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Log4j2
 @Service
 public class UserDetailsService {
+
+  private static final Log log = LogFactory.getLog(UserDetailsService.class);
 
   public static final String PASSWORDS_DID_NOT_MATCH = "Passwords did not match.";
   public static final String E_MAIL_ADDRESS_IS_ALREADY_IN_USE = "E-Mail address is already in use.";
@@ -29,9 +31,11 @@ public class UserDetailsService {
   private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   private final LoginCrudRepository loginCrudRepository;
+  private final CurrentLoginRepository currentLoginRepository;
 
-  public UserDetailsService(LoginCrudRepository loginCrudRepository) {
+  public UserDetailsService(LoginCrudRepository loginCrudRepository, CurrentLoginRepository currentLoginRepository) {
     this.loginCrudRepository = loginCrudRepository;
+    this.currentLoginRepository = currentLoginRepository;
   }
 
   private List<ValidationError> validateUserDetailsDto(UserDetailsDto userDetailsDto) {
@@ -102,7 +106,7 @@ public class UserDetailsService {
 
   // Only the username is taken from the Security Context. As other user details might change.
   public Optional<UserDetailsDto> getCurrentUserDetails() {
-    Optional<String> username = SecurityUtils.getCurrentLogin().map(Login::getUsername);
+    Optional<String> username = currentLoginRepository.getCurrentLogin().map(Login::getUsername);
     Optional<Login> login = username.flatMap(loginCrudRepository::findById);
 
     return login.map(this::mapLoginToUserDetailsDto);
@@ -112,7 +116,7 @@ public class UserDetailsService {
   public Collection<ValidationError> updateCurrentUserDetails(UserDetailsDto userDetails) {
     List<ValidationError> validationErrors = new ArrayList<>();
     // Override Username with Security context to prevent modification of other users data.
-    String username = SecurityUtils.getCurrentLogin()
+    String username = currentLoginRepository.getCurrentLogin()
         .map(Login::getUsername)
         .orElseThrow(() -> new IllegalArgumentException("User not authenticated!"));
     Login login = loginCrudRepository.findById(username)
@@ -122,13 +126,15 @@ public class UserDetailsService {
     login.getPatient().setGivenName(userDetails.getGivenName());
     login.getPatient().setSurname(userDetails.getSurname());
 
-    if (!userDetails.getEmail().equals(login.getEmail()) && !isEmailUnique(userDetails.getEmail())) {
-      validationErrors.add(new ValidationError(E_MAIL_ADDRESS_IS_ALREADY_IN_USE));
-    } else {
-      login.setEmail(userDetails.getEmail());
+    if (userDetails.getEmail() != null && !userDetails.getEmail().isEmpty()) {
+      if (!userDetails.getEmail().equals(login.getEmail()) && !isEmailUnique(userDetails.getEmail())) {
+        validationErrors.add(new ValidationError(E_MAIL_ADDRESS_IS_ALREADY_IN_USE));
+      } else {
+        login.setEmail(userDetails.getEmail());
+      }
     }
 
-    if (userDetails.getPassword() != null) {
+    if (userDetails.getPassword() != null && !userDetails.getPassword().isEmpty()) {
       if (!userDetails.getPassword().equals(userDetails.getRepeatPassword())) {
         validationErrors.add(new ValidationError(PASSWORDS_DID_NOT_MATCH));
       } else {
@@ -141,7 +147,6 @@ public class UserDetailsService {
     }
 
     return validationErrors;
-
   }
 
   public boolean isUsernameUnique(String username) {
