@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JournalEntryService {
 
-  public JournalEntryCrudRepository journalEntryCrudRepository;
+  public final JournalEntryCrudRepository journalEntryCrudRepository;
 
   public JournalEntryService(JournalEntryCrudRepository journalEntryCrudRepository) {
     this.journalEntryCrudRepository = journalEntryCrudRepository;
@@ -34,7 +34,7 @@ public class JournalEntryService {
 
   public void update(JournalEntryDto journalEntryDto) {
     journalEntryCrudRepository
-        .update(journalEntryDto.getId(), journalEntryDto.getTitle(), journalEntryDto.getContent(), new Date());
+        .updateById(journalEntryDto.getId(), journalEntryDto.getTitle(), journalEntryDto.getContent(), new Date());
   }
 
   public JournalEntry findById(Long id) {

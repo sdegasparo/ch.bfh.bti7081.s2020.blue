@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2020.blue.domain;
 
-import java.util.Optional;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,8 +36,4 @@ public class Reward {
 
   @ManyToOne
   private Achievement achievement;
-
-  public Optional<Achievement> getAchievement() {
-    return Optional.ofNullable(achievement);
-  }
 }

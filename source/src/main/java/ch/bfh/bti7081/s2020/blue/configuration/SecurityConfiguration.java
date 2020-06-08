@@ -38,7 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         // Restrict access to our application.
         .and().authorizeRequests()
-        // TODO Add publicly accessible routes here.
         .antMatchers("/", "/login", "/register").permitAll()
 
         // Allow all flow internal requests.
@@ -78,11 +77,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   }
 
   @Override
-  protected void configure(AuthenticationManagerBuilder auth) {
-    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    authProvider.setUserDetailsService(databaseUserDetailsService);
-    authProvider.setPasswordEncoder(Login.PASSWORD_ENCODER);
+  protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) {
+    DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+    daoAuthenticationProvider.setUserDetailsService(databaseUserDetailsService);
+    daoAuthenticationProvider.setPasswordEncoder(Login.PASSWORD_ENCODER);
 
-    auth.authenticationProvider(authProvider);
+    authenticationManagerBuilder.authenticationProvider(daoAuthenticationProvider);
   }
 }

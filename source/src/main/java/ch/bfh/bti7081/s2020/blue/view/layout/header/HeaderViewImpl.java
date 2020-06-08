@@ -14,8 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
 
   private final HeaderViewListener listener;
-
-  HorizontalLayout layout = new HorizontalLayout();
+  private final HorizontalLayout layout;
 
   public HeaderViewImpl() {
     listener = new HeaderPresenter(this);
@@ -53,18 +52,20 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     navLayout.setJustifyContentMode(JustifyContentMode.AROUND);
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Label currentUser = new Label(
-        authentication.getName());
+    Label currentUser = new Label(authentication.getName());
     Icon userIcon = new Icon(VaadinIcon.USER);
     userIcon.setColor(color);
-    userIcon.getStyle().set("width", "1em")
+    userIcon.getStyle()
+        .set("width", "1em")
         .set("height", "2em");
     userLayout.add(userIcon, currentUser);
     userLayout.setJustifyContentMode(JustifyContentMode.END);
 
+    layout = new HorizontalLayout();
     layout.add(titleLayout, navLayout, userLayout);
     layout.setWidth("100%");
-    layout.getStyle().set("font-size", "1.5em")
+    layout.getStyle()
+        .set("font-size", "1.5em")
         .set("border-bottom", "3px solid #000000")
         .set("padding-bottom", "0.5em");
 

@@ -13,7 +13,6 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.Route;
 import java.util.List;
 
 @CssImport("./styles.css")
@@ -43,9 +42,9 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
 
     for (JournalEntry journalEntry : journalEntries) {
       Div div = new Div();
-      div.getStyle().set("border", "1px solid black");
-      div.getStyle().set("padding", "0.5em");
-      div.getStyle().set("width", "96%");
+      div.getStyle().set("border", "1px solid black")
+          .set("padding", "0.5em")
+          .set("width", "96%");
 
       H3 journalEntryTitle = new H3(journalEntry.getTitle());
       div.add(journalEntryTitle);
@@ -67,7 +66,7 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
   }
 
   @Override
-  public void navigateToDetailView(Long id) {
-    getUI().ifPresent(ui -> ui.navigate(JournalDetailViewImpl.class, id));
+  public void navigateToDetailView(Long journalId) {
+    getUI().ifPresent(ui -> ui.navigate(JournalDetailViewImpl.class, journalId));
   }
 }

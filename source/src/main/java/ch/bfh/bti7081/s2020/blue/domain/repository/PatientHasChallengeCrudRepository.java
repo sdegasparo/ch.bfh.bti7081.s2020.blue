@@ -19,11 +19,12 @@ public interface PatientHasChallengeCrudRepository extends CrudRepository<Patien
   @PreAuthorize("isAuthenticated()")
   @Query(value = "insert into patient_has_challenge"
       + "         (patient_id, challenge_id)"
-      + "         values (("
-      + "           select id from patient"
-      + "             where login_username = :#{principal.username}"
-      + "), :#{#challengeId})", nativeQuery = true)
-  int assignToCurrentUser(@Param("challengeId") Long challengeId);
+      + "             values (("
+      + "                  select id from patient"
+      + "                      where login_username = :#{principal.username}"
+      + "             ), :#{#challengeId})",
+      nativeQuery = true)
+  void assignToCurrentUser(@Param("challengeId") Long challengeId);
 
   Optional<PatientHasChallenge> findByPatientIdAndChallengeId(Long patientId, Long challengeId);
 }

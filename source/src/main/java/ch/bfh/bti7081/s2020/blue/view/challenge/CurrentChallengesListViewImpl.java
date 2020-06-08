@@ -37,9 +37,9 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
 
     for (Challenge challenge : challenges) {
       Div div = new Div();
-      div.getStyle().set("border", "1px solid black");
-      div.getStyle().set("padding", "0.5em");
-      div.getStyle().set("width", "100%");
+      div.getStyle().set("border", "1px solid black")
+          .set("padding", "0.5em")
+          .set("width", "100%");
 
       H3 challengeTitle = new H3(challenge.getName());
       challengeTitle.getStyle().set("margin", "0"); // TODO should be in global styles
@@ -63,7 +63,7 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
   }
 
   @Override
-  public void navigateToDetailView(Long id) {
-    getUI().ifPresent(ui -> ui.navigate(ChallengeDetailViewImpl.class, id));
+  public void navigateToDetailView(Long challengeId) {
+    getUI().ifPresent(ui -> ui.navigate(ChallengeDetailViewImpl.class, challengeId));
   }
 }

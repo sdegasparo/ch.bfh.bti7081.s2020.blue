@@ -50,9 +50,10 @@ public class ChallengesListViewImpl extends SocialAnxietyLayout implements Chall
 
     for (ChallengeDto challenge : challenges) {
       Div div = new Div();
-      div.getStyle().set("border", "1px solid black");
-      div.getStyle().set("padding", "0.5em");
-      div.getStyle().set("margin", "0.2em");
+      div.getStyle()
+          .set("border", "1px solid black")
+          .set("padding", "0.5em")
+          .set("margin", "0.2em");
       div.setWidth("94%");
       div.add(new Text(challenge.getContent()));
       div.add(new Html("<br />"));

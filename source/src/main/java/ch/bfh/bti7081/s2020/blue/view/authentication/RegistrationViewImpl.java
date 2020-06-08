@@ -67,8 +67,8 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     var emailField = new EmailField();
     emailField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(emailField, "E-Mail");
-    binder.forField(emailField).withValidator(new EmailValidator(
-        "Dies ist keine gültige E-Mail-Adresse."))
+    binder.forField(emailField)
+        .withValidator(new EmailValidator("Dies ist keine gültige E-Mail-Adresse."))
         .withValidator(listener::isEmailUnique, "Diese E-Mail-Adresse wird bereits verwendet.")
         .bind(UserDetailsDto::getEmail, UserDetailsDto::setEmail);
 
@@ -79,7 +79,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
 
     var save = new Button();
     save.setText("Registrieren");
-    save.addClickListener(e -> listener.saveButtonClick());
+    save.addClickListener(event -> listener.saveButtonClick());
     save.setMaxWidth("800px");
     save.setWidthFull();
 
