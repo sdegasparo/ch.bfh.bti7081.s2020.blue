@@ -21,9 +21,10 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
   @PreAuthorize("isAuthenticated()")
   JournalEntry save(JournalEntry entry);
 
-  @PreAuthorize("isAuthenticated()")
+
   @Modifying
   @Transactional
+  @PreAuthorize("isAuthenticated()")
   @Query(value = "update journal_entry"
       + "         set title = :#{#title},"
       + "             content = :#{#content},"
