@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2020.blue.view.layout.header;
 
-import ch.bfh.bti7081.s2020.blue.presenter.HeaderPresenter;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
@@ -11,13 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
 
-  private final HeaderViewListener listener;
-  HorizontalLayout layout = new HorizontalLayout();
-
   public HeaderViewImpl() {
-    listener = new HeaderPresenter(this);
-    listener.onInit();
-
     HorizontalLayout titleLayout = new HorizontalLayout();
     titleLayout.setWidth("33.33%");
     HorizontalLayout navLayout = new HorizontalLayout();
@@ -50,24 +43,23 @@ public class HeaderViewImpl extends HorizontalLayout implements HeaderView {
     navLayout.setJustifyContentMode(JustifyContentMode.AROUND);
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    Label currentUser = new Label(
-        authentication.getName());
+    Label currentUser = new Label(authentication.getName());
     Icon userIcon = new Icon(VaadinIcon.USER);
     userIcon.setColor(color);
-    userIcon.getStyle().set("width", "1em")
+    userIcon.getStyle()
+        .set("width", "1em")
         .set("height", "2em");
     userLayout.add(userIcon, currentUser);
     userLayout.setJustifyContentMode(JustifyContentMode.END);
 
+    HorizontalLayout layout = new HorizontalLayout();
     layout.add(titleLayout, navLayout, userLayout);
     layout.setWidth("100%");
-    layout.getStyle().set("font-size", "1.5em")
+    layout.getStyle()
+        .set("font-size", "1.5em")
         .set("border-bottom", "3px solid #000000")
         .set("padding-bottom", "0.5em");
-  }
 
-  @Override
-  public void display() {
     add(layout);
     setWidth("100%");
     setMargin(false);

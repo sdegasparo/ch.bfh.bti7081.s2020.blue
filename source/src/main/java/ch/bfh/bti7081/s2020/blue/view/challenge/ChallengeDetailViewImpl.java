@@ -20,7 +20,6 @@ import com.vaadin.flow.router.Route;
 public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements ChallengeDetailView, HasUrlParameter<Long> {
 
   private final ChallengeDetailViewListener listener;
-
   private Div contentDiv;
   private Label loadingLabel;
 

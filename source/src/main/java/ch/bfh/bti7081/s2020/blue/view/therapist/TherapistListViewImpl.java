@@ -18,12 +18,12 @@ import java.util.List;
 @Route("therapists")
 public class TherapistListViewImpl extends SocialAnxietyLayout implements TherapistListView {
 
-  private final TherapistViewListener listener;
   private Div content;
 
   public TherapistListViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
-    listener = new TherapistListPresenter(this, beanInjector);
+
+    TherapistViewListener listener = new TherapistListPresenter(this, beanInjector);
     listener.onInit();
   }
 

@@ -17,7 +17,6 @@ public class HomeView extends SocialAnxietyLayout {
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-
     HorizontalLayout layout = new HorizontalLayout();
     layout.setWidth("100%");
 

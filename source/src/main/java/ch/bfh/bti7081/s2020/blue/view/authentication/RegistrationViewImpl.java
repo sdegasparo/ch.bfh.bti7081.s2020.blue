@@ -31,7 +31,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     var registerDto = new RegisterDto();
     binder.setBean(registerDto);
 
-    listener = new RegistrationPresenter(registerDto, this, beanInjector);
+    listener = new RegistrationPresenter(this, registerDto, beanInjector);
 
     var formLayout = new FormLayout();
     var registerTitle = new H2("Registrieren");
@@ -60,16 +60,15 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
     var passwordRepeatField = new PasswordField();
     passwordRepeatField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(passwordRepeatField, "Passwort wiederholen");
-    binder
-        .forField(passwordRepeatField)
+    binder.forField(passwordRepeatField)
         .withValidator(repeat -> repeat.equals(passwordField.getValue()), "Passwörter stimmen nicht überein.")
         .bind(RegisterDto::getRepeatPassword, RegisterDto::setRepeatPassword);
 
     var emailField = new EmailField();
     emailField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(emailField, "E-Mail");
-    binder.forField(emailField).withValidator(new EmailValidator(
-        "Dies ist keine gültige E-Mail-Adresse."))
+    binder.forField(emailField)
+        .withValidator(new EmailValidator("Dies ist keine gültige E-Mail-Adresse."))
         .withValidator(listener::isEmailUnique, "Diese E-Mail-Adresse wird bereits verwendet.")
         .bind(RegisterDto::getEmail, RegisterDto::setEmail);
 
@@ -80,7 +79,7 @@ public class RegistrationViewImpl extends VerticalLayout implements Registration
 
     var save = new Button();
     save.setText("Save");
-    save.addClickListener(e -> listener.saveButtonClick());
+    save.addClickListener(event -> listener.saveButtonClick());
     save.setMaxWidth("800px");
     save.setWidthFull();
 

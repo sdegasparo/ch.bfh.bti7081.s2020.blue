@@ -56,11 +56,9 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
     Label messageLabel = new Label();
     messageLabel.setText("Löschen?");
 
-    Button confirmButton = new Button("Confirm", event ->
-        listener.onJournalEntryDeleteConfirm()
+    Button confirmButton = new Button("Confirm", event -> listener.onJournalEntryDeleteConfirm()
     );
-    Button cancelButton = new Button("Cancel",
-        event -> listener.onJournalEntryDeleteCancel());
+    Button cancelButton = new Button("Cancel", event -> listener.onJournalEntryDeleteCancel());
 
     deleteConfirmationDialog.add(messageLabel, confirmButton, cancelButton);
     deleteConfirmationDialog.open();

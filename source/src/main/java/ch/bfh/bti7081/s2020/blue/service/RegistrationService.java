@@ -5,7 +5,6 @@ import ch.bfh.bti7081.s2020.blue.domain.Patient;
 import ch.bfh.bti7081.s2020.blue.domain.dto.RegisterDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
 import ch.bfh.bti7081.s2020.blue.domain.repository.LoginCrudRepository;
-import ch.bfh.bti7081.s2020.blue.domain.repository.PatientCrudRepository;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -23,20 +22,15 @@ public class RegistrationService {
   private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   private final LoginCrudRepository loginCrudRepository;
-  private final PatientCrudRepository patientCrudRepository;
 
-  public RegistrationService(LoginCrudRepository loginCrudRepository,
-      PatientCrudRepository patientCrudRepository) {
+  public RegistrationService(LoginCrudRepository loginCrudRepository) {
     this.loginCrudRepository = loginCrudRepository;
-    this.patientCrudRepository = patientCrudRepository;
   }
 
   public Collection<ValidationError> register(RegisterDto registerDto) {
-    Set<ConstraintViolation<RegisterDto>> violations = Validation.buildDefaultValidatorFactory()
-        .getValidator().validate(registerDto);
+    Set<ConstraintViolation<RegisterDto>> violations = Validation.buildDefaultValidatorFactory().getValidator().validate(registerDto);
     List<ValidationError> validationErrors = violations.stream()
-        .map(violation -> new ValidationError(
-            String.format("%s: %s", violation.getPropertyPath(), violation.getMessage())))
+        .map(violation -> new ValidationError(String.format("%s: %s", violation.getPropertyPath(), violation.getMessage())))
         .collect(Collectors.toList());
 
     if (!isUsernameUnique(registerDto.getUsername())) {
@@ -68,9 +62,11 @@ public class RegistrationService {
       patient.setLogin(login);
       loginCrudRepository.save(login);
     } else {
-      log.info(String.format("Could not register '%s' [%s] due to %s", registerDto.getUsername(),
+      log.info(String.format("Could not register '%s' [%s] due to %s",
+          registerDto.getUsername(),
           registerDto.getEmail(),
-          validationErrors.stream().map(ValidationError::getMessage)
+          validationErrors.stream()
+              .map(ValidationError::getMessage)
               .collect(Collectors.joining(", "))));
     }
 

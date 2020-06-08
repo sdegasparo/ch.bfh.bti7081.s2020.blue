@@ -14,7 +14,13 @@ import org.springframework.stereotype.Repository;
 public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry, Long> {
 
   @PreAuthorize("isAuthenticated()")
-  @Query(value = "select * from journal_entry where journal_entry.patient_id = (select id from patient where login_username = :#{principal.username})",
+  @Query(value = "select *"
+      + " from journal_entry"
+      + "         where journal_entry.patient_id = ("
+      + "             select id"
+      + "              from patient"
+      + "                  where login_username = :#{principal.username}"
+      + "         )",
       nativeQuery = true)
   List<JournalEntry> findAllByCurrentUser();
 
@@ -22,11 +28,10 @@ public interface JournalEntryCrudRepository extends CrudRepository<JournalEntry,
   @Transactional
   @PreAuthorize("isAuthenticated()")
   @Query(value = "update journal_entry"
-      + "         set title = :#{#title},"
-      + "             content = :#{#content},"
-      + "             creation_date = :#{#creationDate}"
-      + "         where journal_entry.id = :#{#id}",
+      + "        set title = :#{#title},"
+      + "            content = :#{#content},"
+      + "            creation_date = :#{#creationDate}"
+      + "        where journal_entry.id = :#{#id}",
       nativeQuery = true)
-  void update(Long id, String title, String content, Date creationDate);
-
+  void updateById(Long id, String title, String content, Date creationDate);
 }

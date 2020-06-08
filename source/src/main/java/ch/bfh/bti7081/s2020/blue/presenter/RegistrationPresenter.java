@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 
 public class RegistrationPresenter implements RegisterViewListener {
 
-  private final RegisterDto model;
   private final RegistrationView view;
+  private final RegisterDto model;
   private final RegistrationService registrationService;
 
-  public RegistrationPresenter(RegisterDto model, RegistrationView view, BeanInjector beanInjector) {
-    this.model = model;
+  public RegistrationPresenter(RegistrationView view, RegisterDto model, BeanInjector beanInjector) {
     this.view = view;
+    this.model = model;
     this.registrationService = beanInjector.get(RegistrationService.class);
   }
 
@@ -32,7 +32,6 @@ public class RegistrationPresenter implements RegisterViewListener {
           errors.stream()
               .map(ValidationError::getMessage)
               .collect(Collectors.joining(" ")));
-
     }
   }
 

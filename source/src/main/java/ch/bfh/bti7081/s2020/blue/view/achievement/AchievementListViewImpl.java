@@ -8,10 +8,8 @@ import com.vaadin.flow.router.Route;
 @Route("achievements")
 public class AchievementListViewImpl extends VerticalLayout implements AchievementListView {
 
-  private final AchievementListViewListener listener;
-
   public AchievementListViewImpl() {
-    listener = new AchievementListPresenter(this);
+    AchievementListViewListener listener = new AchievementListPresenter(this);
     listener.onInit();
   }
 

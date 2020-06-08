@@ -23,8 +23,7 @@ public class ChallengeService {
   private final ChallengeCrudRepository challengeCrudRepository;
   private final PatientHasChallengeCrudRepository patientHasChallengeCrudRepository;
 
-  public ChallengeService(ChallengeCrudRepository challengeCrudRepository,
-      PatientHasChallengeCrudRepository patientHasChallengeCrudRepository) {
+  public ChallengeService(ChallengeCrudRepository challengeCrudRepository, PatientHasChallengeCrudRepository patientHasChallengeCrudRepository) {
     this.challengeCrudRepository = challengeCrudRepository;
     this.patientHasChallengeCrudRepository = patientHasChallengeCrudRepository;
   }
@@ -44,9 +43,17 @@ public class ChallengeService {
         .name(challenge.getName())
         .content(challenge.getContent())
         .criteria(challenge.getCriteria())
-        .accepted(challenge.getPatients() != null && !challenge.getPatients().isEmpty())
-        .completed(challenge.getPatients() != null && !challenge.getPatients().isEmpty() && challenge.getPatients().get(0).getCompleted())
+        .accepted(isAccepted(challenge))
+        .completed(isCompleted(challenge))
         .build();
+  }
+
+  private boolean isAccepted(Challenge challenge) {
+    return challenge.getPatients() != null && !challenge.getPatients().isEmpty();
+  }
+
+  private boolean isCompleted(Challenge challenge) {
+    return challenge.getPatients() != null && !challenge.getPatients().isEmpty() && challenge.getPatients().get(0).getCompleted();
   }
 
   public List<Challenge> findAllAssignedToCurrentUser() {
@@ -64,11 +71,8 @@ public class ChallengeService {
 
   @Transactional
   public void completeChallenge(Long challengeId) {
-    Long patientId = ((Login) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-        .getPatient().getId();
-    Optional<PatientHasChallenge> patientHasChallenge = patientHasChallengeCrudRepository
-        .findByPatientIdAndChallengeId(patientId, challengeId);
-    patientHasChallenge
-        .ifPresent((patientHasChallenge1 -> patientHasChallenge1.setCompleted(Boolean.TRUE)));
+    Long patientId = ((Login) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPatient().getId();
+    Optional<PatientHasChallenge> optionalPatientHasChallenge = patientHasChallengeCrudRepository.findByPatientIdAndChallengeId(patientId, challengeId);
+    optionalPatientHasChallenge.ifPresent((patientHasChallenge -> patientHasChallenge.setCompleted(Boolean.TRUE)));
   }
 }

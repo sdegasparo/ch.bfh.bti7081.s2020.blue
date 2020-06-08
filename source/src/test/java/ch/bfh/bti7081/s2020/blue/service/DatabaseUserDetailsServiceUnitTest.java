@@ -21,7 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class DatabaseUserDetailsServiceUnitTest {
 
   @Rule
-  public ExpectedException expectedException = ExpectedException.none();
+  public final ExpectedException expectedException = ExpectedException.none();
 
   @Mock
   LoginCrudRepository loginCrudRepositoryMock;

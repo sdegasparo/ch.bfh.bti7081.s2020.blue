@@ -60,7 +60,7 @@ public class CurrentChallengesListViewImpl extends VerticalLayout implements Cur
   }
 
   @Override
-  public void navigateToDetailView(Long id) {
-    getUI().ifPresent(ui -> ui.navigate(ChallengeDetailViewImpl.class, id));
+  public void navigateToDetailView(Long challengeId) {
+    getUI().ifPresent(ui -> ui.navigate(ChallengeDetailViewImpl.class, challengeId));
   }
 }
