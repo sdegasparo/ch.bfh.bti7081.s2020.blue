@@ -21,9 +21,10 @@ import com.vaadin.flow.router.Route;
 @CssImport("./styles.css")
 public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements ChallengeDetailView, HasUrlParameter<Long> {
 
-  private final ChallengeDetailViewListener listener;
   private Div contentDiv;
   private Label loadingLabel;
+
+  private final ChallengeDetailViewListener listener;
 
   public ChallengeDetailViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
@@ -33,10 +34,11 @@ public class ChallengeDetailViewImpl extends SocialAnxietyLayout implements Chal
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-    contentDiv = new Div();
     loadingLabel = new Label("Loading challenge..");
 
+    contentDiv = new Div();
     contentDiv.add(loadingLabel);
+
     add(contentDiv);
   }
 
