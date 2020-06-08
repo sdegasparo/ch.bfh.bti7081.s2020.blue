@@ -14,4 +14,14 @@ public class HeaderPresenter implements HeaderView.HeaderViewListener {
   public void onInit() {
     view.display();
   }
+
+  @Override
+  public void onLogoutClick() {
+    view.navigateToLogout();
+  }
+
+  @Override
+  public void onEditProfileClick() {
+    view.navigateToUserDetails();
+  }
 }
