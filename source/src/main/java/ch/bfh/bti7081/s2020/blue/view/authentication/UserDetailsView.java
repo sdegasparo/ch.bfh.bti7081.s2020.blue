@@ -14,10 +14,10 @@ public interface UserDetailsView {
 
   interface UserDetailsListener {
 
+    void onInit();
+
     void saveButtonClick();
 
     boolean isEmailUnique(String email);
-
-    void onInit();
   }
 }

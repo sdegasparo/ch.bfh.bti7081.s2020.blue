@@ -40,7 +40,7 @@ public class RegisterPresenterUnitTest {
         .when(beanInjectorMock)
         .get(UserDetailsService.class);
 
-    fixture = new RegistrationPresenter(userDetailsDtoMock, registrationViewMock, beanInjectorMock);
+    fixture = new RegistrationPresenter(registrationViewMock, userDetailsDtoMock, beanInjectorMock);
   }
 
   @Test

@@ -18,14 +18,15 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
-@PageTitle("Profil")
 @Route("user")
+@PageTitle("Profil")
 @RouteAlias("profile")
 public class UserDetailsViewImpl extends SocialAnxietyLayout implements UserDetailsView {
 
   private Label infoText;
-  private Binder<UserDetailsDto> binder;
+
   private UserDetailsListener listener;
+  private Binder<UserDetailsDto> binder;
 
   public UserDetailsViewImpl(BeanInjector beanInjector) {
     super(beanInjector);
@@ -33,7 +34,6 @@ public class UserDetailsViewImpl extends SocialAnxietyLayout implements UserDeta
 
   @Override
   protected void initializeView(BeanInjector beanInjector) {
-
     listener = new UserDetailPresenter(this, beanInjector);
     listener.onInit();
   }
@@ -61,8 +61,7 @@ public class UserDetailsViewImpl extends SocialAnxietyLayout implements UserDeta
     var passwordRepeatField = new PasswordField();
     passwordRepeatField.setValueChangeMode(ValueChangeMode.EAGER);
     formLayout.addFormItem(passwordRepeatField, "Passwort wiederholen");
-    binder
-        .forField(passwordRepeatField)
+    binder.forField(passwordRepeatField)
         .withValidator(repeat -> repeat.equals(passwordField.getValue()), "Passwörter stimmen nicht überein.")
         .bind(UserDetailsDto::getRepeatPassword, UserDetailsDto::setRepeatPassword);
 
@@ -109,6 +108,4 @@ public class UserDetailsViewImpl extends SocialAnxietyLayout implements UserDeta
   public void navigateToLogin() {
     getUI().ifPresent(ui -> ui.navigate(LoginViewImpl.class));
   }
-
-
 }
