@@ -12,20 +12,15 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import java.util.List;
 
-@Route("journal")
-public class JournalListViewImpl extends SocialAnxietyLayout implements JournalListView {
+public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
   private JournalListListener listener;
 
   public JournalListViewImpl(BeanInjector beanInjector) {
-    super(beanInjector);
-  }
-
-  @Override
-  protected void initializeView(BeanInjector beanInjector) {
     listener = new JournalListPresenter(this, beanInjector);
     listener.onInit();
   }
