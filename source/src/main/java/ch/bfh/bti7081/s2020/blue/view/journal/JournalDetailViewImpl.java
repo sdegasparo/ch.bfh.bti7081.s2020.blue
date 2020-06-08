@@ -78,10 +78,10 @@ public class JournalDetailViewImpl extends SocialAnxietyLayout implements Journa
     formlayout.addFormItem(title, "Titel");
     binder.bind(title, JournalEntryDto::getTitle, JournalEntryDto::setTitle);
 
-    TextArea content = new TextArea();
-    content.getStyle().set("minHeight", "150px");
-    formlayout.addFormItem(content, "Inhalt");
-    binder.bind(content, JournalEntryDto::getContent, JournalEntryDto::setContent);
+    TextArea journalEntryContent = new TextArea();
+    journalEntryContent.getStyle().set("minHeight", "150px");
+    formlayout.addFormItem(journalEntryContent, "Inhalt");
+    binder.bind(journalEntryContent, JournalEntryDto::getContent, JournalEntryDto::setContent);
 
     Button deleteButton = new Button("Löschen");
     deleteButton.addClickListener(event -> listener.onJournalEntryDelete());
