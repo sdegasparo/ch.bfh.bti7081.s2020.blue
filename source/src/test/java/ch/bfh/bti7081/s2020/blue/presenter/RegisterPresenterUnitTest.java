@@ -4,9 +4,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-import ch.bfh.bti7081.s2020.blue.domain.dto.RegisterDto;
+import ch.bfh.bti7081.s2020.blue.domain.dto.UserDetailsDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
-import ch.bfh.bti7081.s2020.blue.service.RegistrationService;
+import ch.bfh.bti7081.s2020.blue.service.UserDetailsService;
 import ch.bfh.bti7081.s2020.blue.util.BeanInjector;
 import ch.bfh.bti7081.s2020.blue.view.authentication.RegistrationView;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class RegisterPresenterUnitTest {
 
   @Mock
-  private RegisterDto registerDtoMock;
+  private UserDetailsDto userDetailsDtoMock;
 
   @Mock
   private RegistrationView registrationViewMock;
@@ -30,24 +30,24 @@ public class RegisterPresenterUnitTest {
   private BeanInjector beanInjectorMock;
 
   @Mock
-  private RegistrationService registrationServiceMock;
+  private UserDetailsService userDetailsServiceMock;
 
   private RegistrationPresenter fixture;
 
   @Before
   public void beforeTestSetup() {
-    doReturn(registrationServiceMock)
+    doReturn(userDetailsServiceMock)
         .when(beanInjectorMock)
-        .get(RegistrationService.class);
+        .get(UserDetailsService.class);
 
-    fixture = new RegistrationPresenter(registerDtoMock, registrationViewMock, beanInjectorMock);
+    fixture = new RegistrationPresenter(registrationViewMock, userDetailsDtoMock, beanInjectorMock);
   }
 
   @Test
   public void saveButtonClickNavigatesToLogin() {
     // When the registration service does not return any errors.
     doReturn(Collections.emptyList())
-        .when(registrationServiceMock)
+        .when(userDetailsServiceMock)
         .register(any());
 
     fixture.saveButtonClick();
@@ -60,7 +60,7 @@ public class RegisterPresenterUnitTest {
   public void saveButtonClickTriggersErrorMessage() {
     // When the registration service return errors.
     doReturn(List.of(new ValidationError("Error one."), new ValidationError("Error two.")))
-        .when(registrationServiceMock)
+        .when(userDetailsServiceMock)
         .register(any());
 
     fixture.saveButtonClick();
