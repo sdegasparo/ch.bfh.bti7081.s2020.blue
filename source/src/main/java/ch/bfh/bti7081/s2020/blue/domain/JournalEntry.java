@@ -15,8 +15,8 @@ import org.hibernate.annotations.Parameter;
 public class JournalEntry {
 
   @Id
-  @GenericGenerator(name = "pk_sequence", strategy = PostgreSQLConstants.SEQUENCE_GENERATOR_STRATEGY, parameters = {@Parameter(name = "sequence_name", value = "journal_entry_id_seq"), @Parameter(name = "increment_size", value = "1")})
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
+  @GenericGenerator(name = "journal_entry_id_seq", strategy = PostgreSQLConstants.SEQUENCE_GENERATOR_STRATEGY, parameters = {@Parameter(name = "sequence_name", value = "journal_entry_id_seq"), @Parameter(name = "increment_size", value = "1")})
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "journal_entry_id_seq")
   private Long id;
 
   @Temporal(TemporalType.TIMESTAMP)
