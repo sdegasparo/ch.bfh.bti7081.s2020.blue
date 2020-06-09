@@ -20,7 +20,7 @@ public class JournalEntry {
   private Long id;
 
   @Temporal(TemporalType.TIMESTAMP)
-  private Date creationDate;
+  private Date creationDate = new Date();
 
   private String title;
   private String content;
@@ -31,11 +31,10 @@ public class JournalEntry {
   public JournalEntry() {
   }
 
-  public JournalEntry(final String title, final String content, final Patient patient, final Date creationDate) {
+  public JournalEntry(final String title, final String content, final Patient patient) {
     this.title = title;
     this.content = content;
     this.patient = patient;
-    this.creationDate = creationDate;
   }
 
   public Long getId() {
