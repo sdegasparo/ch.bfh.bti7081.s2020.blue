@@ -1,12 +1,12 @@
 package ch.bfh.bti7081.s2020.blue.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 
 import ch.bfh.bti7081.s2020.blue.domain.Login;
 import ch.bfh.bti7081.s2020.blue.domain.repository.LoginCrudRepository;
 import java.util.Optional;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,16 +37,14 @@ public class DatabaseUserDetailsServiceUnitTest {
   public void loadUserByUsernameReturnsUserDetails() {
     final String username = "username";
 
-    Login login = Login.builder()
-        .username(username)
-        .build();
+    Login login = new Login(username, null, null);
 
     doReturn(Optional.of(login))
         .when(loginCrudRepositoryMock)
         .findById(username);
 
     UserDetails userDetails = fixture.loadUserByUsername(username);
-    Assertions.assertThat(userDetails)
+    assertThat(userDetails)
         .hasFieldOrPropertyWithValue("username", username);
   }
 

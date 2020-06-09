@@ -8,27 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-@Getter
-@Setter
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class JournalEntry {
 
   @Id
-  @GenericGenerator(name = "pk_sequence",
-      strategy = PostgreSQLConstants.SEQUENCE_GENERATOR_STRATEGY,
-      parameters = {@Parameter(name = "sequence_name", value = "journal_entry_id_seq"),
-          @Parameter(name = "increment_size", value = "1")})
+  @GenericGenerator(name = "pk_sequence", strategy = PostgreSQLConstants.SEQUENCE_GENERATOR_STRATEGY, parameters = {@Parameter(name = "sequence_name", value = "journal_entry_id_seq"), @Parameter(name = "increment_size", value = "1")})
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
   private Long id;
 
@@ -40,4 +27,45 @@ public class JournalEntry {
 
   @ManyToOne
   private Patient patient;
+
+  public JournalEntry() {
+  }
+
+  public JournalEntry(final String title, final String content, final Patient patient) {
+    this.title = title;
+    this.content = content;
+    this.patient = patient;
+  }
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public Date getCreationDate() {
+    return this.creationDate;
+  }
+
+  public String getTitle() {
+    return this.title;
+  }
+
+  public void setTitle(final String title) {
+    this.title = title;
+  }
+
+  public String getContent() {
+    return this.content;
+  }
+
+  public void setContent(final String content) {
+    this.content = content;
+  }
+
+  public Patient getPatient() {
+    return this.patient;
+  }
+
+  public void setPatient(final Patient patient) {
+    this.patient = patient;
+  }
 }

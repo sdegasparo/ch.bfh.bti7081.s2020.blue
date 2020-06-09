@@ -21,11 +21,7 @@ public class JournalDetailPresenter implements JournalDetailListener {
   @Override
   public void afterViewInit(Long id) {
     JournalEntry journalEntry = journalEntryService.findById(id);
-    JournalEntryDto journalEntryDto = JournalEntryDto.builder()
-        .id(journalEntry.getId())
-        .title(journalEntry.getTitle())
-        .content(journalEntry.getContent())
-        .build();
+    JournalEntryDto journalEntryDto = new JournalEntryDto(journalEntry.getId(), journalEntry.getTitle(), journalEntry.getContent());
     view.afterViewInit(journalEntryDto);
   }
 

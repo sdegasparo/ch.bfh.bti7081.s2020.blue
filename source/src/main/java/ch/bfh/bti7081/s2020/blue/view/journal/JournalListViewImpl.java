@@ -18,7 +18,7 @@ import java.util.List;
 @CssImport("./styles.css")
 public class JournalListViewImpl extends VerticalLayout implements JournalListView {
 
-  private JournalListListener listener;
+  private final JournalListListener listener;
 
   public JournalListViewImpl(BeanInjector beanInjector) {
     listener = new JournalListPresenter(this, beanInjector);

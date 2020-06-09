@@ -24,11 +24,7 @@ public class JournalEntryService {
 
   public Long save(JournalEntryDto journalEntryDto) {
     Login login = (Login) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    JournalEntry entry = JournalEntry.builder().title(journalEntryDto.getTitle())
-        .content(journalEntryDto.getContent())
-        .creationDate(new Date())
-        .patient(login.getPatient())
-        .build();
+    JournalEntry entry = new JournalEntry(journalEntryDto.getTitle(), journalEntryDto.getContent(), login.getPatient());
     return journalEntryCrudRepository.save(entry).getId();
   }
 

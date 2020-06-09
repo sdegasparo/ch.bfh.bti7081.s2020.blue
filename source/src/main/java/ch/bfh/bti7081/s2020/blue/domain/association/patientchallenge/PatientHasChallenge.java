@@ -7,18 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @IdClass(PatientHasChallengeId.class)
 public class PatientHasChallenge {
 
@@ -32,5 +22,37 @@ public class PatientHasChallenge {
   @JoinColumn(name = "challenge_id")
   private Challenge challenge;
 
-  private Boolean completed;
+  private Boolean completed = Boolean.FALSE;
+
+  public PatientHasChallenge() {
+  }
+
+  public PatientHasChallenge(final Patient patient, final Challenge challenge) {
+    this.patient = patient;
+    this.challenge = challenge;
+  }
+
+  public Patient getPatient() {
+    return this.patient;
+  }
+
+  public void setPatient(final Patient patient) {
+    this.patient = patient;
+  }
+
+  public Challenge getChallenge() {
+    return this.challenge;
+  }
+
+  public void setChallenge(final Challenge challenge) {
+    this.challenge = challenge;
+  }
+
+  public Boolean getCompleted() {
+    return this.completed;
+  }
+
+  public void setCompleted(final Boolean completed) {
+    this.completed = completed;
+  }
 }

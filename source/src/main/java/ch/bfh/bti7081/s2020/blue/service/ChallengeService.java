@@ -39,14 +39,7 @@ public class ChallengeService {
   }
 
   private ChallengeDto challengeToDto(Challenge challenge) {
-    return ChallengeDto.builder()
-        .id(challenge.getId())
-        .name(challenge.getName())
-        .content(challenge.getContent())
-        .criteria(challenge.getCriteria())
-        .accepted(isAccepted(challenge))
-        .completed(isCompleted(challenge))
-        .build();
+    return new ChallengeDto(challenge.getId(), challenge.getName(), challenge.getContent(), challenge.getCriteria(), isAccepted(challenge), isCompleted(challenge));
   }
 
   private boolean isAccepted(Challenge challenge) {

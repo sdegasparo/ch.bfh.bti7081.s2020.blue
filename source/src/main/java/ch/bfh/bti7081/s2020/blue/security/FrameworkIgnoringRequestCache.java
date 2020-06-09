@@ -13,7 +13,7 @@ public class FrameworkIgnoringRequestCache extends HttpSessionRequestCache {
   /**
    * {@inheritDoc}
    * <p>
-   * If the method is detects an internal framework request, we skip saving it.
+   * If the method detects an internal framework request, we skip saving it.
    *
    * @see SecurityUtils#isFrameworkInternalRequest(HttpServletRequest)
    */

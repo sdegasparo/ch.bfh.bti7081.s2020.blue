@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2020.blue.domain.dto.UserDetailsDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
 import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.LoginCrudRepository;
+import ch.bfh.bti7081.s2020.blue.domain.repository.PatientCrudRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,19 +23,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsService {
 
-  private static final Log log = LogFactory.getLog(UserDetailsService.class);
-
   public static final String PASSWORDS_DID_NOT_MATCH = "Passwords did not match.";
   public static final String E_MAIL_ADDRESS_IS_ALREADY_IN_USE = "E-Mail address is already in use.";
   public static final String USERNAME_IS_ALREADY_IN_USE = "Username is already in use.";
-
+  private static final Log log = LogFactory.getLog(UserDetailsService.class);
   private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   private final LoginCrudRepository loginCrudRepository;
+  private final PatientCrudRepository patientCrudRepository;
   private final CurrentLoginRepository currentLoginRepository;
 
-  public UserDetailsService(LoginCrudRepository loginCrudRepository, CurrentLoginRepository currentLoginRepository) {
+  public UserDetailsService(LoginCrudRepository loginCrudRepository, PatientCrudRepository patientCrudRepository, CurrentLoginRepository currentLoginRepository) {
     this.loginCrudRepository = loginCrudRepository;
+    this.patientCrudRepository = patientCrudRepository;
     this.currentLoginRepository = currentLoginRepository;
   }
 
@@ -56,12 +57,7 @@ public class UserDetailsService {
   }
 
   private UserDetailsDto mapLoginToUserDetailsDto(Login login) {
-    return UserDetailsDto.builder()
-        .email(login.getEmail())
-        .givenName(login.getPatient().getGivenName())
-        .surname(login.getPatient().getSurname())
-        .username(login.getUsername())
-        .build();
+    return new UserDetailsDto(login.getUsername(), null, null, login.getEmail(), login.getPatient().getSurname(), login.getPatient().getGivenName(), null);
   }
 
   public List<ValidationError> register(UserDetailsDto userDetailsDto) {
@@ -74,23 +70,11 @@ public class UserDetailsService {
 
     if (validationErrors.isEmpty()) {
       String encodedPassword = passwordEncoder.encode(userDetailsDto.getPassword());
-      Patient patient = Patient.builder()
-          .givenName(userDetailsDto.getGivenName())
-          .surname(userDetailsDto.getGivenName())
-          .build();
 
-      Login login = Login.builder()
-          .username(userDetailsDto.getUsername())
-          .email(userDetailsDto.getEmail())
-          .password(encodedPassword)
-          .isEnabled(true)
-          .isBlocked(false)
-          .patient(patient)
-          .build();
+      Login login = new Login(userDetailsDto.getUsername(), encodedPassword, userDetailsDto.getEmail());
+      Patient patient = new Patient(userDetailsDto.getSurname(), userDetailsDto.getGivenName(), login);
 
-      patient.setLogin(login);
-
-      loginCrudRepository.save(login);
+      patientCrudRepository.save(patient);
     } else {
       log.info(
           String.format("Could not register '%s' [%s] due to %s",

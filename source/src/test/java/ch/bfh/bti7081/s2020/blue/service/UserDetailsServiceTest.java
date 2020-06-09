@@ -13,6 +13,7 @@ import ch.bfh.bti7081.s2020.blue.domain.dto.UserDetailsDto;
 import ch.bfh.bti7081.s2020.blue.domain.dto.ValidationError;
 import ch.bfh.bti7081.s2020.blue.domain.repository.CurrentLoginRepository;
 import ch.bfh.bti7081.s2020.blue.domain.repository.LoginCrudRepository;
+import ch.bfh.bti7081.s2020.blue.domain.repository.PatientCrudRepository;
 import java.util.Collection;
 import java.util.Optional;
 import org.junit.Before;
@@ -29,25 +30,18 @@ public class UserDetailsServiceTest {
   LoginCrudRepository loginCrudRepositoryMock;
 
   @Mock
+  PatientCrudRepository patientCrudRepositoryMock;
+
+  @Mock
   CurrentLoginRepository currentLoginRepository;
 
   UserDetailsService fixture;
 
   @Before
   public void beforeTestSetup() {
-    Patient patient = Patient.builder()
-        .surname("Tester")
-        .givenName("Bester")
-        .build();
+    Patient patient = new Patient("Tester", "Bester", null);
 
-    Login login = Login.builder()
-        .username("testuser1")
-        .email("test@test.local")
-        .isBlocked(false)
-        .isEnabled(true)
-        .password(null)
-        .patient(patient)
-        .build();
+    Login login = new Login("testuser1", "test@test.local", null);
 
     doReturn(Optional.ofNullable(login))
         .when(loginCrudRepositoryMock)
@@ -57,7 +51,7 @@ public class UserDetailsServiceTest {
         .when(currentLoginRepository)
         .getCurrentLogin();
 
-    fixture = new UserDetailsService(loginCrudRepositoryMock, currentLoginRepository);
+    fixture = new UserDetailsService(loginCrudRepositoryMock, patientCrudRepositoryMock, currentLoginRepository);
   }
 
   @Test

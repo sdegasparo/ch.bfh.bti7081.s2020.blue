@@ -7,16 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @IdClass(PatientAchievedId.class)
 public class PatientAchieved {
 
@@ -29,4 +21,28 @@ public class PatientAchieved {
   @ManyToOne
   @JoinColumn(name = "achievement_id")
   private Achievement achievement;
+
+  public PatientAchieved() {
+  }
+
+  public PatientAchieved(final Patient patient, final Achievement achievement) {
+    this.patient = patient;
+    this.achievement = achievement;
+  }
+
+  public Patient getPatient() {
+    return this.patient;
+  }
+
+  public void setPatient(final Patient patient) {
+    this.patient = patient;
+  }
+
+  public Achievement getAchievement() {
+    return this.achievement;
+  }
+
+  public void setAchievement(final Achievement achievement) {
+    this.achievement = achievement;
+  }
 }

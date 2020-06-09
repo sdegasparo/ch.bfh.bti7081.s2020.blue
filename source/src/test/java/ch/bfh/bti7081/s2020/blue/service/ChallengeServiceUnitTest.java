@@ -38,14 +38,12 @@ public class ChallengeServiceUnitTest {
 
   @Test
   public void findAllReturnsChallengeDtosSortedByNotAcceptedFirst() {
-    Challenge challenge1 = Challenge.builder()
-        .patients(Collections.singletonList(PatientHasChallenge.builder()
-            .completed(Boolean.TRUE)
-            .build()))
-        .build();
+    Challenge challenge1 = new Challenge();
+    PatientHasChallenge patientHasChallenge = new PatientHasChallenge(null, challenge1);
+    patientHasChallenge.setCompleted(Boolean.TRUE);
+    challenge1.setPatients(Collections.singletonList(patientHasChallenge));
 
-    Challenge challenge2 = Challenge.builder()
-        .build();
+    Challenge challenge2 = new Challenge();
 
     doReturn(List.of(challenge1, challenge2))
         .when(challengeCrudRepositoryMock)
