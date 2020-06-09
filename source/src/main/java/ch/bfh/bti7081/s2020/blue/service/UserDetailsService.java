@@ -17,17 +17,16 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsService {
 
+  private static final Log log = LogFactory.getLog(UserDetailsService.class);
+
   public static final String PASSWORDS_DID_NOT_MATCH = "Passwords did not match.";
   public static final String E_MAIL_ADDRESS_IS_ALREADY_IN_USE = "E-Mail address is already in use.";
   public static final String USERNAME_IS_ALREADY_IN_USE = "Username is already in use.";
-  private static final Log log = LogFactory.getLog(UserDetailsService.class);
-  private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   private final LoginCrudRepository loginCrudRepository;
   private final PatientCrudRepository patientCrudRepository;
@@ -69,9 +68,9 @@ public class UserDetailsService {
     }
 
     if (validationErrors.isEmpty()) {
-      String encodedPassword = passwordEncoder.encode(userDetailsDto.getPassword());
+      String encodedPassword = Login.PASSWORD_ENCODER.encode(userDetailsDto.getPassword());
 
-      Login login = new Login(userDetailsDto.getUsername(), encodedPassword, userDetailsDto.getEmail());
+      Login login = new Login(userDetailsDto.getUsername(), userDetailsDto.getEmail(), encodedPassword);
       Patient patient = new Patient(userDetailsDto.getSurname(), userDetailsDto.getGivenName(), login);
 
       patientCrudRepository.save(patient);
@@ -122,7 +121,7 @@ public class UserDetailsService {
       if (!userDetails.getPassword().equals(userDetails.getRepeatPassword())) {
         validationErrors.add(new ValidationError(PASSWORDS_DID_NOT_MATCH));
       } else {
-        login.setPassword(passwordEncoder.encode(userDetails.getPassword()));
+        login.setPassword(Login.PASSWORD_ENCODER.encode(userDetails.getPassword()));
       }
     }
 
