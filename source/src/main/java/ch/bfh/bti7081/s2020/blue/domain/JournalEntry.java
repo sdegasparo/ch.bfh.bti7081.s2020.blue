@@ -20,7 +20,7 @@ public class JournalEntry {
   private Long id;
 
   @Temporal(TemporalType.TIMESTAMP)
-  private Date creationDate;
+  private Date creationDate = new Date();
 
   private String title;
   private String content;
