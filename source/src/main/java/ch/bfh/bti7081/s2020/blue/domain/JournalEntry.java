@@ -31,10 +31,11 @@ public class JournalEntry {
   public JournalEntry() {
   }
 
-  public JournalEntry(final String title, final String content, final Patient patient) {
+  public JournalEntry(final String title, final String content, final Patient patient, final Date creationDate) {
     this.title = title;
     this.content = content;
     this.patient = patient;
+    this.creationDate = creationDate;
   }
 
   public Long getId() {
