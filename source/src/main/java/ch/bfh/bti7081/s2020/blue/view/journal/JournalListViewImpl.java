@@ -29,7 +29,6 @@ public class JournalListViewImpl extends VerticalLayout implements JournalListVi
   public void display(List<JournalEntry> journalEntries) {
     HorizontalLayout horizontalLayout = new HorizontalLayout();
     H2 title = new H2("Meine Journaleinträge");
-    title.getStyle().set("padding", "0.5em");
 
     Button newJournalEntryButton = new Button(new Icon(VaadinIcon.PLUS));
     newJournalEntryButton.getStyle().set("cursor", "pointer");
