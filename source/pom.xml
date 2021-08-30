@@ -51,7 +51,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- Vaadin configuration -->
-    <vaadin.version>14.1.27</vaadin.version>
+    <vaadin.version>14.6.8</vaadin.version>
 
     <!-- Sonarcloud configuration -->
     <sonar.projectKey>zeroplexer_ch.bfh.bti7081.s2020.blue</sonar.projectKey>
